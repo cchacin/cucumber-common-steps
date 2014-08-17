@@ -1,0 +1,22 @@
+language: java
+jdk:
+  - oraclejdk8
+before_script:
+  - sudo apt-get -qq update > /dev/null
+  - sudo apt-get -qq install graphviz > /dev/null
+  - chmod +x update-gh-pages.sh
+  - mysql -e 'create database myapp_test;'
+services:
+  - mysql
+  - redis
+cache:
+  directories:
+  - $HOME/.m2
+install: true
+script: mvn clean test
+after_success:
+  - mvn javadoc:javadoc jacoco:report coveralls:jacoco
+  - ./update-gh-pages.sh
+env:
+  global:
+    secure: SWDrW9Zm3lcZhFympim61AjT+jFmD9Hq/nG4oexp2TyEzzfabKf82WgSIfScsQX5HWPz97d2KbP6+hjorLH/tMHaT+KKbqRWB2hdiAI5bpM3djae9TyjgcfjlkIJtaPUkvROYjd38bFZZdko5LRjuab4pnY+8jmNXbzMkPOj1u4=
