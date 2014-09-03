@@ -12,8 +12,8 @@
         <version>0.0.5</version>
     </parent>
 
-    <name>Cucumber common steps</name>
-    <description>Cucumber common steps definitions.</description>
+    <name>Cucumber Common Step Definitions</name>
+    <description>Cucumber Common Step Definitions.</description>
     <inceptionYear>2014</inceptionYear>
     <url>https://github.com/cchacin/cucumber-common-steps</url>
 
@@ -29,7 +29,12 @@
         <mockito.version>1.9.5</mockito.version>
         <junit.version>4.11</junit.version>
         <cucumber.version>1.1.8</cucumber.version>
+        <assertj.version>1.6.1</assertj.version>
         <slf4j.version>1.7.7</slf4j.version>
+        <javaee.version>6.0-6</javaee.version>
+        <dbsetup.version>1.3.0</dbsetup.version>
+        <openejb.version>4.7.0</openejb.version>
+        <jsonunit.version>1.1.6</jsonunit.version>
     </properties>
 
     <dependencies>
@@ -38,7 +43,7 @@
         <dependency>
             <groupId>org.apache.openejb</groupId>
             <artifactId>javaee-api</artifactId>
-            <version>6.0-6</version>
+            <version>${javaee.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -65,14 +70,14 @@
         <dependency>
             <groupId>com.ninja-squad</groupId>
             <artifactId>DbSetup</artifactId>
-            <version>1.3.0</version>
+            <version>${dbsetup.version}</version>
         </dependency>
 
         <!-- AssertJ -->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>1.6.1</version>
+            <version>${assertj.version}</version>
         </dependency>
 
         <!-- Cucumber -->
@@ -91,13 +96,13 @@
         <dependency>
             <groupId>org.apache.openejb</groupId>
             <artifactId>openejb-cxf-rs</artifactId>
-            <version>4.7.0</version>
+            <version>${openejb.version}</version>
         </dependency>
 
         <dependency>
             <groupId>net.javacrumbs.json-unit</groupId>
             <artifactId>json-unit-fluent</artifactId>
-            <version>1.1.6</version>
+            <version>${jsonunit.version}</version>
         </dependency>
 
     </dependencies>
