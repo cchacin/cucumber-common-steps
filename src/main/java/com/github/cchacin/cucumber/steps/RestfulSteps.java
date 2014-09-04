@@ -37,8 +37,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RestfulSteps {
 
     private Response response;
-    public static final String BASE_URL = "http://localhost:8080/";
-    final WebClient webClient = WebClient.create(BASE_URL).accept(
+    private static final String BASE_URL = "http://localhost:8080/";
+    private final WebClient webClient = WebClient.create(BASE_URL).accept(
             APPLICATION_JSON);
 
     private String authorizationHeader;
