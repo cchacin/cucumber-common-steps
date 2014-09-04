@@ -61,3 +61,5 @@ public class UsersEndpointITest {
 }
 ```
 
+And then run: ```mvn test``` -> output:
+
