@@ -34,7 +34,7 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static net.javacrumbs.jsonunit.fluent.JsonFluentAssert.assertThatJson;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CommonEndpointsStepDefs {
+public class RestfulSteps {
 
     private Response response;
     public static final String BASE_URL = "http://localhost:8080/";
@@ -42,8 +42,6 @@ public class CommonEndpointsStepDefs {
             APPLICATION_JSON);
 
     private String authorizationHeader;
-
-    private static String appName = "functional_tests";
 
     private String getContentFromResourceFilePath(String postBodyFilePath) {
         byte[] encoded;
@@ -59,13 +57,13 @@ public class CommonEndpointsStepDefs {
     }
 
     @Given("^header \"([^\"]*)\" with value \"([^\"]*)\"$")
-    public void header_with_value(String headerName, String headerValue)
+    public void header_with_value(final String headerName, final String headerValue)
             throws Throwable {
         this.webClient.header(headerName, headerValue);
     }
 
     @Given("^header \"([^\"]*)\" has not been set$")
-    public void header_has_not_been_set(String headerName) throws Throwable {
+    public void header_has_not_been_set(final String headerName) throws Throwable {
     }
 
     @Given("^I made a (GET|HEAD) call to \"([^\"]*)\" endpoint$")
@@ -82,7 +80,7 @@ public class CommonEndpointsStepDefs {
 
     @Given("^I made a (POST|PUT) call to \"([^\"]*)\" endpoint with post body:$")
     public void I_made_the_POST_PUT_call_to_endpoint_with_post_body(
-            String method, String endpointUrl, final String postBody)
+            final String method, final String endpointUrl, final String postBody)
             throws Throwable {
         WebClient client = WebClient.create(BASE_URL);
         if (this.authorizationHeader != null) {
@@ -96,7 +94,7 @@ public class CommonEndpointsStepDefs {
 
     @Given("^I made a (POST|PUT) call to \"([^\"]*)\" endpoint with post body in file \"([^\"]*)\"$")
     public void I_made_a_POST_call_to_endpoint_with_post_body_in_file(
-            String method, String endpointUrl, final String postBodyFilePath)
+            final String method, final String endpointUrl, final String postBodyFilePath)
             throws Throwable {
         String postBody = this.getContentFromResourceFilePath(postBodyFilePath);
         I_made_the_POST_PUT_call_to_endpoint_with_post_body(method,
@@ -105,12 +103,12 @@ public class CommonEndpointsStepDefs {
 
     @Given("^wait for \"([^\"]*)\" seconds for the background processes to finish$")
     public void wait_for_seconds_for_the_background_processes_to_finish(
-            Integer timeToWaitInSeconds) throws Throwable {
+            final Integer timeToWaitInSeconds) throws Throwable {
         Thread.sleep(timeToWaitInSeconds * 1_000);
     }
 
     @Given("^I made a DELETE call to \"([^\"]*)\" endpoint$")
-    public void I_made_a_DELETE_call_to_endpoint(String endpointUrl)
+    public void I_made_a_DELETE_call_to_endpoint(final String endpointUrl)
             throws Throwable {
         WebClient client = WebClient.create(BASE_URL);
         if (this.authorizationHeader != null) {
@@ -122,8 +120,8 @@ public class CommonEndpointsStepDefs {
 
     @Given("^I made a (GET|HEAD) call to \"([^\"]*)\" endpoint with header \"([^\"]*)\" with value \"([^\"]*)\"$")
     public void I_made_a_GET_HEAD_call_to_endpoint_with_header_with_value(
-            final String method, final String endpointUrl, String headerName,
-            String headerValue) throws Throwable {
+            final String method, final String endpointUrl, final String headerName,
+            final String headerValue) throws Throwable {
         WebClient client = WebClient.create(BASE_URL);
         client.header(headerName, headerValue);
         if (this.authorizationHeader != null) {
@@ -158,7 +156,7 @@ public class CommonEndpointsStepDefs {
 
     @When("^I make a (POST|PUT) call to \"([^\"]*)\" endpoint with post body in file \"([^\"]*)\"$")
     public void I_make_a_POST_PUT_call_to_endpoint_with_post_body_in_file(
-            String method, String endpointUrl, final String postBodyFilePath)
+            final String method, final String endpointUrl, final String postBodyFilePath)
             throws Throwable {
         String content = getContentFromResourceFilePath(postBodyFilePath);
 
@@ -227,8 +225,8 @@ public class CommonEndpointsStepDefs {
     }
 
     @Then("^response header \"([^\"]*)\" should be \"([^\"]*)\";$")
-    public void response_header_should_be_(String responseHeaderName,
-                                           String headerValue) throws Throwable {
+    public void response_header_should_be_(final String responseHeaderName,
+                                           final String headerValue) throws Throwable {
         System.out.println(this.response.getMetadata());
     }
 }

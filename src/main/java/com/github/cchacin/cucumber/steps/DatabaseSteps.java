@@ -33,13 +33,13 @@ import java.util.Properties;
 import static com.ninja_squad.dbsetup.Operations.deleteAllFrom;
 import static com.ninja_squad.dbsetup.operation.CompositeOperation.sequenceOf;
 
-public class CommonDatabaseStepDefs {
+public class DatabaseSteps {
 
     private static final Properties properties = new Properties();
 
     static {
         try {
-            properties.load(CommonDatabaseStepDefs.class
+            properties.load(DatabaseSteps.class
                     .getResourceAsStream("/test_db.properties"));
         } catch (IOException e) {
             e.printStackTrace();
@@ -52,8 +52,8 @@ public class CommonDatabaseStepDefs {
             properties.getProperty("database.password"));
 
     @Given("^I have the following rows in the \"(.*?)\" table:$")
-    public void i_have_the_following_rows_in_the_table(String tableName,
-                                                       DataTable data) throws Throwable {
+    public void i_have_the_following_rows_in_the_table(final String tableName,
+                                                       final DataTable data) throws Throwable {
         this.insert(tableName, data);
     }
 
@@ -64,7 +64,7 @@ public class CommonDatabaseStepDefs {
         this.insert(tableName, data);
     }
 
-    private void insert(final String tableName, final DataTable data) {
+    public void insert(final String tableName, final DataTable data) {
         List<DataTableRow> rows = data.getGherkinRows();
         final List<String> columns = rows.get(0).getCells();
 
@@ -82,11 +82,11 @@ public class CommonDatabaseStepDefs {
         this.apply(sequenceOf(operations));
     }
 
-    private void deleteAll(final String tableName) {
+    public void deleteAll(final String tableName) {
         this.apply(deleteAllFrom(tableName));
     }
 
-    private void apply(final Operation operation) {
+    public void apply(final Operation operation) {
         new DbSetup(destination, operation).launch();
     }
 }
