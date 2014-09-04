@@ -16,11 +16,11 @@ Add as dependency in your pom.xml:
 <dependency>
     <artifactId>cucumber-common-steps</artifactId>
     <packaging>jar</packaging>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>@version@</version>
 </dependency>
 ```
 
-Create an integration test:
+Write your feature in gherkin language with a tag(s) in ```src/test/resources```
 
 ```gherkin
 @users_endpoint
@@ -50,3 +50,14 @@ Feature: REST API to manage users
         ]
     """
 ```
+
+Write a cucumber integration-test in ```src/test/java```:
+
+```java
+@RunWith(Cucumber.class)
+@CucumberOptions(format = {"pretty", "html:target/cucumber",
+		"json:target/cucumber.json"}, tags = {"@users_endpoint"}, glue = {"com.github.cchacin","org.superbiz.javaee"})
+public class UsersEndpointITest {
+}
+```
+
