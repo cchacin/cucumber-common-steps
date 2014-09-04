@@ -23,7 +23,6 @@ import com.ninja_squad.dbsetup.operation.Operation;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import gherkin.formatter.model.DataTableRow;
-import gherkin.formatter.model.Row;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -65,20 +64,18 @@ public class DatabaseSteps {
     }
 
     public void insert(final String tableName, final DataTable data) {
-        List<DataTableRow> rows = data.getGherkinRows();
+        final List<DataTableRow> rows = data.getGherkinRows();
         final List<String> columns = rows.get(0).getCells();
 
-        final List<DataTableRow> rows2 = rows.subList(1, rows.size());
-
-        List<Operation> operations = new ArrayList<>();
-        Insert.Builder builder = Insert.into(tableName);
+        final List<Operation> operations = new ArrayList<>();
+        final Insert.Builder builder = Insert.into(tableName);
         builder.columns(columns.toArray(new String[columns.size()]));
-        for (Row row : rows2) {
+
+        rows.subList(1, rows.size()).forEach(row -> {
             builder.values(row.getCells().toArray(
                     new String[row.getCells().size()]));
             operations.add(builder.build());
-        }
-
+        });
         this.apply(sequenceOf(operations));
     }
 
