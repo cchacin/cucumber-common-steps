@@ -9,7 +9,6 @@
 
     <container qualifier="tomee" default="true">
         <configuration>
-            <property name="preloadClasses">org.superbiz.Dependencies</property>
             <property name="singleDumpByArchiveName">true</property>
             <property name="httpPort">-1</property>
             <property name="stopPort">-1</property>
