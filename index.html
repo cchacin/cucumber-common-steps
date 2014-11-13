@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Cucumber-common-steps : Cucumbre common steps definitions">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
-    <title>Cucumber-common-steps</title>
+    <title>Cucumber Common Steps by cchacin</title>
   </head>
 
   <body>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/cchacin/cucumber-common-steps">View on GitHub</a>
+    <header>
+      <div class="container">
+        <h1>Cucumber Common Steps</h1>
+        <h2>Cucumber common steps definitions</h2>
 
-          <h1 id="project_title">Cucumber-common-steps</h1>
-          <h2 id="project_tagline">Cucumbre common steps definitions</h2>
+        <section id="downloads">
+          <a href="https://github.com/cchacin/cucumber-common-steps/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/cchacin/cucumber-common-steps/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/cchacin/cucumber-common-steps" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/cchacin/cucumber-common-steps/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/cchacin/cucumber-common-steps/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
+    <div class="container">
+      <section id="main_content">
         <p><a href="https://travis-ci.org/cchacin/cucumber-common-steps.svg?branch=master"><img src="https://travis-ci.org/cchacin/cucumber-common-steps.svg?branch=master" alt="Build Status"></a>
 <a href="https://www.versioneye.com/user/projects/5407630bccc023c90d000098"><img src="https://www.versioneye.com/user/projects/5407630bccc023c90d000098/badge.svg" alt="Dependency Status"></a></p>
 
 <h1>
-<a id="cucumber-common-steps" class="anchor" href="#cucumber-common-steps" aria-hidden="true"><span class="octicon octicon-link"></span></a>cucumber-common-steps</h1>
+<a id="cucumber-common-steps" class="anchor" href="#cucumber-common-steps" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cucumber Common Steps</h1>
 
-<p>Cucumber common steps definitions</p>
+<p>This project is an intent to provide common steps definitions to make functional testing for REST API's, Database setup's and HTML page's</p>
+
+<p>This is based on <a href="https://github.com/cucumber/cucumber-jvm">cucumber-jvm</a> project.</p>
+
+<p>You need to specify your features in the gherkin language and run it with <a href="https://github.com/cucumber/cucumber-java-skeleton">cucumber-java</a> or <a href="https://github.com/cukespace/cukespace">cukespace</a> + <a href="http://arquillian.org/">arquillian</a></p>
 
 <h1>
 <a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting Started</h1>
@@ -47,7 +48,7 @@
 <div class="highlight highlight-xml"><pre>&lt;<span class="pl-ent">dependency</span>&gt;
     &lt;<span class="pl-ent">artifactId</span>&gt;cucumber-common-steps&lt;/<span class="pl-ent">artifactId</span>&gt;
     &lt;<span class="pl-ent">packaging</span>&gt;jar&lt;/<span class="pl-ent">packaging</span>&gt;
-    &lt;<span class="pl-ent">version</span>&gt;@version@&lt;/<span class="pl-ent">version</span>&gt;
+    &lt;<span class="pl-ent">version</span>&gt;0.0.5&lt;/<span class="pl-ent">version</span>&gt;
     &lt;<span class="pl-ent">scope</span>&gt;test&lt;/<span class="pl-ent">scope</span>&gt;
 &lt;/<span class="pl-ent">dependency</span>&gt;</pre></div>
 
@@ -82,9 +83,9 @@
 
 <p>Write a cucumber integration-test in <code>src/test/java</code>:</p>
 
-<div class="highlight highlight-java"><pre>@RunWith(<span class="pl-s">Cucumber</span><span class="pl-ko">.</span>class)
-@CucumberOptions(format <span class="pl-ko">=</span> {<span class="pl-s1"><span class="pl-pds">"</span>pretty<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>html:target/cucumber<span class="pl-pds">"</span></span>,
-        <span class="pl-s1"><span class="pl-pds">"</span>json:target/cucumber.json<span class="pl-pds">"</span></span>}, tags <span class="pl-ko">=</span> {<span class="pl-s1"><span class="pl-pds">"</span>@users_endpoint<span class="pl-pds">"</span></span>}, glue <span class="pl-ko">=</span> {<span class="pl-s1"><span class="pl-pds">"</span>com.github.cchacin<span class="pl-pds">"</span></span>,<span class="pl-s1"><span class="pl-pds">"</span>org.superbiz.javaee<span class="pl-pds">"</span></span>})
+<div class="highlight highlight-java"><pre>@Glues({<span class="pl-s">RestSteps</span><span class="pl-ko">.</span>class})
+@Features({<span class="pl-s1"><span class="pl-pds">"</span>features/successful-endpoints.feature<span class="pl-pds">"</span></span>})
+@RunWith(<span class="pl-s">ArquillianCucumber</span><span class="pl-ko">.</span>class)
 <span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-entc">UsersEndpointITest</span> {
 }</pre></div>
 
@@ -92,15 +93,6 @@
       </section>
     </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Cucumber-common-steps maintained by <a href="https://github.com/cchacin">cchacin</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
     
-
   </body>
 </html>
