@@ -15,6 +15,7 @@
  */
 package com.github.cchacin.cucumber.steps;
 
+import com.github.cchacin.cucumber.steps.example.app.JaxRSActivator;
 import com.github.cchacin.cucumber.steps.rest.RestSteps;
 import cucumber.runtime.arquillian.ArquillianCucumber;
 import cucumber.runtime.arquillian.api.Features;

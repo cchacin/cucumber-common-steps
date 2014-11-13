@@ -29,7 +29,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-abstract class Base {
+public abstract class Base {
     Response response;
 
     @ArquillianResource
@@ -61,7 +61,7 @@ abstract class Base {
         this.webClient.header(headerName, headerValue);
     }
 
-    final void createClientWithAuthHeader() throws Throwable {
+    final void createClientWithAuthHeader() {
         this.webClient = WebClient.create(this.contextPath.toString());
         if (this.authorizationHeader != null) {
             this.setHeader("Authorization", this.authorizationHeader);

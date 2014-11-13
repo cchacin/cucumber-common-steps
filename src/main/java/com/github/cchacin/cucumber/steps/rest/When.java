@@ -27,7 +27,7 @@ public abstract class When extends Given {
         assertThat(this.response.getStatus()).isBetween(200, 299);
     }
 
-    @cucumber.api.java.en.Given("^I make a (GET|HEAD) call to \"([^\"]*)\" endpoint with header \"([^\"]*)\" with value \"([^\"]*)\"$")
+    @cucumber.api.java.en.When("^I make a (GET|HEAD) call to \"([^\"]*)\" endpoint with header \"([^\"]*)\" with value \"([^\"]*)\"$")
     public final void I_make_a_GET_HEAD_call_to_endpoint_with_header_with_value(
             final String method, final String endpointUrl, final String headerName,
             final String headerValue) throws Throwable {

@@ -18,8 +18,16 @@ Feature: Successful rest calls
     And response should be json:
     """
     {
-      "id": "some-id"
+      "model": {
+        "id": "${json-unit.ignore}",
+        "created": "${json-unit.ignore}",
+        "modified": "${json-unit.ignore}",
+        "email": "",
+        "password": "",
+        "fullname": ""
+      }
     }
+
     """
 
   #######

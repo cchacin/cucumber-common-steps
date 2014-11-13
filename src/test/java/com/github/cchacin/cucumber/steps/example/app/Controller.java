@@ -13,21 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.cchacin.cucumber.steps;
+package com.github.cchacin.cucumber.steps.example.app;
 
 import javax.ejb.Stateless;
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+import java.util.Date;
 
 @Path("/")
 @Stateless
-public class RestfulSuccessController {
+public class Controller {
 
     @GET
     @Path("/successful/get")
     @Produces("application/json")
     public Response successfulGET() {
-        return Response.ok("{\"id\":\"some-id\"}").header("a", "a").build();
+        return Response.ok(new Model("1", new Date(), new Date(), "", "", "")).header("a", "a").build();
     }
 
     @PUT

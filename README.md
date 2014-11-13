@@ -59,9 +59,9 @@ Feature: REST API to manage users
 Write a cucumber integration-test in ```src/test/java```:
 
 ```java
-@RunWith(Cucumber.class)
-@CucumberOptions(format = {"pretty", "html:target/cucumber",
-		"json:target/cucumber.json"}, tags = {"@users_endpoint"}, glue = {"com.github.cchacin","org.superbiz.javaee"})
+@Glues({RestSteps.class})
+@Features({"features/successful-endpoints.feature"})
+@RunWith(ArquillianCucumber.class)
 public class UsersEndpointITest {
 }
 ```

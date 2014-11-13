@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.cchacin.cucumber.steps;
+package com.github.cchacin.cucumber.steps.example.app;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
