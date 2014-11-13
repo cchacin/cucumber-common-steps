@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Cucumber-common-steps : Cucumbre common steps definitions">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Cucumber-common-steps</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/cchacin/cucumber-common-steps">View on GitHub</a>
+
+          <h1 id="project_title">Cucumber-common-steps</h1>
+          <h2 id="project_tagline">Cucumbre common steps definitions</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/cchacin/cucumber-common-steps/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/cchacin/cucumber-common-steps/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p><a href="https://travis-ci.org/cchacin/cucumber-common-steps.svg?branch=master"><img src="https://travis-ci.org/cchacin/cucumber-common-steps.svg?branch=master" alt="Build Status"></a>
+<a href="https://www.versioneye.com/user/projects/5407630bccc023c90d000098"><img src="https://www.versioneye.com/user/projects/5407630bccc023c90d000098/badge.svg" alt="Dependency Status"></a></p>
+
+<h1>
+<a id="cucumber-common-steps" class="anchor" href="#cucumber-common-steps" aria-hidden="true"><span class="octicon octicon-link"></span></a>cucumber-common-steps</h1>
+
+<p>Cucumber common steps definitions</p>
+
+<h1>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting Started</h1>
+
+<p>Add as dependency in your pom.xml:</p>
+
+<div class="highlight highlight-xml"><pre>&lt;<span class="pl-ent">dependency</span>&gt;
+    &lt;<span class="pl-ent">artifactId</span>&gt;cucumber-common-steps&lt;/<span class="pl-ent">artifactId</span>&gt;
+    &lt;<span class="pl-ent">packaging</span>&gt;jar&lt;/<span class="pl-ent">packaging</span>&gt;
+    &lt;<span class="pl-ent">version</span>&gt;@version@&lt;/<span class="pl-ent">version</span>&gt;
+    &lt;<span class="pl-ent">scope</span>&gt;test&lt;/<span class="pl-ent">scope</span>&gt;
+&lt;/<span class="pl-ent">dependency</span>&gt;</pre></div>
+
+<p>Write your feature in gherkin language with a tag(s) in <code>src/test/resources</code></p>
+
+<div class="highlight highlight-gherkin"><pre><span class="pl-s">@users_endpoint</span>
+<span class="pl-k">Feature</span>:<span class="pl-s1"> REST API to manage users</span>
+
+  <span class="pl-k">Background</span>:
+    <span class="pl-k">Given </span>I have the only following rows in the <span class="pl-s1">"users"</span> table:
+<span class="pl-k">      | <span class="pl-s2">id</span> | <span class="pl-s2">created</span>             | <span class="pl-s2">modified</span>            | <span class="pl-s2">email</span>                | <span class="pl-s2">fullname</span> | <span class="pl-s2">password</span> | <span class="pl-s2">version</span> |</span>
+<span class="pl-k">      | <span class="pl-s2">1</span>  | <span class="pl-s2">2014</span>-<span class="pl-s2">07</span>-<span class="pl-s2">16</span> <span class="pl-s2">00</span>:<span class="pl-s2">00</span>:<span class="pl-s2">00</span> | <span class="pl-s2">2014</span>-<span class="pl-s2">07</span>-<span class="pl-s2">16</span> <span class="pl-s2">00</span>:<span class="pl-s2">00</span>:<span class="pl-s2">00</span> | <span class="pl-s2">cchacin</span>@<span class="pl-s2">superbiz</span>.<span class="pl-s2">org</span> | <span class="pl-s2">Carlos</span>   | <span class="pl-s2">passw0rd</span> | <span class="pl-s2">0</span>       |</span>
+
+  <span class="pl-k">Scenario</span>:<span class="pl-s1"> Retrieve users list</span>
+    <span class="pl-k">When </span>I make a GET call to <span class="pl-s1">"/users"</span> endpoint
+    <span class="pl-k">Then </span>the response status code should be <span class="pl-s1">"200"</span>
+    <span class="pl-k">And </span>response content type should be <span class="pl-s1">"application/json"</span>
+    <span class="pl-k">And </span>response should be json:
+    <span class="pl-s1">"""</span>
+<span class="pl-s1">        [</span>
+<span class="pl-s1">          {</span>
+<span class="pl-s1">              "id": "${json-unit.ignore}",</span>
+<span class="pl-s1">              "created": "${json-unit.ignore}",</span>
+<span class="pl-s1">              "modified": "${json-unit.ignore}",</span>
+<span class="pl-s1">              "email": "cchacin@superbiz.org",</span>
+<span class="pl-s1">              "fullname": "Carlos",</span>
+<span class="pl-s1">              "password": "passw0rd",</span>
+<span class="pl-s1">              "version": 0</span>
+<span class="pl-s1">          }</span>
+<span class="pl-s1">        ]</span>
+<span class="pl-s1">    """</span></pre></div>
+
+<p>Write a cucumber integration-test in <code>src/test/java</code>:</p>
+
+<div class="highlight highlight-java"><pre>@RunWith(<span class="pl-s">Cucumber</span><span class="pl-ko">.</span>class)
+@CucumberOptions(format <span class="pl-ko">=</span> {<span class="pl-s1"><span class="pl-pds">"</span>pretty<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>html:target/cucumber<span class="pl-pds">"</span></span>,
+        <span class="pl-s1"><span class="pl-pds">"</span>json:target/cucumber.json<span class="pl-pds">"</span></span>}, tags <span class="pl-ko">=</span> {<span class="pl-s1"><span class="pl-pds">"</span>@users_endpoint<span class="pl-pds">"</span></span>}, glue <span class="pl-ko">=</span> {<span class="pl-s1"><span class="pl-pds">"</span>com.github.cchacin<span class="pl-pds">"</span></span>,<span class="pl-s1"><span class="pl-pds">"</span>org.superbiz.javaee<span class="pl-pds">"</span></span>})
+<span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-entc">UsersEndpointITest</span> {
+}</pre></div>
+
+<p>And then run: <code>mvn test</code> -&gt; output:</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Cucumber-common-steps maintained by <a href="https://github.com/cchacin">cchacin</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
