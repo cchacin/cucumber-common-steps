@@ -17,6 +17,7 @@ Add as dependency in your pom.xml:
     <artifactId>cucumber-common-steps</artifactId>
     <packaging>jar</packaging>
     <version>@version@</version>
+    <scope>test</scope>
 </dependency>
 ```
 

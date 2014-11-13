@@ -20,26 +20,29 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.cxf.helpers.IOUtils;
 import org.apache.cxf.jaxrs.client.WebClient;
+import org.jboss.arquillian.test.api.ArquillianResource;
 
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static net.javacrumbs.jsonunit.fluent.JsonFluentAssert.assertThatJson;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RestfulSteps {
 
     private Response response;
-    private static final String BASE_URL = "http://localhost:8080/";
-    private final WebClient webClient = WebClient.create(BASE_URL).accept(
-            APPLICATION_JSON);
+
+    @ArquillianResource
+    private URL contextPath;
+
+    private WebClient webClient;
 
     private String authorizationHeader;
 
@@ -69,7 +72,7 @@ public class RestfulSteps {
     @Given("^I made a (GET|HEAD) call to \"([^\"]*)\" endpoint$")
     public void I_made_a_GET_HEAD_call_to_endpoint(final String method,
                                                    final String endpointUrl) throws Throwable {
-        WebClient client = WebClient.create(BASE_URL);
+        WebClient client = WebClient.create(this.contextPath.toString());
         if (this.authorizationHeader != null) {
             this.webClient.header("Authorization", this.authorizationHeader);
         }
@@ -82,7 +85,7 @@ public class RestfulSteps {
     public void I_made_the_POST_PUT_call_to_endpoint_with_post_body(
             final String method, final String endpointUrl, final String postBody)
             throws Throwable {
-        WebClient client = WebClient.create(BASE_URL);
+        WebClient client = WebClient.create(this.contextPath.toString());
         if (this.authorizationHeader != null) {
             this.webClient.header("Authorization", this.authorizationHeader);
         }
@@ -93,7 +96,7 @@ public class RestfulSteps {
     }
 
     @Given("^I made a (POST|PUT) call to \"([^\"]*)\" endpoint with post body in file \"([^\"]*)\"$")
-    public void I_made_a_POST_call_to_endpoint_with_post_body_in_file(
+    public void I_made_a_POST_PUT_call_to_endpoint_with_post_body_in_file(
             final String method, final String endpointUrl, final String postBodyFilePath)
             throws Throwable {
         String postBody = this.getContentFromResourceFilePath(postBodyFilePath);
@@ -110,7 +113,7 @@ public class RestfulSteps {
     @Given("^I made a DELETE call to \"([^\"]*)\" endpoint$")
     public void I_made_a_DELETE_call_to_endpoint(final String endpointUrl)
             throws Throwable {
-        WebClient client = WebClient.create(BASE_URL);
+        WebClient client = WebClient.create(this.contextPath.toString());
         if (this.authorizationHeader != null) {
             this.webClient.header("Authorization", this.authorizationHeader);
         }
@@ -122,7 +125,7 @@ public class RestfulSteps {
     public void I_made_a_GET_HEAD_call_to_endpoint_with_header_with_value(
             final String method, final String endpointUrl, final String headerName,
             final String headerValue) throws Throwable {
-        WebClient client = WebClient.create(BASE_URL);
+        WebClient client = WebClient.create(this.contextPath.toString());
         client.header(headerName, headerValue);
         if (this.authorizationHeader != null) {
             this.webClient.header("Authorization", this.authorizationHeader);
@@ -135,6 +138,7 @@ public class RestfulSteps {
     @When("^I make a (GET|HEAD) call to \"([^\"]*)\" endpoint$")
     public final void I_make_a_GET_HEAD_call_to_endpoint(final String method,
                                                          final String endpointUrl) throws Throwable {
+        this.webClient = WebClient.create(this.contextPath.toString());
         if (this.authorizationHeader != null) {
             this.webClient.header("Authorization", this.authorizationHeader);
         }
@@ -146,6 +150,7 @@ public class RestfulSteps {
     public void I_make_a_POST_PUT_call_to_endpoint_with_post_body(
             String method, String endpointUrl, final String postBody)
             throws Throwable {
+        this.webClient = WebClient.create(this.contextPath.toString());
         if (this.authorizationHeader != null) {
             this.webClient.header("Authorization", this.authorizationHeader);
         }
@@ -191,7 +196,7 @@ public class RestfulSteps {
     public void response_should_be_json_responseBody(
             final String contentFilePath) throws Throwable {
 
-        String content = getContentFromResourceFilePath(contentFilePath);
+        final String content = getContentFromResourceFilePath(contentFilePath);
         this.response_should_be_json(content);
     }
 
@@ -227,6 +232,8 @@ public class RestfulSteps {
     @Then("^response header \"([^\"]*)\" should be \"([^\"]*)\";$")
     public void response_header_should_be_(final String responseHeaderName,
                                            final String headerValue) throws Throwable {
-        System.out.println(this.response.getMetadata());
+
+        assertThat(headerValue).isEqualTo(
+                this.response.getMetadata().getFirst(responseHeaderName));
     }
 }

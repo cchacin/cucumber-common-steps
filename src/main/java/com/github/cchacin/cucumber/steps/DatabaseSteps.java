@@ -24,6 +24,7 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import gherkin.formatter.model.DataTableRow;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +38,8 @@ public class DatabaseSteps {
     private static final Properties properties = new Properties();
 
     static {
-        try {
-            properties.load(DatabaseSteps.class
-                    .getResourceAsStream("/test_db.properties"));
+        try (final FileInputStream stream = new FileInputStream("/test_db.properties")) {
+            properties.load(stream);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -56,14 +56,14 @@ public class DatabaseSteps {
         this.insert(tableName, data);
     }
 
-    @Given("^I have the only following rows in the \"([^\"]*)\" table:$")
-    public void I_have_the_only_following_rows_in_the_table(
+    @Given("^I have only the following rows in the \"([^\"]*)\" table:$")
+    public void I_have_only_the_following_rows_in_the_table(
             final String tableName, final DataTable data) throws Throwable {
         this.deleteAll(tableName);
         this.insert(tableName, data);
     }
 
-    public void insert(final String tableName, final DataTable data) {
+    void insert(final String tableName, final DataTable data) {
         final List<DataTableRow> rows = data.getGherkinRows();
         final List<String> columns = rows.get(0).getCells();
 
@@ -71,19 +71,20 @@ public class DatabaseSteps {
         final Insert.Builder builder = Insert.into(tableName);
         builder.columns(columns.toArray(new String[columns.size()]));
 
-        rows.subList(1, rows.size()).forEach(row -> {
+        for(DataTableRow row : rows.subList(1, rows.size())) {
             builder.values(row.getCells().toArray(
                     new String[row.getCells().size()]));
             operations.add(builder.build());
-        });
+        }
+
         this.apply(sequenceOf(operations));
     }
 
-    public void deleteAll(final String tableName) {
+    void deleteAll(final String tableName) {
         this.apply(deleteAllFrom(tableName));
     }
 
-    public void apply(final Operation operation) {
+    void apply(final Operation operation) {
         new DbSetup(destination, operation).launch();
     }
 }

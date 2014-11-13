@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<arquillian>
+
+    <extension qualifier="cucumber">
+        <property name="report">true</property>
+        <property name="report-directory">target/cucumber-report</property>
+        <property name="persistenceEventsActivated">true</property>
+    </extension>
+
+    <container qualifier="tomee" default="true">
+        <configuration>
+            <property name="preloadClasses">org.superbiz.Dependencies</property>
+            <property name="singleDumpByArchiveName">true</property>
+            <property name="httpPort">-1</property>
+            <property name="stopPort">-1</property>
+        </configuration>
+    </container>
+
+</arquillian>
