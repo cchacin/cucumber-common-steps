@@ -67,32 +67,23 @@ public class RestfulSteps {
 
     @Given("^header \"([^\"]*)\" has not been set$")
     public void header_has_not_been_set(final String headerName) throws Throwable {
+        assertThat(this.response.getMetadata().getFirst(headerName)).isNull();
+
     }
 
     @Given("^I made a (GET|HEAD) call to \"([^\"]*)\" endpoint$")
     public void I_made_a_GET_HEAD_call_to_endpoint(final String method,
                                                    final String endpointUrl) throws Throwable {
-        WebClient client = WebClient.create(this.contextPath.toString());
-        if (this.authorizationHeader != null) {
-            this.webClient.header("Authorization", this.authorizationHeader);
-        }
-        Response getResponse = (method.equals("GET")) ? client
-                .path(endpointUrl).get() : client.path(endpointUrl).head();
-        assertThat(getResponse.getStatus()).isBetween(200, 299);
+        I_make_a_GET_HEAD_call_to_endpoint(method, endpointUrl);
+        assertThat(this.response.getStatus()).isBetween(200, 299);
     }
 
     @Given("^I made a (POST|PUT) call to \"([^\"]*)\" endpoint with post body:$")
     public void I_made_the_POST_PUT_call_to_endpoint_with_post_body(
             final String method, final String endpointUrl, final String postBody)
             throws Throwable {
-        WebClient client = WebClient.create(this.contextPath.toString());
-        if (this.authorizationHeader != null) {
-            this.webClient.header("Authorization", this.authorizationHeader);
-        }
-        Response getResponse = (method.equals("POST")) ? client.path(
-                endpointUrl).post(postBody) : client.path(endpointUrl).put(
-                postBody);
-        assertThat(getResponse.getStatus()).isBetween(200, 299);
+        I_make_a_POST_PUT_call_to_endpoint_with_post_body(method, endpointUrl, postBody);
+        assertThat(this.response.getStatus()).isBetween(200, 299);
     }
 
     @Given("^I made a (POST|PUT) call to \"([^\"]*)\" endpoint with post body in file \"([^\"]*)\"$")
@@ -113,35 +104,32 @@ public class RestfulSteps {
     @Given("^I made a DELETE call to \"([^\"]*)\" endpoint$")
     public void I_made_a_DELETE_call_to_endpoint(final String endpointUrl)
             throws Throwable {
-        WebClient client = WebClient.create(this.contextPath.toString());
-        if (this.authorizationHeader != null) {
-            this.webClient.header("Authorization", this.authorizationHeader);
-        }
-        Response getResponse = client.path(endpointUrl).delete();
-        assertThat(getResponse.getStatus()).isBetween(200, 299);
+        I_make_a_DELETE_call_to_endpoint(endpointUrl);
+        assertThat(this.response.getStatus()).isBetween(200, 299);
     }
 
     @Given("^I made a (GET|HEAD) call to \"([^\"]*)\" endpoint with header \"([^\"]*)\" with value \"([^\"]*)\"$")
     public void I_made_a_GET_HEAD_call_to_endpoint_with_header_with_value(
             final String method, final String endpointUrl, final String headerName,
             final String headerValue) throws Throwable {
-        WebClient client = WebClient.create(this.contextPath.toString());
-        client.header(headerName, headerValue);
-        if (this.authorizationHeader != null) {
-            this.webClient.header("Authorization", this.authorizationHeader);
-        }
-        Response getResponse = (method.equals("GET")) ? client
-                .path(endpointUrl).get() : client.path(endpointUrl).head();
-        assertThat(getResponse.getStatus()).isBetween(200, 299);
+        I_make_a_GET_HEAD_call_to_endpoint_with_header_with_value(method, endpointUrl, headerName, headerValue);
+        assertThat(this.response.getStatus()).isBetween(200, 299);
     }
 
     @When("^I make a (GET|HEAD) call to \"([^\"]*)\" endpoint$")
     public final void I_make_a_GET_HEAD_call_to_endpoint(final String method,
                                                          final String endpointUrl) throws Throwable {
-        this.webClient = WebClient.create(this.contextPath.toString());
-        if (this.authorizationHeader != null) {
-            this.webClient.header("Authorization", this.authorizationHeader);
-        }
+        createClientWithAuthHeader();
+        this.response = (method.equals("GET")) ? this.webClient.path(
+                endpointUrl).get() : this.webClient.path(endpointUrl).head();
+    }
+
+    @Given("^I make a (GET|HEAD) call to \"([^\"]*)\" endpoint with header \"([^\"]*)\" with value \"([^\"]*)\"$")
+    public void I_make_a_GET_HEAD_call_to_endpoint_with_header_with_value(
+            final String method, final String endpointUrl, final String headerName,
+            final String headerValue) throws Throwable {
+        createClientWithAuthHeader();
+        this.webClient.header(headerName, headerValue);
         this.response = (method.equals("GET")) ? this.webClient.path(
                 endpointUrl).get() : this.webClient.path(endpointUrl).head();
     }
@@ -150,13 +138,17 @@ public class RestfulSteps {
     public void I_make_a_POST_PUT_call_to_endpoint_with_post_body(
             String method, String endpointUrl, final String postBody)
             throws Throwable {
-        this.webClient = WebClient.create(this.contextPath.toString());
-        if (this.authorizationHeader != null) {
-            this.webClient.header("Authorization", this.authorizationHeader);
-        }
+        createClientWithAuthHeader();
         this.response = (method.equals("POST")) ? this.webClient.path(
                 endpointUrl).post(postBody) : this.webClient.path(endpointUrl)
                 .put(postBody);
+    }
+
+    private void createClientWithAuthHeader() throws Throwable {
+        this.webClient = WebClient.create(this.contextPath.toString());
+        if (this.authorizationHeader != null) {
+            this.header_with_value("Authorization", this.authorizationHeader);
+        }
     }
 
     @When("^I make a (POST|PUT) call to \"([^\"]*)\" endpoint with post body in file \"([^\"]*)\"$")
@@ -172,9 +164,7 @@ public class RestfulSteps {
     @When("^I make a DELETE call to \"([^\"]*)\" endpoint$")
     public final void I_make_a_DELETE_call_to_endpoint(final String endpointUrl)
             throws Throwable {
-        if (this.authorizationHeader != null) {
-            this.webClient.header("Authorization", this.authorizationHeader);
-        }
+        this.createClientWithAuthHeader();
         this.response = this.webClient.path(endpointUrl).delete();
     }
 
@@ -232,7 +222,6 @@ public class RestfulSteps {
     @Then("^response header \"([^\"]*)\" should be \"([^\"]*)\";$")
     public void response_header_should_be_(final String responseHeaderName,
                                            final String headerValue) throws Throwable {
-
         assertThat(headerValue).isEqualTo(
                 this.response.getMetadata().getFirst(responseHeaderName));
     }
