@@ -1,10 +1,14 @@
 [![Build Status](https://travis-ci.org/cchacin/cucumber-common-steps.svg?branch=master)](https://travis-ci.org/cchacin/cucumber-common-steps.svg?branch=master)
 [![Dependency Status](https://www.versioneye.com/user/projects/5407630bccc023c90d000098/badge.svg)](https://www.versioneye.com/user/projects/5407630bccc023c90d000098)
 
-cucumber-common-steps
+Cucumber Common Steps
 =====================
 
-Cucumber common steps definitions
+This project is an intent to provide common steps definitions to make functional testing for REST API's, Database setup's and HTML page's
+
+This is based on [cucumber-jvm](https://github.com/cucumber/cucumber-jvm) project.
+
+You need to specify your features in the gherkin language and run it with [cucumber-java](https://github.com/cucumber/cucumber-java-skeleton) or [cukespace](https://github.com/cukespace/cukespace) + [arquillian](http://arquillian.org/)
 
 
 Getting Started
@@ -16,7 +20,7 @@ Add as dependency in your pom.xml:
 <dependency>
     <artifactId>cucumber-common-steps</artifactId>
     <packaging>jar</packaging>
-    <version>@version@</version>
+    <version>0.0.5</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -63,4 +67,5 @@ public class UsersEndpointITest {
 ```
 
 And then run: ```mvn test``` -> output:
+
 
