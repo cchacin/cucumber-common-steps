@@ -5,14 +5,14 @@ Feature: Successful rest calls
   #######
   Scenario:
     When I make a GET call to "/rest/successful/get" endpoint
-    Then the response status code should be "200"
+    Then response status code should be "200"
     And response content type should be "application/json"
     And response header "a" should be "a";
     And response should be json in file "/responses/successful.json"
 
   Scenario:
     When I make a GET call to "/rest/successful/get" endpoint
-    Then the response status code should be "200"
+    Then response status code should be "200"
     And response content type should be "application/json"
     And response header "a" should be "a";
     And response should be json:
@@ -31,5 +31,5 @@ Feature: Successful rest calls
     {
     }
     """
-    Then the response status code should be "204"
+    Then response status code should be "204"
     And response should be empty
