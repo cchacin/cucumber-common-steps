@@ -5,6 +5,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   #copy data we're interested in to other place
   #mkdir -p $HOME/reports
   cp -R ./target/site $HOME/.
+  cp -R ./target/cucumber-report $HOME/site/.
 
   #go to home and setup git
   cd $HOME
