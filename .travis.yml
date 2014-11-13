@@ -14,7 +14,7 @@ cache:
 install: true
 script: mvn clean test
 after_success:
-  - mvn javadoc:javadoc jacoco:report coveralls:jacoco
+  - mvn javadoc:javadoc
   - ./update-gh-pages.sh
 env:
   global:
