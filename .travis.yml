@@ -12,10 +12,10 @@ cache:
   directories:
   - $HOME/.m2
 install: true
-script: mvn clean test
+script: mvn clean jacoco:prepare-agent test
 after_success:
-  - mvn javadoc:javadoc
+  - mvn javadoc:javadoc jacoco:report coveralls:report
   - ./update-gh-pages.sh
 env:
   global:
-    secure: SWDrW9Zm3lcZhFympim61AjT+jFmD9Hq/nG4oexp2TyEzzfabKf82WgSIfScsQX5HWPz97d2KbP6+hjorLH/tMHaT+KKbqRWB2hdiAI5bpM3djae9TyjgcfjlkIJtaPUkvROYjd38bFZZdko5LRjuab4pnY+8jmNXbzMkPOj1u4=
+  - secure: EQ0gLiDj+vMXhjeE+yPCaGdsEshapNH/JVc/f0nwGc4Z3uzC6/8mK4/eYZ9pAcMXoO5sQjBGVFS2e8wOvnOUTs9hSkV3/NXmL2R/AGbHRGr/mkVRkq3FcjC7YB2dNdVLLFdEIA/dviQXwyFqkiQ28wvVEz65BjYSEcqGiJ1BLgA=
