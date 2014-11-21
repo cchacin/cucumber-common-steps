@@ -7,7 +7,7 @@
 Cucumber Common Steps
 =====================
 
-{% 5724918 %}
+{% gist 5724918 %}
 
 This project is an intent to provide common steps definitions to make functional testing for REST API's, Database setup's and HTML page's
 
