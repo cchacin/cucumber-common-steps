@@ -1,35 +1,41 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Cucumber Common Steps : Cucumber common steps definitions">
 
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>Cucumber Common Steps by cchacin</title>
+    <title>Cucumber Common Steps</title>
   </head>
 
   <body>
 
-    <header>
-      <div class="container">
-        <h1>Cucumber Common Steps</h1>
-        <h2>Cucumber common steps definitions</h2>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/cchacin/cucumber-common-steps">View on GitHub</a>
 
-        <section id="downloads">
-          <a href="https://github.com/cchacin/cucumber-common-steps/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/cchacin/cucumber-common-steps/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/cchacin/cucumber-common-steps" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
-      </div>
-    </header>
+          <h1 id="project_title">Cucumber Common Steps</h1>
+          <h2 id="project_tagline">Cucumber common steps definitions</h2>
 
-    <div class="container">
-      <section id="main_content">
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/cchacin/cucumber-common-steps/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/cchacin/cucumber-common-steps/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
         <p><a href="https://travis-ci.org/cchacin/cucumber-common-steps.svg?branch=master"><img src="https://travis-ci.org/cchacin/cucumber-common-steps.svg?branch=master" alt="Build Status"></a>
-<a href="https://www.versioneye.com/user/projects/5407630bccc023c90d000098"><img src="https://www.versioneye.com/user/projects/5407630bccc023c90d000098/badge.svg" alt="Dependency Status"></a></p>
+<a href="https://coveralls.io/r/cchacin/cucumber-common-steps?branch=master"><img src="https://coveralls.io/repos/cchacin/cucumber-common-steps/badge.png?branch=master" alt="Coverage Status"></a>
+<a href="http://waffle.io/cchacin/cucumber-common-steps"><img src="https://badge.waffle.io/cchacin/cucumber-common-steps.svg?label=ready&amp;title=Ready" alt="Stories in Ready"></a>
+<a href="https://www.versioneye.com/user/projects/5407630bccc023c90d000098"><img src="https://www.versioneye.com/user/projects/5407630bccc023c90d000098/badge.svg" alt="Dependency Status"></a>
+<a href="https://maven-badges.herokuapp.com/maven-central/com.github.cchacin/cucumber-common-steps"><img src="https://maven-badges.herokuapp.com/maven-central/com.github.cchacin/cucumber-common-steps/badge.svg" alt="Maven Central"></a></p>
 
 <h1>
 <a id="cucumber-common-steps" class="anchor" href="#cucumber-common-steps" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cucumber Common Steps</h1>
@@ -54,7 +60,7 @@
 
 <p>Write your feature in gherkin language with a tag(s) in <code>src/test/resources</code></p>
 
-<div class="highlight highlight-gherkin"><pre><span class="pl-s">@users_endpoint</span>
+<div class="highlight highlight-gherkin"><pre><span class="pl-st">@users_endpoint</span>
 <span class="pl-k">Feature</span>:<span class="pl-s1"> REST API to manage users</span>
 
   <span class="pl-k">Background</span>:
@@ -83,16 +89,25 @@
 
 <p>Write a cucumber integration-test in <code>src/test/java</code>:</p>
 
-<div class="highlight highlight-java"><pre>@Glues({<span class="pl-s">RestSteps</span><span class="pl-ko">.</span>class})
+<div class="highlight highlight-java"><pre>@Glues({<span class="pl-stj">RestSteps</span><span class="pl-k">.</span>class})
 @Features({<span class="pl-s1"><span class="pl-pds">"</span>features/successful-endpoints.feature<span class="pl-pds">"</span></span>})
-@RunWith(<span class="pl-s">ArquillianCucumber</span><span class="pl-ko">.</span>class)
-<span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-entc">UsersEndpointITest</span> {
+@RunWith(<span class="pl-stj">ArquillianCucumber</span><span class="pl-k">.</span>class)
+<span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">UsersEndpointITest</span> {
 }</pre></div>
 
 <p>And then run: <code>mvn test</code> -&gt; output:</p>
       </section>
     </div>
 
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Cucumber Common Steps maintained by <a href="https://github.com/cchacin">cchacin</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
     
+
   </body>
 </html>
