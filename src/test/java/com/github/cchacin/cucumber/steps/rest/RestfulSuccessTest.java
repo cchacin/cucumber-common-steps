@@ -33,6 +33,8 @@ public class RestfulSuccessTest {
     @Deployment
     public static Archive<?> createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "test-app.war")
-                .addPackage(Controller.class.getPackage());
+                .addPackage(Controller.class.getPackage())
+                .addAsWebInfResource("test-resources.xml", "resources.xml")
+                .addAsWebInfResource("test-openejb-jar.xml", "openejb-jar.xml");
     }
 }

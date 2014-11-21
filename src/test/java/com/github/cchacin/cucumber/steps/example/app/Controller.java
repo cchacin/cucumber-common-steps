@@ -31,7 +31,7 @@ public class Controller {
     @Path("/successful/get")
     @Produces("application/json")
     public Response successfulGET() {
-        return Response.ok(new Model("1", new Date(), new Date(), "", "", "")).header("a", "a").build();
+        return Response.ok(new Model("1", new Date(), new Date(), null, "", "")).header("a", "a").build();
     }
 
     @PUT

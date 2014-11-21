@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<resources>
+    <Service id="jsonProvider" class-name="org.apache.cxf.jaxrs.provider.json.JSONProvider">
+        dropRootElement=true
+        supportUnwrapped = true
+        dropCollectionWrapperElement=true
+    </Service>
+</resources>

@@ -25,14 +25,11 @@ Feature: Successful rest calls
     And response should be json:
     """
     {
-      "model": {
-        "id": "${json-unit.ignore}",
-        "created": "${json-unit.ignore}",
-        "modified": "${json-unit.ignore}",
-        "email": "",
-        "password": "",
-        "fullname": ""
-      }
+      "id": "${json-unit.ignore}",
+      "created": "${json-unit.ignore}",
+      "modified": "${json-unit.ignore}",
+      "password": "",
+      "fullname": ""
     }
 
     """
