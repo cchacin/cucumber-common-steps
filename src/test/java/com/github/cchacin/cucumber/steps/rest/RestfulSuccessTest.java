@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.cchacin.cucumber.steps;
+package com.github.cchacin.cucumber.steps.rest;
 
-import com.github.cchacin.cucumber.steps.example.app.JaxRSActivator;
-import com.github.cchacin.cucumber.steps.rest.RestSteps;
+import com.github.cchacin.cucumber.steps.example.app.Controller;
 import cucumber.runtime.arquillian.ArquillianCucumber;
 import cucumber.runtime.arquillian.api.Features;
 import cucumber.runtime.arquillian.api.Glues;
@@ -34,6 +33,6 @@ public class RestfulSuccessTest {
     @Deployment
     public static Archive<?> createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "test-app.war")
-                .addPackage(JaxRSActivator.class.getPackage());
+                .addPackage(Controller.class.getPackage());
     }
 }

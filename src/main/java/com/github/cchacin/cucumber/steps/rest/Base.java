@@ -58,6 +58,9 @@ public abstract class Base {
     }
 
     final void setHeader(final String headerName, final String headerValue) {
+        if ("Authorization".equals(headerName)) {
+            this.authorizationHeader = headerValue;
+        }
         this.webClient.header(headerName, headerValue);
     }
 
