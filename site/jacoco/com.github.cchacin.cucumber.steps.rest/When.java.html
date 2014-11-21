@@ -31,12 +31,12 @@ import static org.assertj.core.api.Assertions.assertThat;
     public final void I_make_a_GET_HEAD_call_to_endpoint_with_header_with_value(
             final String method, final String endpointUrl, final String headerName,
             final String headerValue) throws Throwable {
-<span class="nc" id="L34">        createClientWithAuthHeader();</span>
-<span class="nc" id="L35">        this.setHeader(headerName, headerValue);</span>
-<span class="nc bnc" id="L36" title="All 2 branches missed.">        this.response = (method.equals(&quot;GET&quot;)) ? this.webClient.path(</span>
-<span class="nc" id="L37">                endpointUrl).get() : this.webClient.path(endpointUrl).head();</span>
-<span class="nc" id="L38">        assertThat(this.response.getStatus()).isBetween(200, 299);</span>
-<span class="nc" id="L39">    }</span>
+<span class="fc" id="L34">        createClientWithAuthHeader();</span>
+<span class="fc" id="L35">        this.setHeader(headerName, headerValue);</span>
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">        this.response = (method.equals(&quot;GET&quot;)) ? this.webClient.path(</span>
+<span class="pc" id="L37">                endpointUrl).get() : this.webClient.path(endpointUrl).head();</span>
+<span class="fc" id="L38">        assertThat(this.response.getStatus()).isBetween(200, 299);</span>
+<span class="fc" id="L39">    }</span>
 
     @cucumber.api.java.en.When(&quot;^I make a (POST|PUT) call to \&quot;([^\&quot;]*)\&quot; endpoint with post body:$&quot;)
     public final void I_make_a_POST_PUT_call_to_endpoint_with_post_body(
