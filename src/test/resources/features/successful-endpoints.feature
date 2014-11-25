@@ -1,5 +1,30 @@
 Feature: Successful rest calls
 
+  # DATABASE GET
+  Scenario: Retrieve users list
+    Given I have only the following rows in the "models" table:
+      | id | created             | modified            | email                | fullname | password |
+      | 1  | 2014-07-16 00:00:00 | 2014-07-16 00:00:00 | cchacin@superbiz.org | Carlos   | passw0rd |
+    When I make a GET call to "/users" endpoint
+    Then response status code should be "200"
+    And response content type should be "application/json"
+    And response should be json:
+    """
+    {
+      "model":
+        [
+          {
+              "id": 1,
+              "created": "2014-07-16T00:00:00-04:00",
+              "modified": "2014-07-16T00:00:00-04:00",
+              "email": "cchacin@superbiz.org",
+              "fullname": "Carlos",
+              "password": "passw0rd"
+          }
+        ]
+    }
+    """
+
   #######
   # GET
   #######

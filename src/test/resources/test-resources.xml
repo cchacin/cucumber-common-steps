@@ -1,8 +1,25 @@
 <?xml version="1.0"?>
 <resources>
+    <Resource id="jdbc/test" type="javax.sql.DataSource">
+        JdbcDriver = org.hsqldb.jdbcDriver
+        JdbcUrl = jdbc:hsqldb:mem:test
+        UserName = SA
+        Password =
+        JtaManaged = true
+    </Resource>
+
+
+    <Resource id="jdbc/test-unmanaged" type="javax.sql.DataSource">
+        JdbcDriver = org.hsqldb.jdbcDriver
+        JdbcUrl = jdbc:hsqldb:mem:test
+        UserName = SA
+        Password =
+        JtaManaged = false
+    </Resource>
+
     <Service id="jsonProvider" class-name="org.apache.cxf.jaxrs.provider.json.JSONProvider">
-        dropRootElement=true
+        dropRootElement = true
         supportUnwrapped = true
-        dropCollectionWrapperElement=true
+        dropCollectionWrapperElement = false
     </Service>
 </resources>

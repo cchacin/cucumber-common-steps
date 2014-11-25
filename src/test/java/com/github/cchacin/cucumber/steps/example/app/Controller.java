@@ -1,6 +1,4 @@
 /**
- * Copyright (C) 2014 Carlos Chacin (cchacin@gmail.com)
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,6 +13,7 @@
  */
 package com.github.cchacin.cucumber.steps.example.app;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -22,6 +21,7 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.Date;
+import java.util.List;
 
 @Path("/")
 @Stateless
@@ -33,11 +33,21 @@ public class Controller {
     @Context
     HttpHeaders headers;
 
+    @EJB
+    ModelDao modelDao;
+
     @GET
     @Path("/successful/get")
     @Produces("application/json")
     public Response successfulGET() {
         return Response.ok(new Model("1", new Date(), new Date(), null, "", "")).header("a", "a").build();
+    }
+
+    @GET
+    @Path("/users")
+    @Produces("application/json")
+    public List<Model> successfulGETUsers() {
+        return modelDao.get();
     }
 
     @GET

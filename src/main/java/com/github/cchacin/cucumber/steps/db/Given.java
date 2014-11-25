@@ -1,6 +1,4 @@
 /**
- * Copyright (C) 2014 Carlos Chacin (cchacin@gmail.com)
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -23,7 +21,6 @@ import com.ninja_squad.dbsetup.operation.Operation;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +33,16 @@ public abstract class Given {
     private static final Properties properties = new Properties();
 
     static {
-        try (final FileInputStream stream = new FileInputStream("/test_db.properties")) {
-            properties.load(stream);
+        try {
+            properties.load(Given.class.getResourceAsStream("/test-db.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        /*try (final FileInputStream stream = new FileInputStream("/test-db.properties")) {
+            properties.load(stream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
     }
 
     private final Destination destination = new DriverManagerDestination(

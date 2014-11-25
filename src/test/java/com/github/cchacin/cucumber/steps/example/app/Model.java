@@ -1,6 +1,4 @@
 /**
- * Copyright (C) 2014 Carlos Chacin (cchacin@gmail.com)
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,8 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
@@ -29,12 +26,20 @@ import java.util.Date;
 @AllArgsConstructor
 @XmlRootElement
 @Entity
-@Table(name = "model")
+@Table(name = "models")
 public class Model {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     String id;
+    @Column(name = "created")
     Date created;
+    @Column(name = "modified")
     Date modified;
+    @Column(name = "email")
     String email;
+    @Column(name = "fullname")
     String fullname;
+    @Column(name = "password")
     String password;
 }

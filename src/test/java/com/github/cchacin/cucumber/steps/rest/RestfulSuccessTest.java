@@ -1,6 +1,4 @@
 /**
- * Copyright (C) 2014 Carlos Chacin (cchacin@gmail.com)
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,6 +13,7 @@
  */
 package com.github.cchacin.cucumber.steps.rest;
 
+import com.github.cchacin.cucumber.steps.db.DatabaseSteps;
 import com.github.cchacin.cucumber.steps.example.app.Controller;
 import cucumber.runtime.arquillian.ArquillianCucumber;
 import cucumber.runtime.arquillian.api.Features;
@@ -25,7 +24,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.runner.RunWith;
 
-@Glues({RestSteps.class})
+@Glues({RestSteps.class, DatabaseSteps.class})
 @Features({"features/successful-endpoints.feature"})
 @RunWith(ArquillianCucumber.class)
 public class RestfulSuccessTest {
@@ -34,7 +33,9 @@ public class RestfulSuccessTest {
     public static Archive<?> createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "test-app.war")
                 .addPackage(Controller.class.getPackage())
+                .addAsManifestResource("test-persistence.xml", "persistence.xml")
                 .addAsWebInfResource("test-resources.xml", "resources.xml")
                 .addAsWebInfResource("test-openejb-jar.xml", "openejb-jar.xml");
+
     }
 }
