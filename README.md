@@ -1,13 +1,11 @@
 [![Build Status](https://travis-ci.org/cchacin/cucumber-common-steps.svg?branch=master)](https://travis-ci.org/cchacin/cucumber-common-steps.svg?branch=master)
-[![Coverage Status](https://coveralls.io/repos/cchacin/cucumber-common-steps/badge.png?branch=master)](https://coveralls.io/r/cchacin/cucumber-common-steps?branch=master)
+[![Coverage Status](https://img.shields.io/coveralls/cchacin/cucumber-common-steps.svg)](https://coveralls.io/r/cchacin/cucumber-common-steps?branch=master)
 [![Stories in Ready](https://badge.waffle.io/cchacin/cucumber-common-steps.svg?label=ready&title=Ready)](http://waffle.io/cchacin/cucumber-common-steps)
 [![Dependency Status](https://www.versioneye.com/user/projects/5407630bccc023c90d000098/badge.svg)](https://www.versioneye.com/user/projects/5407630bccc023c90d000098)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.cchacin/cucumber-common-steps/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.cchacin/cucumber-common-steps)
 
 Cucumber Common Steps
 =====================
-
-{% gist 5724918 %}
 
 This project is an intent to provide common steps definitions to make functional testing for REST API's, Database setup's and HTML page's
 
