@@ -1,6 +1,6 @@
 language: java
 jdk:
-  - oraclejdk8
+  - oraclejdk7
 before_script:
   - sudo apt-get -qq update > /dev/null
   - sudo apt-get -qq install graphviz > /dev/null
@@ -12,9 +12,10 @@ cache:
   directories:
   - $HOME/.m2
 install: true
-script: mvn clean jacoco:prepare-agent test
+script:
+  - mvn clean compile cobertura:cobertura
 after_success:
-  - mvn javadoc:javadoc jacoco:report coveralls:report
+  - mvn javadoc:javadoc coveralls:report
   - ./update-gh-pages.sh
 env:
   global:

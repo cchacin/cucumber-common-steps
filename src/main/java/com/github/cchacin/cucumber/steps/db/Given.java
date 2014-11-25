@@ -38,11 +38,6 @@ public abstract class Given {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*try (final FileInputStream stream = new FileInputStream("/test-db.properties")) {
-            properties.load(stream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
     }
 
     private final Destination destination = new DriverManagerDestination(

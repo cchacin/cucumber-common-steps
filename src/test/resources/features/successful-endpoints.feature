@@ -15,8 +15,8 @@ Feature: Successful rest calls
         [
           {
               "id": 1,
-              "created": "2014-07-16T00:00:00-04:00",
-              "modified": "2014-07-16T00:00:00-04:00",
+              "created": "${json-unit.ignore}",
+              "modified": "${json-unit.ignore}",
               "email": "cchacin@superbiz.org",
               "fullname": "Carlos",
               "password": "passw0rd"

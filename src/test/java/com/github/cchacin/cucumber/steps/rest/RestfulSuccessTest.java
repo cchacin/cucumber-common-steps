@@ -21,6 +21,7 @@ import cucumber.runtime.arquillian.api.Glues;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.runner.RunWith;
 
@@ -33,6 +34,7 @@ public class RestfulSuccessTest {
     public static Archive<?> createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "test-app.war")
                 .addPackage(Controller.class.getPackage())
+                .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsManifestResource("test-persistence.xml", "persistence.xml")
                 .addAsWebInfResource("test-resources.xml", "resources.xml")
                 .addAsWebInfResource("test-openejb-jar.xml", "openejb-jar.xml");
