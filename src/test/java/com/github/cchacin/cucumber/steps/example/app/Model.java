@@ -19,6 +19,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
@@ -26,6 +28,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @XmlRootElement
+@Entity
+@Table(name = "model")
 public class Model {
     String id;
     Date created;

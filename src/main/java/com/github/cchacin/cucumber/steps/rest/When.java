@@ -15,6 +15,10 @@
  */
 package com.github.cchacin.cucumber.steps.rest;
 
+import cucumber.api.DataTable;
+
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class When extends Given {
@@ -66,4 +70,15 @@ public abstract class When extends Given {
     }
 
 
+    @cucumber.api.java.en.When("^I make a (GET|HEAD) call to \"([^\"]*)\" endpoint with headers:$")
+    public void I_make_a_GET_HEAD_call_to_endpoint_with_headers(final String method, final String endpointUrl, final DataTable headers) throws Throwable {
+        createClientWithAuthHeader();
+        Map<String, String> headersMap = headers.asMap(String.class, String.class);
+        for (Map.Entry<String, String> entry : headersMap.entrySet()) {
+            this.setHeader(entry.getKey(), entry.getValue());
+        }
+        this.response = (method.equals("GET")) ? this.webClient.path(
+                endpointUrl).get() : this.webClient.path(endpointUrl).head();
+        assertThat(this.response.getStatus()).isBetween(200, 299);
+    }
 }

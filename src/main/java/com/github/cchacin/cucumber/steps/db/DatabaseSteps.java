@@ -13,7 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.cchacin.cucumber.steps.rest;
+package com.github.cchacin.cucumber.steps.db;
 
-public abstract class Given extends Base {
+public class DatabaseSteps extends Given {
+
 }

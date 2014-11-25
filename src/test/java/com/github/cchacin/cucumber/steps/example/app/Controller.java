@@ -16,16 +16,22 @@
 package com.github.cchacin.cucumber.steps.example.app;
 
 import javax.ejb.Stateless;
-import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import java.util.Date;
 
 @Path("/")
 @Stateless
 public class Controller {
+
+    @Context
+    UriInfo uriInfo;
+
+    @Context
+    HttpHeaders headers;
 
     @GET
     @Path("/successful/get")
@@ -34,9 +40,36 @@ public class Controller {
         return Response.ok(new Model("1", new Date(), new Date(), null, "", "")).header("a", "a").build();
     }
 
+    @GET
+    @Path("/successful/get/csv")
+    @Produces("text/csv")
+    public Response successfulGETCSV() {
+        return Response.ok("\"headerA\",\"headerB\"\n\"row1A\",\"row1B\"\n").build();
+    }
+
+    @HEAD
+    @Path("/successful/head")
+    @Produces("application/json")
+    public Response successfulHEAD() {
+        return Response.noContent().build();
+    }
+
     @PUT
     @Path("/successful/put")
     public Response successfulPUT(final String body) {
+        return Response.noContent().build();
+    }
+
+    @POST
+    @Path("/successful/post")
+    public Response successfulPOST(final String body) {
+        return Response.created(uriInfo.getAbsolutePathBuilder().path("1").build()).build();
+    }
+
+    @DELETE
+    @Path("/successful/delete")
+    @Produces("application/json")
+    public Response successfulDELETE() {
         return Response.noContent().build();
     }
 }
