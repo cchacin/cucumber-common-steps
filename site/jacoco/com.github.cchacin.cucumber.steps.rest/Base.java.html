@@ -39,36 +39,31 @@ import java.nio.file.Paths;
 
     String authorizationHeader;
 
-    final String fileContent(String filePath) {
-        byte[] encoded;
-        try {
-<span class="fc" id="L45">            encoded = Files.readAllBytes(Paths.get(getClass().getResource(</span>
-<span class="fc" id="L46">                    filePath).toURI()));</span>
-<span class="nc" id="L47">        } catch (IOException | URISyntaxException e) {</span>
-<span class="nc" id="L48">            throw new RuntimeException(e);</span>
-<span class="fc" id="L49">        }</span>
+    final String fileContent(String filePath) throws URISyntaxException, IOException {
+<span class="fc" id="L43">        byte[] encoded = Files.readAllBytes(Paths.get(getClass().getResource(</span>
+<span class="fc" id="L44">                filePath).toURI()));</span>
 
-<span class="fc" id="L51">        return StandardCharsets.UTF_8.decode(ByteBuffer.wrap(encoded))</span>
-<span class="fc" id="L52">                .toString();</span>
+<span class="fc" id="L46">        return StandardCharsets.UTF_8.decode(ByteBuffer.wrap(encoded))</span>
+<span class="fc" id="L47">                .toString();</span>
     }
 
     final String responseValue() throws IOException {
-<span class="fc" id="L56">        return IOUtils</span>
-<span class="fc" id="L57">                .toString((InputStream) this.response.getEntity());</span>
+<span class="fc" id="L51">        return IOUtils</span>
+<span class="fc" id="L52">                .toString((InputStream) this.response.getEntity());</span>
     }
 
     final void setHeader(final String headerName, final String headerValue) {
-<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        if (&quot;Authorization&quot;.equals(headerName)) {</span>
-<span class="fc" id="L62">            this.authorizationHeader = headerValue;</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (&quot;Authorization&quot;.equals(headerName)) {</span>
+<span class="fc" id="L57">            this.authorizationHeader = headerValue;</span>
         }
-<span class="fc" id="L64">        this.webClient.header(headerName, headerValue);</span>
-<span class="fc" id="L65">    }</span>
+<span class="fc" id="L59">        this.webClient.header(headerName, headerValue);</span>
+<span class="fc" id="L60">    }</span>
 
     final void createClientWithAuthHeader() {
-<span class="fc" id="L68">        this.webClient = WebClient.create(this.contextPath.toString());</span>
-<span class="fc bfc" id="L69" title="All 2 branches covered.">        if (this.authorizationHeader != null) {</span>
-<span class="fc" id="L70">            this.setHeader(&quot;Authorization&quot;, this.authorizationHeader);</span>
+<span class="fc" id="L63">        this.webClient = WebClient.create(this.contextPath.toString());</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if (this.authorizationHeader != null) {</span>
+<span class="fc" id="L65">            this.setHeader(&quot;Authorization&quot;, this.authorizationHeader);</span>
         }
-<span class="fc" id="L72">    }</span>
+<span class="fc" id="L67">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

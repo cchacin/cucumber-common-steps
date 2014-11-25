@@ -15,56 +15,71 @@
  */
 package com.github.cchacin.cucumber.steps.rest;
 
+import cucumber.api.DataTable;
+
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-<span class="fc" id="L20">public abstract class When extends Given {</span>
+<span class="fc" id="L24">public abstract class When extends Given {</span>
 
     @cucumber.api.java.en.When(&quot;^I make a (GET|HEAD) call to \&quot;([^\&quot;]*)\&quot; endpoint$&quot;)
     public final void I_make_a_GET_HEAD_call_to_endpoint(final String method, final String endpointUrl) throws Throwable {
-<span class="fc" id="L24">        createClientWithAuthHeader();</span>
-<span class="pc bpc" id="L25" title="1 of 2 branches missed.">        this.response = (method.equals(&quot;GET&quot;)) ? this.webClient.path(</span>
-<span class="pc" id="L26">                endpointUrl).get() : this.webClient.path(endpointUrl).head();</span>
-<span class="fc" id="L27">        assertThat(this.response.getStatus()).isBetween(200, 299);</span>
-<span class="fc" id="L28">    }</span>
+<span class="fc" id="L28">        createClientWithAuthHeader();</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        this.response = (method.equals(&quot;GET&quot;)) ? this.webClient.path(</span>
+<span class="fc" id="L30">                endpointUrl).get() : this.webClient.path(endpointUrl).head();</span>
+<span class="fc" id="L31">        assertThat(this.response.getStatus()).isBetween(200, 299);</span>
+<span class="fc" id="L32">    }</span>
 
     @cucumber.api.java.en.When(&quot;^I make a (GET|HEAD) call to \&quot;([^\&quot;]*)\&quot; endpoint with header \&quot;([^\&quot;]*)\&quot; with value \&quot;([^\&quot;]*)\&quot;$&quot;)
     public final void I_make_a_GET_HEAD_call_to_endpoint_with_header_with_value(
             final String method, final String endpointUrl, final String headerName,
             final String headerValue) throws Throwable {
-<span class="fc" id="L34">        createClientWithAuthHeader();</span>
-<span class="fc" id="L35">        this.setHeader(headerName, headerValue);</span>
-<span class="pc bpc" id="L36" title="1 of 2 branches missed.">        this.response = (method.equals(&quot;GET&quot;)) ? this.webClient.path(</span>
-<span class="pc" id="L37">                endpointUrl).get() : this.webClient.path(endpointUrl).head();</span>
-<span class="fc" id="L38">        assertThat(this.response.getStatus()).isBetween(200, 299);</span>
-<span class="fc" id="L39">    }</span>
+<span class="fc" id="L38">        createClientWithAuthHeader();</span>
+<span class="fc" id="L39">        this.setHeader(headerName, headerValue);</span>
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">        this.response = (method.equals(&quot;GET&quot;)) ? this.webClient.path(</span>
+<span class="pc" id="L41">                endpointUrl).get() : this.webClient.path(endpointUrl).head();</span>
+<span class="fc" id="L42">        assertThat(this.response.getStatus()).isBetween(200, 299);</span>
+<span class="fc" id="L43">    }</span>
 
     @cucumber.api.java.en.When(&quot;^I make a (POST|PUT) call to \&quot;([^\&quot;]*)\&quot; endpoint with post body:$&quot;)
     public final void I_make_a_POST_PUT_call_to_endpoint_with_post_body(
             String method, String endpointUrl, final String postBody)
             throws Throwable {
-<span class="fc" id="L45">        createClientWithAuthHeader();</span>
-<span class="pc bpc" id="L46" title="1 of 2 branches missed.">        this.response = (method.equals(&quot;POST&quot;)) ? this.webClient.path(</span>
-<span class="pc" id="L47">                endpointUrl).post(postBody) : this.webClient.path(endpointUrl)</span>
-<span class="fc" id="L48">                .put(postBody);</span>
-<span class="fc" id="L49">        assertThat(this.response.getStatus()).isBetween(200, 299);</span>
-<span class="fc" id="L50">    }</span>
+<span class="fc" id="L49">        createClientWithAuthHeader();</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        this.response = (method.equals(&quot;POST&quot;)) ? this.webClient.path(</span>
+<span class="fc" id="L51">                endpointUrl).post(postBody) : this.webClient.path(endpointUrl)</span>
+<span class="fc" id="L52">                .put(postBody);</span>
+<span class="fc" id="L53">        assertThat(this.response.getStatus()).isBetween(200, 299);</span>
+<span class="fc" id="L54">    }</span>
 
     @cucumber.api.java.en.When(&quot;^I make a (POST|PUT) call to \&quot;([^\&quot;]*)\&quot; endpoint with post body in file \&quot;([^\&quot;]*)\&quot;$&quot;)
     public final void I_make_a_POST_PUT_call_to_endpoint_with_post_body_in_file(
             final String method, final String endpointUrl, final String postBodyFilePath)
             throws Throwable {
-<span class="nc" id="L56">        I_make_a_POST_PUT_call_to_endpoint_with_post_body(method, endpointUrl,</span>
-<span class="nc" id="L57">                fileContent(postBodyFilePath));</span>
-<span class="nc" id="L58">    }</span>
+<span class="fc" id="L60">        I_make_a_POST_PUT_call_to_endpoint_with_post_body(method, endpointUrl,</span>
+<span class="fc" id="L61">                fileContent(postBodyFilePath));</span>
+<span class="fc" id="L62">    }</span>
 
     @cucumber.api.java.en.When(&quot;^I make a DELETE call to \&quot;([^\&quot;]*)\&quot; endpoint$&quot;)
     public final void I_make_a_DELETE_call_to_endpoint(final String endpointUrl)
             throws Throwable {
-<span class="nc" id="L63">        this.createClientWithAuthHeader();</span>
-<span class="nc" id="L64">        this.response = this.webClient.path(endpointUrl).delete();</span>
-<span class="nc" id="L65">        assertThat(this.response.getStatus()).isBetween(200, 299);</span>
-<span class="nc" id="L66">    }</span>
+<span class="fc" id="L67">        this.createClientWithAuthHeader();</span>
+<span class="fc" id="L68">        this.response = this.webClient.path(endpointUrl).delete();</span>
+<span class="fc" id="L69">        assertThat(this.response.getStatus()).isBetween(200, 299);</span>
+<span class="fc" id="L70">    }</span>
 
 
+    @cucumber.api.java.en.When(&quot;^I make a (GET|HEAD) call to \&quot;([^\&quot;]*)\&quot; endpoint with headers:$&quot;)
+    public void I_make_a_GET_HEAD_call_to_endpoint_with_headers(final String method, final String endpointUrl, final DataTable headers) throws Throwable {
+<span class="fc" id="L75">        createClientWithAuthHeader();</span>
+<span class="fc" id="L76">        Map&lt;String, String&gt; headersMap = headers.asMap(String.class, String.class);</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        for (Map.Entry&lt;String, String&gt; entry : headersMap.entrySet()) {</span>
+<span class="fc" id="L78">            this.setHeader(entry.getKey(), entry.getValue());</span>
+<span class="fc" id="L79">        }</span>
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">        this.response = (method.equals(&quot;GET&quot;)) ? this.webClient.path(</span>
+<span class="pc" id="L81">                endpointUrl).get() : this.webClient.path(endpointUrl).head();</span>
+<span class="fc" id="L82">        assertThat(this.response.getStatus()).isBetween(200, 299);</span>
+<span class="fc" id="L83">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

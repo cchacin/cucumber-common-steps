@@ -57,8 +57,8 @@ import static org.assertj.core.api.Assertions.assertThat;
     @cucumber.api.java.en.Then(&quot;^response should be file \&quot;([^\&quot;]*)\&quot;$&quot;)
     public final void response_should_be_file(final String contentFilePath)
             throws Throwable {
-<span class="nc" id="L60">        assertThat(responseValue()).isEqualTo(fileContent(contentFilePath));</span>
-<span class="nc" id="L61">    }</span>
+<span class="fc" id="L60">        assertThat(responseValue()).isEqualTo(fileContent(contentFilePath));</span>
+<span class="fc" id="L61">    }</span>
 
     @cucumber.api.java.en.Then(&quot;^response header \&quot;([^\&quot;]*)\&quot; should be \&quot;([^\&quot;]*)\&quot;;$&quot;)
     public final void response_header_should_be_(final String responseHeaderName,

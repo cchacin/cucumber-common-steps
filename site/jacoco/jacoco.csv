@@ -1,9 +1,10 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-Cucumber Common Step Definitions,com.github.cchacin.cucumber.steps.rest,Then,9,54,0,0,2,17,1,7,1,7
-Cucumber Common Step Definitions,com.github.cchacin.cucumber.steps.rest,When,45,82,3,3,7,18,5,4,2,4
-Cucumber Common Step Definitions,com.github.cchacin.cucumber.steps.rest,Base,6,58,1,3,2,16,1,6,0,5
+Cucumber Common Step Definitions,com.github.cchacin.cucumber.steps.rest,Then,0,63,0,0,0,19,0,8,0,8
+Cucumber Common Step Definitions,com.github.cchacin.cucumber.steps.rest,When,10,172,2,8,0,34,2,10,0,7
+Cucumber Common Step Definitions,com.github.cchacin.cucumber.steps.rest,Base,0,57,0,4,0,15,0,7,0,5
 Cucumber Common Step Definitions,com.github.cchacin.cucumber.steps.rest,RestSteps,0,3,0,0,0,1,0,1,0,1
-Cucumber Common Step Definitions,com.github.cchacin.cucumber.steps.rest,Given,13,3,0,0,5,1,3,1,3,1
+Cucumber Common Step Definitions,com.github.cchacin.cucumber.steps.rest,Given,0,3,0,0,0,1,0,1,0,1
+Cucumber Common Step Definitions,com.github.cchacin.cucumber.steps.db,DatabaseSteps,3,0,0,0,1,0,1,0,1,0
+Cucumber Common Step Definitions,com.github.cchacin.cucumber.steps.db,Given,159,0,10,0,33,0,12,0,7,0
 Cucumber Common Step Definitions,com.github.cchacin.cucumber.steps,Dependencies,47,0,0,0,11,0,3,0,3,0
 Cucumber Common Step Definitions,com.github.cchacin.cucumber.steps,Dependencies.new Callable() {...},15,0,0,0,4,0,2,0,2,0
-Cucumber Common Step Definitions,com.github.cchacin.cucumber.steps,DatabaseSteps,159,0,10,0,33,0,12,0,7,0
