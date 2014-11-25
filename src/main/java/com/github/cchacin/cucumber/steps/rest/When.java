@@ -31,15 +31,20 @@ public abstract class When extends Given {
         assertThat(this.response.getStatus()).isBetween(200, 299);
     }
 
+    @cucumber.api.java.en.When("^I make a (GET|HEAD) call to \"([^\"]*)\" endpoint in host \"([^\"]*)\"$")
+    public final void I_make_a_GET_HEAD_call_to_endpoint_in_host(final String method, final String endpointUrl, final String host) throws Throwable {
+        createClientWithAuthHeader(host);
+        this.response = (method.equals("GET")) ? this.webClient.path(
+                endpointUrl).get() : this.webClient.path(endpointUrl).head();
+        assertThat(this.response.getStatus()).isBetween(200, 299);
+    }
+
     @cucumber.api.java.en.When("^I make a (GET|HEAD) call to \"([^\"]*)\" endpoint with header \"([^\"]*)\" with value \"([^\"]*)\"$")
     public final void I_make_a_GET_HEAD_call_to_endpoint_with_header_with_value(
             final String method, final String endpointUrl, final String headerName,
             final String headerValue) throws Throwable {
-        createClientWithAuthHeader();
         this.setHeader(headerName, headerValue);
-        this.response = (method.equals("GET")) ? this.webClient.path(
-                endpointUrl).get() : this.webClient.path(endpointUrl).head();
-        assertThat(this.response.getStatus()).isBetween(200, 299);
+        I_make_a_GET_HEAD_call_to_endpoint(method, endpointUrl);
     }
 
     @cucumber.api.java.en.When("^I make a (POST|PUT) call to \"([^\"]*)\" endpoint with post body:$")
@@ -72,13 +77,10 @@ public abstract class When extends Given {
 
     @cucumber.api.java.en.When("^I make a (GET|HEAD) call to \"([^\"]*)\" endpoint with headers:$")
     public void I_make_a_GET_HEAD_call_to_endpoint_with_headers(final String method, final String endpointUrl, final DataTable headers) throws Throwable {
-        createClientWithAuthHeader();
         Map<String, String> headersMap = headers.asMap(String.class, String.class);
         for (Map.Entry<String, String> entry : headersMap.entrySet()) {
             this.setHeader(entry.getKey(), entry.getValue());
         }
-        this.response = (method.equals("GET")) ? this.webClient.path(
-                endpointUrl).get() : this.webClient.path(endpointUrl).head();
-        assertThat(this.response.getStatus()).isBetween(200, 299);
+        I_make_a_GET_HEAD_call_to_endpoint(method, endpointUrl);
     }
 }

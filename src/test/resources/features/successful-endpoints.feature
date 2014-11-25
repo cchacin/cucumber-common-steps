@@ -4,6 +4,11 @@ Feature: Successful rest calls
   # GET
   #######
   Scenario:
+    When I make a GET call to "/zen" endpoint in host "https://api.github.com"
+    Then response status code should be "200"
+    And response content type should be "text/plain;charset=utf-8"
+
+  Scenario:
     When I make a GET call to "/successful/get" endpoint
     Then response status code should be "200"
     And response content type should be "application/json"

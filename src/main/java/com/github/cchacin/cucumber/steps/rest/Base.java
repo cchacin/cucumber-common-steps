@@ -60,7 +60,11 @@ public abstract class Base {
     }
 
     final void createClientWithAuthHeader() {
-        this.webClient = WebClient.create(this.contextPath.toString());
+        createClientWithAuthHeader(this.contextPath.toString());
+    }
+
+    final void createClientWithAuthHeader(final String host) {
+        this.webClient = WebClient.create(host);
         if (this.authorizationHeader != null) {
             this.setHeader("Authorization", this.authorizationHeader);
         }
