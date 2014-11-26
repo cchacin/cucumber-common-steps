@@ -1,78 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.8333333333333334" branch-rate="0.9285714285714286" lines-covered="85" lines-valid="102" branches-covered="13" branches-valid="14" complexity="1.3846153846153846" version="2.0.3" timestamp="1416964882578">
+<coverage line-rate="0.9550561797752809" branch-rate="0.9285714285714286" lines-covered="85" lines-valid="89" branches-covered="13" branches-valid="14" complexity="1.2916666666666667" version="2.0.3" timestamp="1416965652186">
 	<sources>
 		<source>--source</source>
 		<source>/home/travis/build/cchacin/cucumber-common-steps/src/main/java</source>
 	</sources>
 	<packages>
-		<package name="com.github.cchacin.cucumber.steps" line-rate="0.0" branch-rate="1.0" complexity="2.5">
-			<classes>
-				<class name="com.github.cchacin.cucumber.steps.Dependencies" filename="com/github/cchacin/cucumber/steps/Dependencies.java" line-rate="0.0" branch-rate="1.0" complexity="2.5">
-					<methods>
-						<method name="&lt;clinit&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="30" hits="0" branch="false"/>
-								<line number="31" hits="0" branch="false"/>
-								<line number="32" hits="0" branch="false"/>
-								<line number="40" hits="0" branch="false"/>
-								<line number="41" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="25" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="get" signature="()[Ljava/io/File;" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="44" hits="0" branch="false"/>
-								<line number="46" hits="0" branch="false"/>
-								<line number="48" hits="0" branch="false"/>
-								<line number="49" hits="0" branch="false"/>
-								<line number="51" hits="0" branch="false"/>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="25" hits="0" branch="false"/>
-						<line number="30" hits="0" branch="false"/>
-						<line number="31" hits="0" branch="false"/>
-						<line number="32" hits="0" branch="false"/>
-						<line number="40" hits="0" branch="false"/>
-						<line number="41" hits="0" branch="false"/>
-						<line number="44" hits="0" branch="false"/>
-						<line number="46" hits="0" branch="false"/>
-						<line number="48" hits="0" branch="false"/>
-						<line number="49" hits="0" branch="false"/>
-						<line number="51" hits="0" branch="false"/>
-					</lines>
-				</class>
-				<class name="com.github.cchacin.cucumber.steps.Dependencies$1" filename="com/github/cchacin/cucumber/steps/Dependencies.java" line-rate="0.0" branch-rate="1.0" complexity="2.5">
-					<methods>
-						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
-							<lines>
-							</lines>
-						</method>
-						<method name="call" signature="()Ljava/lang/Object;" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="32" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="call" signature="()[Ljava/io/File;" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="35" hits="0" branch="false"/>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="32" hits="0" branch="false"/>
-						<line number="35" hits="0" branch="false"/>
-					</lines>
-				</class>
-			</classes>
-		</package>
 		<package name="com.github.cchacin.cucumber.steps.db" line-rate="0.8620689655172413" branch-rate="1.0" complexity="1.2">
 			<classes>
 				<class name="com.github.cchacin.cucumber.steps.db.DatabaseSteps" filename="com/github/cchacin/cucumber/steps/db/DatabaseSteps.java" line-rate="1.0" branch-rate="1.0" complexity="0.0">
