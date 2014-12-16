@@ -28,10 +28,9 @@ Add as dependency in your pom.xml:
 </dependency>
 ```
 
-Write your feature in gherkin language with a tag(s) in ```src/test/resources```
+Write your feature in gherkin language in ```src/test/resources```
 
 ```gherkin
-@users_endpoint
 Feature: REST API to manage users
 
   Background:
@@ -62,7 +61,7 @@ Feature: REST API to manage users
 Write a cucumber integration-test in ```src/test/java```:
 
 ```java
-@Glues({RestSteps.class})
+@Glues({RestSteps.class, DatabaseSteps.class})
 @Features({"features/successful-endpoints.feature"})
 @RunWith(ArquillianCucumber.class)
 public class UsersEndpointITest {
