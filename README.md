@@ -21,8 +21,8 @@ Add as dependency in your pom.xml:
 
 ```xml
 <dependency>
+    <groupId>com.github.cchacin</groupId>
     <artifactId>cucumber-common-steps</artifactId>
-    <packaging>jar</packaging>
     <version>0.0.5</version>
     <scope>test</scope>
 </dependency>
