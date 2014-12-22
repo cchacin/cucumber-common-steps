@@ -58,6 +58,34 @@ Feature: REST API to manage users
     """
 ```
 
+Put your database connection properties in ```src/test/resources/test-db.properties```
+
+```properties
+database.url=jdbc:hsqldb:mem:test
+database.driver=org.hsqldb.jdbcDriver
+database.user=SA
+database.password=
+```
+
+Write your application (if needed):
+
+```java
+@Path("/")
+@Stateless
+public class Controller {
+
+    @EJB
+    ModelDao modelDao;
+
+    @GET
+    @Path("/users")
+    @Produces("application/json")
+    public List<Model> successfulGETUsers() {
+        return modelDao.get();
+    }
+}
+```
+
 Write a cucumber integration-test in ```src/test/java```:
 
 ```java
@@ -67,7 +95,3 @@ Write a cucumber integration-test in ```src/test/java```:
 public class UsersEndpointITest {
 }
 ```
-
-And then run: ```mvn test``` -> output:
-
-
