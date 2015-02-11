@@ -13,6 +13,7 @@
  */
 package com.github.cchacin.cucumber.steps.rest;
 
+import com.github.cchacin.cucumber.steps.calls.CallsSteps;
 import com.github.cchacin.cucumber.steps.db.DatabaseSteps;
 import com.github.cchacin.cucumber.steps.example.app.Controller;
 import cucumber.runtime.arquillian.ArquillianCucumber;
@@ -25,7 +26,7 @@ import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.runner.RunWith;
 
-@Glues({RestSteps.class, DatabaseSteps.class})
+@Glues({RestSteps.class, DatabaseSteps.class, CallsSteps.class})
 @Features({"features/successful-endpoints.feature"})
 @RunWith(ArquillianCucumber.class)
 public class RestfulSuccessTest {

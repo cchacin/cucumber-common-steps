@@ -25,6 +25,36 @@ Feature: Successful rest calls
     }
     """
 
+  # EXTERNAL SERVICE
+  Scenario: Mock external API
+    Given The call to external service should be:
+      | method | url            | statusCode |
+      | GET    | /user/71e7cb11 | 200        |
+      | POST   | /user          | 201        |
+      | PUT    | /user/71e7cb11 | 204        |
+      | DELETE | /user/71e7cb11 | 204        |
+    When I make a GET call to "/external/call/user/71e7cb11" endpoint
+    Then response status code should be "200"
+    And response should be json:
+    """
+    {
+      "responses": [
+        {
+          "status": 200
+        },
+        {
+          "status": 201
+        },
+        {
+          "status": 204
+        },
+        {
+          "status": 204
+        }
+      ]
+    }
+    """
+
   #######
   # GET
   #######

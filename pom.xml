@@ -111,6 +111,14 @@
             <version>${jsonunit.version}</version>
         </dependency>
 
+        <!-- Restito -->
+        <dependency>
+            <groupId>com.xebialabs.restito</groupId>
+            <artifactId>restito</artifactId>
+            <version>0.4</version>
+        </dependency>
+
+        <!-- Findbugs -->
         <dependency>
             <groupId>net.sourceforge.findbugs</groupId>
             <artifactId>annotations</artifactId>
