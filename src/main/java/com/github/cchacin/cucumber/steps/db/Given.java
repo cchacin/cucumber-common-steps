@@ -22,6 +22,7 @@ import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -33,8 +34,8 @@ public abstract class Given {
     private static final Properties properties = new Properties();
 
     static {
-        try {
-            properties.load(Given.class.getResourceAsStream("/test-db.properties"));
+        try (InputStream resource = Given.class.getResourceAsStream("/test-db.properties")) {
+            properties.load(resource);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -6,6 +6,7 @@ import cucumber.api.DataTable;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 import org.glassfish.grizzly.http.util.HttpStatus;
 
@@ -42,7 +43,6 @@ public abstract class Given {
         }
     }
 
-    @Value
     @Getter
     private static class Call {
         private String method;

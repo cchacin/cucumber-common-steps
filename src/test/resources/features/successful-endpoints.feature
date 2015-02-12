@@ -25,6 +25,39 @@ Feature: Successful rest calls
     }
     """
 
+  # DATABASE GET
+  Scenario: Retrieve users list
+    Given I have the following rows in the "models" table:
+      | id | created             | modified            | email                 | fullname | password |
+      | 2  | 2015-02-11 00:00:00 | 2015-02-11 00:00:00 | cchacin2@superbiz.org | Carlos2  | passw0rd |
+    When I make a GET call to "/users" endpoint
+    Then response status code should be "200"
+    And response content type should be "application/json"
+    And response should be json:
+    """
+    {
+      "model":
+        [
+          {
+              "id": 1,
+              "created": "${json-unit.ignore}",
+              "modified": "${json-unit.ignore}",
+              "email": "cchacin@superbiz.org",
+              "fullname": "Carlos",
+              "password": "passw0rd"
+          },
+          {
+              "id": 2,
+              "created": "${json-unit.ignore}",
+              "modified": "${json-unit.ignore}",
+              "email": "cchacin2@superbiz.org",
+              "fullname": "Carlos2",
+              "password": "passw0rd"
+          }
+        ]
+    }
+    """
+
   # EXTERNAL SERVICE
   Scenario: Mock external API
     Given The call to external service should be:

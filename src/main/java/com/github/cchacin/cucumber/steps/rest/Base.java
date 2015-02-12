@@ -38,7 +38,7 @@ public abstract class Base {
     String authorizationHeader;
 
     final String fileContent(String filePath) throws URISyntaxException, IOException {
-        byte[] encoded = Files.readAllBytes(Paths.get(getClass().getResource(
+        final byte[] encoded = Files.readAllBytes(Paths.get(Base.class.getResource(
                 filePath).toURI()));
 
         return StandardCharsets.UTF_8.decode(ByteBuffer.wrap(encoded))
