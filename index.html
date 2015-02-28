@@ -1,38 +1,35 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Cucumber Common Steps : Cucumber common steps definitions">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-    <title>Cucumber Common Steps</title>
+    <title>Cucumber Common Steps by cchacin</title>
   </head>
 
   <body>
+    <header>
+      <div class="inner">
+        <h1>Cucumber Common Steps</h1>
+        <h2>Cucumber common steps definitions</h2>
+        <a href="https://github.com/cchacin/cucumber-common-steps" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/cchacin/cucumber-common-steps">View on GitHub</a>
-
-          <h1 id="project_title">Cucumber Common Steps</h1>
-          <h2 id="project_tagline">Cucumber common steps definitions</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/cchacin/cucumber-common-steps/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/cchacin/cucumber-common-steps/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <p><a href="https://travis-ci.org/cchacin/cucumber-common-steps.svg?branch=master"><img src="https://travis-ci.org/cchacin/cucumber-common-steps.svg?branch=master" alt="Build Status"></a>
-<a href="https://coveralls.io/r/cchacin/cucumber-common-steps?branch=master"><img src="https://coveralls.io/repos/cchacin/cucumber-common-steps/badge.png?branch=master" alt="Coverage Status"></a>
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <p><a href="https://travis-ci.org/cchacin/cucumber-common-steps.svg?branch=master"><img src="https://travis-ci.org/cchacin/cucumber-common-steps.svg?branch=master" alt="Build Status"></a>
+<a href="https://coveralls.io/r/cchacin/cucumber-common-steps?branch=master"><img src="https://img.shields.io/coveralls/cchacin/cucumber-common-steps.svg" alt="Coverage Status"></a>
 <a href="http://waffle.io/cchacin/cucumber-common-steps"><img src="https://badge.waffle.io/cchacin/cucumber-common-steps.svg?label=ready&amp;title=Ready" alt="Stories in Ready"></a>
 <a href="https://www.versioneye.com/user/projects/5407630bccc023c90d000098"><img src="https://www.versioneye.com/user/projects/5407630bccc023c90d000098/badge.svg" alt="Dependency Status"></a>
 <a href="https://maven-badges.herokuapp.com/maven-central/com.github.cchacin/cucumber-common-steps"><img src="https://maven-badges.herokuapp.com/maven-central/com.github.cchacin/cucumber-common-steps/badge.svg" alt="Maven Central"></a></p>
@@ -40,9 +37,7 @@
 <h1>
 <a id="cucumber-common-steps" class="anchor" href="#cucumber-common-steps" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cucumber Common Steps</h1>
 
-<p>{% gist 5724918 %}</p>
-
-<p>This project is an intent to provide common steps definitions to make functional testing for REST API's, Database setup's and HTML page's</p>
+<p>This project is an intent to provide common steps definitions to make functional testing for REST API, Database setup, external service mocks and HTML pages</p>
 
 <p>This is based on <a href="https://github.com/cucumber/cucumber-jvm">cucumber-jvm</a> project.</p>
 
@@ -54,62 +49,209 @@
 <p>Add as dependency in your pom.xml:</p>
 
 <div class="highlight highlight-xml"><pre>&lt;<span class="pl-ent">dependency</span>&gt;
+    &lt;<span class="pl-ent">groupId</span>&gt;com.github.cchacin&lt;/<span class="pl-ent">groupId</span>&gt;
     &lt;<span class="pl-ent">artifactId</span>&gt;cucumber-common-steps&lt;/<span class="pl-ent">artifactId</span>&gt;
-    &lt;<span class="pl-ent">packaging</span>&gt;jar&lt;/<span class="pl-ent">packaging</span>&gt;
-    &lt;<span class="pl-ent">version</span>&gt;0.0.5&lt;/<span class="pl-ent">version</span>&gt;
+    &lt;<span class="pl-ent">version</span>&gt;0.0.6&lt;/<span class="pl-ent">version</span>&gt;
     &lt;<span class="pl-ent">scope</span>&gt;test&lt;/<span class="pl-ent">scope</span>&gt;
 &lt;/<span class="pl-ent">dependency</span>&gt;</pre></div>
 
-<p>Write your feature in gherkin language with a tag(s) in <code>src/test/resources</code></p>
+<p>Write your feature in gherkin language in <code>src/test/resources</code></p>
 
-<div class="highlight highlight-gherkin"><pre><span class="pl-st">@users_endpoint</span>
-<span class="pl-k">Feature</span>:<span class="pl-s1"> REST API to manage users</span>
+<p><strong>Steps for Database Setup and verification of Endpoints Results</strong></p>
 
-  <span class="pl-k">Background</span>:
-    <span class="pl-k">Given </span>I have the only following rows in the <span class="pl-s1">"users"</span> table:
-<span class="pl-k">      | <span class="pl-s2">id</span> | <span class="pl-s2">created</span>             | <span class="pl-s2">modified</span>            | <span class="pl-s2">email</span>                | <span class="pl-s2">fullname</span> | <span class="pl-s2">password</span> | <span class="pl-s2">version</span> |</span>
-<span class="pl-k">      | <span class="pl-s2">1</span>  | <span class="pl-s2">2014</span>-<span class="pl-s2">07</span>-<span class="pl-s2">16</span> <span class="pl-s2">00</span>:<span class="pl-s2">00</span>:<span class="pl-s2">00</span> | <span class="pl-s2">2014</span>-<span class="pl-s2">07</span>-<span class="pl-s2">16</span> <span class="pl-s2">00</span>:<span class="pl-s2">00</span>:<span class="pl-s2">00</span> | <span class="pl-s2">cchacin</span>@<span class="pl-s2">superbiz</span>.<span class="pl-s2">org</span> | <span class="pl-s2">Carlos</span>   | <span class="pl-s2">passw0rd</span> | <span class="pl-s2">0</span>       |</span>
+<p>Put your database connection properties in <code>src/test/resources/test-db.properties</code></p>
 
-  <span class="pl-k">Scenario</span>:<span class="pl-s1"> Retrieve users list</span>
+<div class="highlight highlight-properties"><pre><span class="pl-k">database.url</span>=jdbc:hsqldb:mem:test
+<span class="pl-k">database.driver</span>=org.hsqldb.jdbcDriver
+<span class="pl-k">database.user</span>=SA
+<span class="pl-k">database.password</span>=</pre></div>
+
+<p><em>it should be used in <code>Given</code> steps to prepare the database</em></p>
+
+<div class="highlight highlight-gherkin"><pre>  <span class="pl-k">Scenario</span>:<span class="pl-s1"> Retrieve users list</span>
+    <span class="pl-k">Given </span>I have only the following rows in the <span class="pl-s1">"models"</span> table:
+<span class="pl-k">      | <span class="pl-s2">id</span> | <span class="pl-s2">created</span>             | <span class="pl-s2">modified</span>            | <span class="pl-s2">email</span>                | <span class="pl-s2">fullname</span> | <span class="pl-s2">password</span> |</span>
+<span class="pl-k">      | <span class="pl-s2">1</span>  | <span class="pl-s2">2014</span>-<span class="pl-s2">07</span>-<span class="pl-s2">16</span> <span class="pl-s2">00</span>:<span class="pl-s2">00</span>:<span class="pl-s2">00</span> | <span class="pl-s2">2014</span>-<span class="pl-s2">07</span>-<span class="pl-s2">16</span> <span class="pl-s2">00</span>:<span class="pl-s2">00</span>:<span class="pl-s2">00</span> | <span class="pl-s2">cchacin</span>@<span class="pl-s2">superbiz</span>.<span class="pl-s2">org</span> | <span class="pl-s2">Carlos</span>   | <span class="pl-s2">passw0rd</span> |</span>
     <span class="pl-k">When </span>I make a GET call to <span class="pl-s1">"/users"</span> endpoint
-    <span class="pl-k">Then </span>the response status code should be <span class="pl-s1">"200"</span>
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"200"</span>
     <span class="pl-k">And </span>response content type should be <span class="pl-s1">"application/json"</span>
     <span class="pl-k">And </span>response should be json:
     <span class="pl-s1">"""</span>
+<span class="pl-s1">    {</span>
+<span class="pl-s1">      "model":</span>
 <span class="pl-s1">        [</span>
 <span class="pl-s1">          {</span>
-<span class="pl-s1">              "id": "${json-unit.ignore}",</span>
+<span class="pl-s1">              "id": 1,</span>
 <span class="pl-s1">              "created": "${json-unit.ignore}",</span>
 <span class="pl-s1">              "modified": "${json-unit.ignore}",</span>
 <span class="pl-s1">              "email": "cchacin@superbiz.org",</span>
 <span class="pl-s1">              "fullname": "Carlos",</span>
-<span class="pl-s1">              "password": "passw0rd",</span>
-<span class="pl-s1">              "version": 0</span>
+<span class="pl-s1">              "password": "passw0rd"</span>
 <span class="pl-s1">          }</span>
 <span class="pl-s1">        ]</span>
+<span class="pl-s1">    }</span>
+<span class="pl-s1">    """</span>
+
+  <span class="pl-k">Scenario</span>:<span class="pl-s1"> Retrieve users list</span>
+    <span class="pl-k">Given </span>I have the following rows in the <span class="pl-s1">"models"</span> table:
+<span class="pl-k">      | <span class="pl-s2">id</span> | <span class="pl-s2">created</span>             | <span class="pl-s2">modified</span>            | <span class="pl-s2">email</span>                 | <span class="pl-s2">fullname</span> | <span class="pl-s2">password</span> |</span>
+<span class="pl-k">      | <span class="pl-s2">2</span>  | <span class="pl-s2">2015</span>-<span class="pl-s2">02</span>-<span class="pl-s2">11</span> <span class="pl-s2">00</span>:<span class="pl-s2">00</span>:<span class="pl-s2">00</span> | <span class="pl-s2">2015</span>-<span class="pl-s2">02</span>-<span class="pl-s2">11</span> <span class="pl-s2">00</span>:<span class="pl-s2">00</span>:<span class="pl-s2">00</span> | <span class="pl-s2">cchacin2</span>@<span class="pl-s2">superbiz</span>.<span class="pl-s2">org</span> | <span class="pl-s2">Carlos2</span>  | <span class="pl-s2">passw0rd</span> |</span>
+    <span class="pl-k">When </span>I make a GET call to <span class="pl-s1">"/users"</span> endpoint
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"200"</span>
+    <span class="pl-k">And </span>response content type should be <span class="pl-s1">"application/json"</span>
+    <span class="pl-k">And </span>response should be json:
+    <span class="pl-s1">"""</span>
+<span class="pl-s1">    {</span>
+<span class="pl-s1">      "model":</span>
+<span class="pl-s1">        [</span>
+<span class="pl-s1">          {</span>
+<span class="pl-s1">              "id": 1,</span>
+<span class="pl-s1">              "created": "${json-unit.ignore}",</span>
+<span class="pl-s1">              "modified": "${json-unit.ignore}",</span>
+<span class="pl-s1">              "email": "cchacin@superbiz.org",</span>
+<span class="pl-s1">              "fullname": "Carlos",</span>
+<span class="pl-s1">              "password": "passw0rd"</span>
+<span class="pl-s1">          },</span>
+<span class="pl-s1">          {</span>
+<span class="pl-s1">              "id": 2,</span>
+<span class="pl-s1">              "created": "${json-unit.ignore}",</span>
+<span class="pl-s1">              "modified": "${json-unit.ignore}",</span>
+<span class="pl-s1">              "email": "cchacin2@superbiz.org",</span>
+<span class="pl-s1">              "fullname": "Carlos2",</span>
+<span class="pl-s1">              "password": "passw0rd"</span>
+<span class="pl-s1">          }</span>
+<span class="pl-s1">        ]</span>
+<span class="pl-s1">    }</span>
 <span class="pl-s1">    """</span></pre></div>
+
+<p><strong>Steps to verify Restful API reponses</strong></p>
+
+<div class="highlight highlight-gherkin"><pre>  <span class="pl-k">Scenario</span>:
+    <span class="pl-k">When </span>I make a GET call to <span class="pl-s1">"/zen"</span> endpoint in host <span class="pl-s1">"https://api.github.com"</span>
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"200"</span>
+    <span class="pl-k">And </span>response content type should be <span class="pl-s1">"text/plain;charset=utf-8"</span>
+
+  <span class="pl-k">Scenario</span>:
+    <span class="pl-k">When </span>I make a GET call to <span class="pl-s1">"/successful/get"</span> endpoint
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"200"</span>
+    <span class="pl-k">And </span>response content type should be <span class="pl-s1">"application/json"</span>
+    <span class="pl-k">And </span>response header <span class="pl-s1">"a"</span> should be <span class="pl-s1">"a"</span>;
+    <span class="pl-k">And </span>response should be json in file <span class="pl-s1">"/responses/successful.json"</span>
+
+  <span class="pl-k">Scenario</span>:
+    <span class="pl-k">When </span>I make a GET call to <span class="pl-s1">"/successful/get/csv"</span> endpoint
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"200"</span>
+    <span class="pl-k">And </span>response content type should be <span class="pl-s1">"text/csv"</span>
+    <span class="pl-k">And </span>response should be file <span class="pl-s1">"/responses/sample.csv"</span>
+
+  <span class="pl-k">Scenario</span>:
+    <span class="pl-k">When </span>I make a GET call to <span class="pl-s1">"/successful/get"</span> endpoint with header <span class="pl-s1">"Authorization"</span> with value <span class="pl-s1">"OAuth qwerqweqrqwerqwer"</span>
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"200"</span>
+    <span class="pl-k">And </span>response content type should be <span class="pl-s1">"application/json"</span>
+    <span class="pl-k">And </span>response header <span class="pl-s1">"a"</span> should be <span class="pl-s1">"a"</span>;
+    <span class="pl-k">And </span>response should be json in file <span class="pl-s1">"/responses/successful.json"</span>
+
+  <span class="pl-k">Scenario</span>:
+    <span class="pl-k">When </span>I make a GET call to <span class="pl-s1">"/successful/get"</span> endpoint with headers:
+<span class="pl-k">      | <span class="pl-s2">headerName</span>    | <span class="pl-s2">headerValue</span>             |</span>
+<span class="pl-k">      | <span class="pl-s2">Authorization</span> | <span class="pl-s2">OAuth</span> <span class="pl-s2">qwerqweqrqwerqwer</span> |</span>
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"200"</span>
+    <span class="pl-k">And </span>response content type should be <span class="pl-s1">"application/json"</span>
+    <span class="pl-k">And </span>response header <span class="pl-s1">"a"</span> should be <span class="pl-s1">"a"</span>;
+    <span class="pl-k">And </span>response should be json in file <span class="pl-s1">"/responses/successful.json"</span>
+
+  <span class="pl-k">Scenario</span>:
+    <span class="pl-k">When </span>I make a GET call to <span class="pl-s1">"/successful/get"</span> endpoint
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"200"</span>
+    <span class="pl-k">And </span>response content type should be <span class="pl-s1">"application/json"</span>
+    <span class="pl-k">And </span>response header <span class="pl-s1">"a"</span> should be <span class="pl-s1">"a"</span>;
+    <span class="pl-k">And </span>response should be json:
+    <span class="pl-s1">"""</span>
+<span class="pl-s1">    {</span>
+<span class="pl-s1">      "id": "${json-unit.ignore}",</span>
+<span class="pl-s1">      "created": "${json-unit.ignore}",</span>
+<span class="pl-s1">      "modified": "${json-unit.ignore}",</span>
+<span class="pl-s1">      "password": "",</span>
+<span class="pl-s1">      "fullname": ""</span>
+<span class="pl-s1">    }</span>
+<span class="pl-s1">    """</span>
+
+  <span class="pl-k">Scenario</span>:
+    <span class="pl-k">When </span>I make a HEAD call to <span class="pl-s1">"/successful/head"</span> endpoint
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"204"</span>
+    <span class="pl-k">And </span>response should be empty
+
+  <span class="pl-k">Scenario</span>:
+    <span class="pl-k">When </span>I make a PUT call to <span class="pl-s1">"/successful/put"</span> endpoint with post body:
+    <span class="pl-s1">"""</span>
+<span class="pl-s1">    {</span>
+<span class="pl-s1">    }</span>
+<span class="pl-s1">    """</span>
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"204"</span>
+    <span class="pl-k">And </span>response should be empty
+
+  <span class="pl-k">Scenario</span>:
+    <span class="pl-k">When </span>I make a POST call to <span class="pl-s1">"/successful/post"</span> endpoint with post body:
+    <span class="pl-s1">"""</span>
+<span class="pl-s1">    {</span>
+<span class="pl-s1">    }</span>
+<span class="pl-s1">    """</span>
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"201"</span>
+    <span class="pl-k">And </span>response should be empty
+
+  <span class="pl-k">Scenario</span>:
+    <span class="pl-k">When </span>I make a POST call to <span class="pl-s1">"/successful/post"</span> endpoint with post body in file <span class="pl-s1">"/requests/post_request.json"</span>
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"201"</span>
+    <span class="pl-k">And </span>response should be empty
+
+  <span class="pl-k">Scenario</span>:
+    <span class="pl-k">When </span>I make a DELETE call to <span class="pl-s1">"/successful/delete"</span> endpoint
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"204"</span>
+    <span class="pl-k">And </span>response should be empty</pre></div>
+
+<p>Write your application (if needed):</p>
+
+<div class="highlight highlight-java"><pre>@Path(<span class="pl-s1"><span class="pl-pds">"</span>/<span class="pl-pds">"</span></span>)
+@<span class="pl-stj">Stateless</span>
+<span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">Controller</span> {
+
+    <span class="pl-st">@EJB</span>
+    <span class="pl-stj">ModelDao</span> modelDao;
+
+    <span class="pl-st">@GET</span>
+    <span class="pl-st">@Path</span>(<span class="pl-s1"><span class="pl-pds">"</span>/users<span class="pl-pds">"</span></span>)
+    <span class="pl-st">@Produces</span>(<span class="pl-s1"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+    <span class="pl-s">public</span> <span class="pl-st">List&lt;<span class="pl-stj">Model</span>&gt;</span> <span class="pl-en">successfulGETUsers</span>() {
+        <span class="pl-k">return</span> modelDao<span class="pl-k">.</span>get();
+    }
+}</pre></div>
 
 <p>Write a cucumber integration-test in <code>src/test/java</code>:</p>
 
-<div class="highlight highlight-java"><pre>@Glues({<span class="pl-stj">RestSteps</span><span class="pl-k">.</span>class})
+<div class="highlight highlight-java"><pre>@Glues({<span class="pl-stj">RestSteps</span><span class="pl-k">.</span>class, <span class="pl-stj">DatabaseSteps</span><span class="pl-k">.</span>class})
 @Features({<span class="pl-s1"><span class="pl-pds">"</span>features/successful-endpoints.feature<span class="pl-pds">"</span></span>})
 @RunWith(<span class="pl-stj">ArquillianCucumber</span><span class="pl-k">.</span>class)
 <span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">UsersEndpointITest</span> {
 }</pre></div>
+        </section>
 
-<p>And then run: <code>mvn test</code> -&gt; output:</p>
-      </section>
+        <aside id="sidebar">
+          <a href="https://github.com/cchacin/cucumber-common-steps/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/cchacin/cucumber-common-steps/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/cchacin/cucumber-common-steps"></a> is maintained by <a href="https://github.com/cchacin">cchacin</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
     </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Cucumber Common Steps maintained by <a href="https://github.com/cchacin">cchacin</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
+  
   </body>
 </html>
