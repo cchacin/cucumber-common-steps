@@ -189,22 +189,45 @@ database.password=
     And response should be empty
 ```
 
-Write your application (if needed):
 
-```java
-@Path("/")
-@Stateless
-public class Controller {
+*Mocking external API calls*
 
-    @EJB
-    ModelDao modelDao;
-
-    @GET
-    @Path("/users")
-    @Produces("application/json")
-    public List<Model> successfulGETUsers() {
-        return modelDao.get();
+```gherkin
+  Scenario: Mock external API
+    Given The call to external service should be:
+      | method | url            | statusCode |
+      | GET    | /user/71e7cb11 | 200        |
+      | POST   | /user          | 201        |
+      | PUT    | /user/71e7cb11 | 204        |
+      | DELETE | /user/71e7cb11 | 204        |
+    When I make a GET call to "/external/call/user/71e7cb11" endpoint
+    Then response status code should be "200"
+    And response should be json:
+    """
+    {
+      "responses": [
+        {
+          "status": 200
+        },
+        {
+          "status": 201
+        },
+        {
+          "status": 204
+        },
+        {
+          "status": 204
+        }
+      ]
     }
+    """
+```
+
+And then put the payloads (convention over configuration) in ```src/test/resources/restito```: i.e. ```get.user.71e7cb11.json```
+
+```json
+{
+    "sample": 21
 }
 ```
 
