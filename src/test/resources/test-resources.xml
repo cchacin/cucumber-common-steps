@@ -17,9 +17,10 @@
         JtaManaged = false
     </Resource>
 
-    <Service id="jsonProvider" class-name="org.apache.cxf.jaxrs.provider.json.JSONProvider">
+    <Service id="json" class-name="org.apache.cxf.jaxrs.provider.json.JSONProvider">
         dropRootElement = true
         supportUnwrapped = true
-        dropCollectionWrapperElement = false
+        dropCollectionWrapperElement = true
+        serializeAsArray = true
     </Service>
 </resources>

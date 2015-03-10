@@ -20,9 +20,12 @@ import com.ninja_squad.dbsetup.operation.Insert;
 import com.ninja_squad.dbsetup.operation.Operation;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
+import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -34,7 +37,8 @@ public abstract class Given {
     private static final Properties properties = new Properties();
 
     static {
-        try (InputStream resource = Given.class.getResourceAsStream("/test-db.properties")) {
+        try (final InputStream resource = Thread.currentThread()
+                .getContextClassLoader().getResourceAsStream("test-db.properties")) {
             properties.load(resource);
         } catch (IOException e) {
             e.printStackTrace();
@@ -84,4 +88,13 @@ public abstract class Given {
         new DbSetup(destination, operation).launch();
     }
 
+    @cucumber.api.java.en.Given("^I have the following sql script \"([^\"]*)\"$")
+    public void I_have_the_following_sql_script(final String script) throws Throwable {
+        final InputStream resource = Thread.currentThread()
+                .getContextClassLoader().getResourceAsStream(script);
+        final Connection connection = this.destination.getConnection();
+        final String sql = connection.nativeSQL(IOUtils.toString(resource));
+        final CallableStatement callableStatement = connection.prepareCall(sql);
+        callableStatement.execute();
+    }
 }
