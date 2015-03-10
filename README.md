@@ -23,7 +23,7 @@ Add as dependency in your pom.xml:
 <dependency>
     <groupId>com.github.cchacin</groupId>
     <artifactId>cucumber-common-steps</artifactId>
-    <version>0.0.6</version>
+    <version>0.0.7</version>
     <scope>test</scope>
 </dependency>
 ```
