@@ -1,3 +1,1 @@
-com.github.cchacin.cucumber.steps.calls
-com.github.cchacin.cucumber.steps.db
-com.github.cchacin.cucumber.steps.rest
+com.github.cchacin.cucumber.steps
