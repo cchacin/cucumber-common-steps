@@ -13,9 +13,9 @@
  */
 package com.github.cchacin.cucumber.steps.rest;
 
-import com.github.cchacin.cucumber.steps.calls.CallsSteps;
-import com.github.cchacin.cucumber.steps.db.DatabaseSteps;
-import com.github.cchacin.cucumber.steps.example.app.Controller;
+import com.github.cchacin.cucumber.steps.CallsSteps;
+import com.github.cchacin.cucumber.steps.DatabaseSteps;
+import com.github.cchacin.cucumber.steps.RestSteps;
 import cucumber.runtime.arquillian.ArquillianCucumber;
 import cucumber.runtime.arquillian.api.Features;
 import cucumber.runtime.arquillian.api.Glues;
@@ -31,10 +31,10 @@ import org.junit.runner.RunWith;
 @RunWith(ArquillianCucumber.class)
 public class RestfulSuccessTest {
 
-    @Deployment
+    @Deployment(testable = false)
     public static Archive<?> createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "test-app.war")
-                .addPackage(Controller.class.getPackage())
+                .addPackages(true, "com.github.cchacin.cucumber.steps")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsManifestResource("test-persistence.xml", "persistence.xml")
                 .addAsWebInfResource("test-resources.xml", "resources.xml")

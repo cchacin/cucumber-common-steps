@@ -12,7 +12,7 @@ import java.util.List;
 public class ModelDao {
 
     @PersistenceContext
-    EntityManager em;
+    private EntityManager em;
 
     public List<Model> get() {
         CriteriaBuilder cb = em.getCriteriaBuilder();

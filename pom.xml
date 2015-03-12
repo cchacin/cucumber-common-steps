@@ -110,11 +110,11 @@
             <version>${jsonunit.version}</version>
         </dependency>
 
-        <!-- Restito -->
+        <!-- WireMock -->
         <dependency>
-            <groupId>com.xebialabs.restito</groupId>
-            <artifactId>restito</artifactId>
-            <version>0.5</version>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock</artifactId>
+            <version>1.54</version>
         </dependency>
 
         <!-- Findbugs -->

@@ -3,7 +3,7 @@ Feature: Successful rest calls
   # DATABASE SQL SCRIPT
   Scenario: Retrieve users list preparing db with script
     Given I have the following sql script "sample-data.sql"
-    When I make a GET call to "/users" endpoint
+    When I make a GET call to "/test-app/users" endpoint
     Then response status code should be "200"
     And response content type should be "application/json"
     And response should be json:
@@ -25,7 +25,7 @@ Feature: Successful rest calls
     Given I have only the following rows in the "models" table:
       | id | created             | modified            | email                | fullname | password |
       | 1  | 2014-07-16 00:00:00 | 2014-07-16 00:00:00 | cchacin@superbiz.org | Carlos   | passw0rd |
-    When I make a GET call to "/users" endpoint
+    When I make a GET call to "/test-app/users" endpoint
     Then response status code should be "200"
     And response content type should be "application/json"
     And response should be json:
@@ -47,7 +47,7 @@ Feature: Successful rest calls
     Given I have the following rows in the "models" table:
       | id | created             | modified            | email                 | fullname | password |
       | 2  | 2015-02-11 00:00:00 | 2015-02-11 00:00:00 | cchacin2@superbiz.org | Carlos2  | passw0rd |
-    When I make a GET call to "/users" endpoint
+    When I make a GET call to "/test-app/users" endpoint
     Then response status code should be "200"
     And response content type should be "application/json"
     And response should be json:
@@ -75,12 +75,12 @@ Feature: Successful rest calls
   # EXTERNAL SERVICE
   Scenario: Mock external API
     Given The call to external service should be:
-      | method | url            | statusCode |
-      | GET    | /user/71e7cb11 | 200        |
-      | POST   | /user          | 201        |
-      | PUT    | /user/71e7cb11 | 204        |
-      | DELETE | /user/71e7cb11 | 204        |
-    When I make a GET call to "/external/call/user/71e7cb11" endpoint
+      | method | url                | statusCode |
+      | GET    | /user/71e7cb11?a=a | 200        |
+      | POST   | /user              | 201        |
+      | PUT    | /user/71e7cb11     | 204        |
+      | DELETE | /user/71e7cb11     | 204        |
+    When I make a GET call to "/test-app/external/call/user/71e7cb11" endpoint
     Then response status code should be "200"
     And response should be json:
     """
@@ -106,33 +106,25 @@ Feature: Successful rest calls
   # GET
   #######
   Scenario:
-    When I make a GET call to "/zen" endpoint in host "https://api.github.com"
+    When I make a GET call to "https://api.github.com/zen?z=1" endpoint
     Then response status code should be "200"
     And response content type should be "text/plain;charset=utf-8"
 
   Scenario:
-    When I make a GET call to "/successful/get" endpoint
+    When I make a GET call to "/test-app/successful/get" endpoint
     Then response status code should be "200"
     And response content type should be "application/json"
     And response header "a" should be "a";
     And response should be json in file "/responses/successful.json"
 
   Scenario:
-    When I make a GET call to "/successful/get/csv" endpoint
+    When I make a GET call to "/test-app/successful/get/csv" endpoint
     Then response status code should be "200"
     And response content type should be "text/csv"
     And response should be file "/responses/sample.csv"
 
   Scenario:
-    When I make a GET call to "/successful/get" endpoint with header "Authorization" with value "OAuth qwerqweqrqwerqwer"
-    Then response status code should be "200"
-    And response content type should be "application/json"
-    And response header "a" should be "a";
-    And response should be json in file "/responses/successful.json"
-
-  Scenario:
-    When I make a GET call to "/successful/get" endpoint with headers:
-      | headerName    | headerValue             |
+    When I make a GET call to "/test-app/successful/get" endpoint with headers:
       | Authorization | OAuth qwerqweqrqwerqwer |
     Then response status code should be "200"
     And response content type should be "application/json"
@@ -140,7 +132,24 @@ Feature: Successful rest calls
     And response should be json in file "/responses/successful.json"
 
   Scenario:
-    When I make a GET call to "/successful/get" endpoint
+    When I make a GET call to "/test-app/successful/get/params" endpoint with query params:
+      | param1 | passwordParam |
+      | param2 | nameParam     |
+    Then response status code should be "200"
+    And response content type should be "application/json"
+    And response should be json:
+    """
+    {
+      "id": "${json-unit.ignore}",
+      "created": "${json-unit.ignore}",
+      "modified": "${json-unit.ignore}",
+      "password": "passwordParam",
+      "fullname": "nameParam"
+    }
+    """
+
+  Scenario:
+    When I make a GET call to "/test-app/successful/get" endpoint
     Then response status code should be "200"
     And response content type should be "application/json"
     And response header "a" should be "a";
@@ -153,14 +162,13 @@ Feature: Successful rest calls
       "password": "",
       "fullname": ""
     }
-
     """
 
   #######
   # HEAD
   #######
   Scenario:
-    When I make a HEAD call to "/successful/head" endpoint
+    When I make a HEAD call to "/test-app/successful/head" endpoint
     Then response status code should be "204"
     And response should be empty
 
@@ -168,7 +176,7 @@ Feature: Successful rest calls
   # PUT
   #######
   Scenario:
-    When I make a PUT call to "/successful/put" endpoint with post body:
+    When I make a PUT call to "/test-app/successful/put" endpoint with post body:
     """
     {
     }
@@ -180,7 +188,7 @@ Feature: Successful rest calls
   # POST
   #######
   Scenario:
-    When I make a POST call to "/successful/post" endpoint with post body:
+    When I make a POST call to "/test-app/successful/post" endpoint with post body:
     """
     {
     }
@@ -189,7 +197,7 @@ Feature: Successful rest calls
     And response should be empty
 
   Scenario:
-    When I make a POST call to "/successful/post" endpoint with post body in file "/requests/post_request.json"
+    When I make a POST call to "/test-app/successful/post" endpoint with post body in file "/requests/post_request.json"
     Then response status code should be "201"
     And response should be empty
 
@@ -197,6 +205,6 @@ Feature: Successful rest calls
   # DELETE
   #######
   Scenario:
-    When I make a DELETE call to "/successful/delete" endpoint
+    When I make a DELETE call to "/test-app/successful/delete" endpoint
     Then response status code should be "204"
     And response should be empty

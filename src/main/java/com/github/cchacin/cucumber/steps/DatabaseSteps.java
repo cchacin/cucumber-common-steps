@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.cchacin.cucumber.steps.db;
+package com.github.cchacin.cucumber.steps;
 
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.destination.Destination;
@@ -19,6 +19,7 @@ import com.ninja_squad.dbsetup.destination.DriverManagerDestination;
 import com.ninja_squad.dbsetup.operation.Insert;
 import com.ninja_squad.dbsetup.operation.Operation;
 import cucumber.api.DataTable;
+import cucumber.api.java.en.Given;
 import gherkin.formatter.model.DataTableRow;
 import org.apache.commons.io.IOUtils;
 
@@ -33,11 +34,12 @@ import java.util.Properties;
 import static com.ninja_squad.dbsetup.Operations.deleteAllFrom;
 import static com.ninja_squad.dbsetup.operation.CompositeOperation.sequenceOf;
 
-public abstract class Given {
+public class DatabaseSteps {
+
     private static final Properties properties = new Properties();
 
     static {
-        try (final InputStream resource = Thread.currentThread()
+        try (InputStream resource = Thread.currentThread()
                 .getContextClassLoader().getResourceAsStream("test-db.properties")) {
             properties.load(resource);
         } catch (IOException e) {
@@ -50,13 +52,13 @@ public abstract class Given {
             properties.getProperty("database.user"),
             properties.getProperty("database.password"));
 
-    @cucumber.api.java.en.Given("^I have the following rows in the \"(.*?)\" table:$")
+    @Given("^I have the following rows in the \"(.*?)\" table:$")
     public void i_have_the_following_rows_in_the_table(final String tableName,
                                                        final DataTable data) throws Throwable {
         this.insert(tableName, data);
     }
 
-    @cucumber.api.java.en.Given("^I have only the following rows in the \"([^\"]*)\" table:$")
+    @Given("^I have only the following rows in the \"([^\"]*)\" table:$")
     public void I_have_only_the_following_rows_in_the_table(
             final String tableName, final DataTable data) throws Throwable {
         this.deleteAll(tableName);
@@ -88,13 +90,17 @@ public abstract class Given {
         new DbSetup(destination, operation).launch();
     }
 
-    @cucumber.api.java.en.Given("^I have the following sql script \"([^\"]*)\"$")
+    @Given("^I have the following sql script \"([^\"]*)\"$")
     public void I_have_the_following_sql_script(final String script) throws Throwable {
-        final InputStream resource = Thread.currentThread()
-                .getContextClassLoader().getResourceAsStream(script);
-        final Connection connection = this.destination.getConnection();
-        final String sql = connection.nativeSQL(IOUtils.toString(resource));
-        final CallableStatement callableStatement = connection.prepareCall(sql);
-        callableStatement.execute();
+        final Connection connection;
+        final String sql;
+        try (InputStream resource = Thread.currentThread()
+                .getContextClassLoader().getResourceAsStream(script)) {
+            connection = this.destination.getConnection();
+            sql = connection.nativeSQL(IOUtils.toString(resource));
+        }
+        try (final CallableStatement callableStatement = connection.prepareCall(sql)) {
+            callableStatement.execute();
+        }
     }
 }

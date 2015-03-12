@@ -29,6 +29,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -56,6 +57,13 @@ public class Controller {
     @Produces("application/json")
     public Response successfulGET() {
         return Response.ok(new Model("1", new Date(), new Date(), null, "", "")).header("a", "a").build();
+    }
+
+    @GET
+    @Path("/successful/get/params")
+    @Produces("application/json")
+    public Response successfulGETQueryParams(@QueryParam("param1") final String param1, @QueryParam("param2") final String param2) {
+        return Response.ok(new Model("1", new Date(), new Date(), null, param2, param1)).build();
     }
 
     @GET
@@ -106,7 +114,7 @@ public class Controller {
         final ResponseWrapper wrapper;
         final List<ResponseItem> items = Lists.newArrayList();
 
-        final Response getResponse = client.accept(MediaType.APPLICATION_JSON).path("/user/71e7cb11").get();
+        final Response getResponse = client.accept(MediaType.APPLICATION_JSON).path("/user/71e7cb11").query("a", "a").get();
         final Response postResponse = client.accept(MediaType.APPLICATION_JSON).back(true).path("/user").post(null);
         final Response putResponse = client.accept(MediaType.APPLICATION_JSON).back(true).path("/user/71e7cb11").put(null);
         final Response deleteResponse = client.accept(MediaType.APPLICATION_JSON).back(true).path("/user/71e7cb11").delete();

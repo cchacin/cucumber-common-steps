@@ -9,8 +9,7 @@
 
     <container qualifier="tomee" default="true">
         <configuration>
-            <property name="singleDumpByArchiveName">true</property>
-            <property name="httpPort">-1</property>
+            <property name="httpPort">8080</property>
             <property name="stopPort">-1</property>
         </configuration>
     </container>
