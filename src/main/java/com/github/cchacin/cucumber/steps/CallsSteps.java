@@ -6,8 +6,7 @@ import cucumber.api.DataTable;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Value;
 
 import java.util.List;
 
@@ -39,23 +38,19 @@ public class CallsSteps {
         final List<Call> calls = data.asList(Call.class);
 
         for (Call call : calls) {
-            System.out.println(call);
-            server.stubFor(call.getHttpMethod().willReturn(aResponse().withStatus(call.getStatusCode())));
-            System.out.println(call);
+            server.stubFor(call.getHttpMethod().willReturn(aResponse().withStatus(call.getStatusCode()).withBodyFile(call.getFilename())));
         }
     }
 
-    @ToString
-    @Getter
+    @Value
     private static class Call {
         private String method;
         private String url;
         private int statusCode;
-        private String queryParams;
-        private String headers;
+        private String filename;
         private MappingBuilder builder;
 
-        private MappingBuilder getHttpMethod() {
+        MappingBuilder getHttpMethod() {
             switch (getMethod().toUpperCase()) {
                 case "POST":
                     return post(urlPathEqualTo(getUrl()));

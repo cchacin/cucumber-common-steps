@@ -75,11 +75,11 @@ Feature: Successful rest calls
   # EXTERNAL SERVICE
   Scenario: Mock external API
     Given The call to external service should be:
-      | method | url                | statusCode |
-      | GET    | /user/71e7cb11?a=a | 200        |
-      | POST   | /user              | 201        |
-      | PUT    | /user/71e7cb11     | 204        |
-      | DELETE | /user/71e7cb11     | 204        |
+      | method | url                | statusCode | filename      |
+      | GET    | /user/71e7cb11?a=a | 200        | 71e7cb11.json |
+      | POST   | /user              | 201        |               |
+      | PUT    | /user/71e7cb11     | 204        |               |
+      | DELETE | /user/71e7cb11     | 204        |               |
     When I make a GET call to "/test-app/external/call/user/71e7cb11" endpoint
     Then response status code should be "200"
     And response should be json:
