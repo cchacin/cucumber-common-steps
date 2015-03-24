@@ -1,66 +1,68 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.9655172413793104" branch-rate="0.38461538461538464" lines-covered="112" lines-valid="116" branches-covered="30" branches-valid="78" complexity="1.608695652173913" version="2.0.3" timestamp="1427153963044">
+<coverage line-rate="0.9658119658119658" branch-rate="0.38461538461538464" lines-covered="113" lines-valid="117" branches-covered="30" branches-valid="78" complexity="1.608695652173913" version="2.0.3" timestamp="1427224685361">
 	<sources>
 		<source>--source</source>
 		<source>/home/travis/build/cchacin/cucumber-common-steps/src/main/java</source>
 	</sources>
 	<packages>
-		<package name="com.github.cchacin.cucumber.steps" line-rate="0.9655172413793104" branch-rate="0.38461538461538464" complexity="1.608695652173913">
+		<package name="com.github.cchacin.cucumber.steps" line-rate="0.9658119658119658" branch-rate="0.38461538461538464" complexity="1.608695652173913">
 			<classes>
 				<class name="com.github.cchacin.cucumber.steps.CallsSteps" filename="com/github/cchacin/cucumber/steps/CallsSteps.java" line-rate="1.0" branch-rate="1.0" complexity="3.25">
 					<methods>
 						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="21" hits="1" branch="false"/>
 								<line number="23" hits="1" branch="false"/>
-								<line number="45" hits="1" branch="false"/>
+								<line number="25" hits="1" branch="false"/>
+								<line number="54" hits="1" branch="false"/>
 							</lines>
 						</method>
 						<method name="setUp" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="27" hits="15" branch="false"/>
-								<line number="28" hits="15" branch="false"/>
+								<line number="29" hits="15" branch="false"/>
+								<line number="30" hits="15" branch="false"/>
 							</lines>
 						</method>
 						<method name="tearDown" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="32" hits="15" branch="false"/>
-								<line number="33" hits="15" branch="false"/>
+								<line number="34" hits="15" branch="false"/>
+								<line number="35" hits="15" branch="false"/>
 							</lines>
 						</method>
 						<method name="the_call_to_external_service_should_be" signature="(Lcucumber/api/DataTable;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="38" hits="1" branch="false"/>
-								<line number="40" hits="1" branch="true" condition-coverage="100% (2/2)">
+								<line number="40" hits="1" branch="false"/>
+								<line number="42" hits="1" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="41" hits="4" branch="false"/>
-								<line number="42" hits="4" branch="false"/>
-								<line number="43" hits="1" branch="false"/>
+								<line number="44" hits="4" branch="false"/>
+								<line number="48" hits="4" branch="false"/>
+								<line number="50" hits="4" branch="false"/>
+								<line number="52" hits="1" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="21" hits="1" branch="false"/>
 						<line number="23" hits="1" branch="false"/>
-						<line number="27" hits="15" branch="false"/>
-						<line number="28" hits="15" branch="false"/>
-						<line number="32" hits="15" branch="false"/>
-						<line number="33" hits="15" branch="false"/>
-						<line number="38" hits="1" branch="false"/>
-						<line number="40" hits="1" branch="true" condition-coverage="100% (2/2)">
+						<line number="25" hits="1" branch="false"/>
+						<line number="29" hits="15" branch="false"/>
+						<line number="30" hits="15" branch="false"/>
+						<line number="34" hits="15" branch="false"/>
+						<line number="35" hits="15" branch="false"/>
+						<line number="40" hits="1" branch="false"/>
+						<line number="42" hits="1" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="41" hits="4" branch="false"/>
-						<line number="42" hits="4" branch="false"/>
-						<line number="43" hits="1" branch="false"/>
-						<line number="45" hits="1" branch="false"/>
+						<line number="44" hits="4" branch="false"/>
+						<line number="48" hits="4" branch="false"/>
+						<line number="50" hits="4" branch="false"/>
+						<line number="52" hits="1" branch="false"/>
+						<line number="54" hits="1" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.github.cchacin.cucumber.steps.CallsSteps$Call" filename="com/github/cchacin/cucumber/steps/CallsSteps.java" line-rate="0.75" branch-rate="0.21428571428571427" complexity="3.25">
@@ -75,17 +77,17 @@
 						</method>
 						<method name="getBuilder" signature="()Lcom/github/tomakehurst/wiremock/client/MappingBuilder;" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="51" hits="0" branch="false"/>
+								<line number="60" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="getFilename" signature="()Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="50" hits="4" branch="false"/>
+								<line number="59" hits="4" branch="false"/>
 							</lines>
 						</method>
 						<method name="getHttpMethod" signature="()Lcom/github/tomakehurst/wiremock/client/MappingBuilder;" line-rate="0.8333333333333334" branch-rate="0.6666666666666666">
 							<lines>
-								<line number="54" hits="4" branch="true" condition-coverage="66% (12/18)">
+								<line number="63" hits="4" branch="true" condition-coverage="66% (12/18)">
 									<conditions>
 										<condition number="0" type="jump" coverage="50%"/>
 										<condition number="1" type="jump" coverage="50%"/>
@@ -95,26 +97,26 @@
 										<condition number="1" type="switch" coverage="80%"/>
 									</conditions>
 								</line>
-								<line number="56" hits="1" branch="false"/>
-								<line number="58" hits="1" branch="false"/>
-								<line number="60" hits="1" branch="false"/>
-								<line number="62" hits="1" branch="false"/>
-								<line number="64" hits="0" branch="false"/>
+								<line number="65" hits="1" branch="false"/>
+								<line number="67" hits="1" branch="false"/>
+								<line number="69" hits="1" branch="false"/>
+								<line number="71" hits="1" branch="false"/>
+								<line number="73" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="getMethod" signature="()Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="47" hits="4" branch="false"/>
+								<line number="56" hits="4" branch="false"/>
 							</lines>
 						</method>
 						<method name="getStatusCode" signature="()I" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="49" hits="4" branch="false"/>
+								<line number="58" hits="4" branch="false"/>
 							</lines>
 						</method>
 						<method name="getUrl" signature="()Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="48" hits="4" branch="false"/>
+								<line number="57" hits="4" branch="false"/>
 							</lines>
 						</method>
 						<method name="hashCode" signature="()I" line-rate="1.0" branch-rate="1.0">
@@ -123,7 +125,7 @@
 						</method>
 						<method name="toString" signature="()Ljava/lang/String;" line-rate="0.0" branch-rate="0.0">
 							<lines>
-								<line number="45" hits="0" branch="true" condition-coverage="0% (0/38)">
+								<line number="54" hits="0" branch="true" condition-coverage="0% (0/38)">
 									<conditions>
 										<condition number="0" type="jump" coverage="0%"/>
 										<condition number="1" type="jump" coverage="0%"/>
@@ -150,7 +152,7 @@
 						</method>
 					</methods>
 					<lines>
-						<line number="45" hits="0" branch="true" condition-coverage="0% (0/38)">
+						<line number="54" hits="0" branch="true" condition-coverage="0% (0/38)">
 							<conditions>
 								<condition number="0" type="jump" coverage="0%"/>
 								<condition number="1" type="jump" coverage="0%"/>
@@ -173,12 +175,12 @@
 								<condition number="18" type="jump" coverage="0%"/>
 							</conditions>
 						</line>
-						<line number="47" hits="4" branch="false"/>
-						<line number="48" hits="4" branch="false"/>
-						<line number="49" hits="4" branch="false"/>
-						<line number="50" hits="4" branch="false"/>
-						<line number="51" hits="0" branch="false"/>
-						<line number="54" hits="4" branch="true" condition-coverage="66% (12/18)">
+						<line number="56" hits="4" branch="false"/>
+						<line number="57" hits="4" branch="false"/>
+						<line number="58" hits="4" branch="false"/>
+						<line number="59" hits="4" branch="false"/>
+						<line number="60" hits="0" branch="false"/>
+						<line number="63" hits="4" branch="true" condition-coverage="66% (12/18)">
 							<conditions>
 								<condition number="0" type="jump" coverage="50%"/>
 								<condition number="1" type="jump" coverage="50%"/>
@@ -188,11 +190,11 @@
 								<condition number="1" type="switch" coverage="80%"/>
 							</conditions>
 						</line>
-						<line number="56" hits="1" branch="false"/>
-						<line number="58" hits="1" branch="false"/>
-						<line number="60" hits="1" branch="false"/>
-						<line number="62" hits="1" branch="false"/>
-						<line number="64" hits="0" branch="false"/>
+						<line number="65" hits="1" branch="false"/>
+						<line number="67" hits="1" branch="false"/>
+						<line number="69" hits="1" branch="false"/>
+						<line number="71" hits="1" branch="false"/>
+						<line number="73" hits="0" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.github.cchacin.cucumber.steps.DatabaseSteps" filename="com/github/cchacin/cucumber/steps/DatabaseSteps.java" line-rate="0.972972972972973" branch-rate="0.6" complexity="0.0">
