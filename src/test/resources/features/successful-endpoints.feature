@@ -23,8 +23,10 @@ Feature: Successful rest calls
   # DATABASE GET
   Scenario: Retrieve users list
     Given I have only the following rows in the "models" table:
-      | id | created             | modified            | email                | fullname | password |
-      | 1  | 2014-07-16 00:00:00 | 2014-07-16 00:00:00 | cchacin@superbiz.org | Carlos   | passw0rd |
+      | id | created             | modified            | email                 | fullname | password  |
+      | 1  | 2014-07-16 00:00:00 | 2014-07-16 00:00:00 | cchacin@superbiz.org  | Carlos   | passw0rd  |
+      | 2  | 2014-07-16 00:00:00 | 2014-07-16 00:00:00 | cchacin2@superbiz.org | Carlos2  | passw0rd2 |
+      | 3  | 2014-07-16 00:00:00 | 2014-07-16 00:00:00 | cchacin3@superbiz.org | Carlos3  | passw0rd3 |
     When I make a GET call to "/test-app/users" endpoint
     Then response status code should be "200"
     And response content type should be "application/json"
@@ -32,12 +34,28 @@ Feature: Successful rest calls
     """
     [
       {
-          "id": 1,
-          "created": "${json-unit.ignore}",
-          "modified": "${json-unit.ignore}",
-          "email": "cchacin@superbiz.org",
-          "fullname": "Carlos",
-          "password": "passw0rd"
+        "created":"2014-07-16T00:00:00-07:00",
+        "email":"cchacin@superbiz.org",
+        "fullname":"Carlos",
+        "id":1,
+        "modified":"2014-07-16T00:00:00-07:00",
+        "password":"passw0rd"
+      },
+      {
+        "created":"2014-07-16T00:00:00-07:00",
+        "email":"cchacin2@superbiz.org",
+        "fullname":"Carlos2",
+        "id":2,
+        "modified":"2014-07-16T00:00:00-07:00",
+        "password":"passw0rd2"
+      },
+      {
+        "created":"2014-07-16T00:00:00-07:00",
+        "email":"cchacin3@superbiz.org",
+        "fullname":"Carlos3",
+        "id":3,
+        "modified":"2014-07-16T00:00:00-07:00",
+        "password":"passw0rd3"
       }
     ]
     """
@@ -46,7 +64,7 @@ Feature: Successful rest calls
   Scenario: Retrieve users list cleaning db
     Given I have the following rows in the "models" table:
       | id | created             | modified            | email                 | fullname | password |
-      | 2  | 2015-02-11 00:00:00 | 2015-02-11 00:00:00 | cchacin2@superbiz.org | Carlos2  | passw0rd |
+      | 4  | 2015-02-11 00:00:00 | 2015-02-11 00:00:00 | cchacin2@superbiz.org | Carlos2  | passw0rd |
     When I make a GET call to "/test-app/users" endpoint
     Then response status code should be "200"
     And response content type should be "application/json"
@@ -54,20 +72,36 @@ Feature: Successful rest calls
     """
     [
       {
-          "id": 1,
-          "created": "${json-unit.ignore}",
-          "modified": "${json-unit.ignore}",
-          "email": "cchacin@superbiz.org",
-          "fullname": "Carlos",
-          "password": "passw0rd"
+        "created":"2014-07-16T00:00:00-07:00",
+        "email":"cchacin@superbiz.org",
+        "fullname":"Carlos",
+        "id":1,
+        "modified":"2014-07-16T00:00:00-07:00",
+        "password":"passw0rd"
       },
       {
-          "id": 2,
-          "created": "${json-unit.ignore}",
-          "modified": "${json-unit.ignore}",
-          "email": "cchacin2@superbiz.org",
-          "fullname": "Carlos2",
-          "password": "passw0rd"
+        "created":"2014-07-16T00:00:00-07:00",
+        "email":"cchacin2@superbiz.org",
+        "fullname":"Carlos2",
+        "id":2,
+        "modified":"2014-07-16T00:00:00-07:00",
+        "password":"passw0rd2"
+      },
+      {
+        "created":"2014-07-16T00:00:00-07:00",
+        "email":"cchacin3@superbiz.org",
+        "fullname":"Carlos3",
+        "id":3,
+        "modified":"2014-07-16T00:00:00-07:00",
+        "password":"passw0rd3"
+      },
+      {
+        "created":"2015-02-11T00:00:00-08:00",
+        "email":"cchacin2@superbiz.org",
+        "fullname":"Carlos2",
+        "id":4,
+        "modified":"2015-02-11T00:00:00-08:00",
+        "password":"passw0rd"
       }
     ]
     """

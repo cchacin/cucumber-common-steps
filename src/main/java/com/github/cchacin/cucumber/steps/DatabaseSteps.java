@@ -70,10 +70,10 @@ public class DatabaseSteps {
         final List<String> columns = rows.get(0).getCells();
 
         final List<Operation> operations = new ArrayList<>();
-        final Insert.Builder builder = Insert.into(tableName);
-        builder.columns(columns.toArray(new String[columns.size()]));
 
         for (DataTableRow row : rows.subList(1, rows.size())) {
+            final Insert.Builder builder = Insert.into(tableName);
+            builder.columns(columns.toArray(new String[columns.size()]));
             builder.values(row.getCells().toArray(
                     new String[row.getCells().size()]));
             operations.add(builder.build());
