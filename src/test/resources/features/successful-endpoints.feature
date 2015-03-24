@@ -10,12 +10,20 @@ Feature: Successful rest calls
     """
     [
       {
-          "id": 101,
-          "created": "${json-unit.ignore}",
-          "modified": "${json-unit.ignore}",
-          "email": "cchacin@superbiz.org",
-          "fullname": "Carlos",
-          "password": "passWorD"
+        "created":"2014-07-16T00:00:00-07:00",
+        "email":"cchacin@superbiz.org",
+        "fullname":"Carlos",
+        "id":101,
+        "modified":"2014-07-16T00:00:00-07:00",
+        "password":"passWorD"
+      },
+      {
+        "created":"2014-07-16T00:00:00-07:00",
+        "email":"cchacin2@superbiz.org",
+        "fullname":"Carlos2",
+        "id":102,
+        "modified":"2014-07-16T00:00:00-07:00",
+        "password":"passWorD2"
       }
     ]
     """

@@ -21,10 +21,12 @@ import com.ninja_squad.dbsetup.operation.Operation;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import gherkin.formatter.model.DataTableRow;
-import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -92,15 +94,18 @@ public class DatabaseSteps {
 
     @Given("^I have the following sql script \"([^\"]*)\"$")
     public void I_have_the_following_sql_script(final String script) throws Throwable {
-        final Connection connection;
-        final String sql;
-        try (InputStream resource = Thread.currentThread()
-                .getContextClassLoader().getResourceAsStream(script)) {
-            connection = this.destination.getConnection();
-            sql = connection.nativeSQL(IOUtils.toString(resource));
+
+        final URL resource = Thread.currentThread()
+                .getContextClassLoader().getResource(script);
+        if (resource == null) {
+            return;
         }
-        try (final CallableStatement callableStatement = connection.prepareCall(sql)) {
-            callableStatement.execute();
+        List<String> lines = FileUtils.readLines(new File(resource.toURI()), "UTF-8");
+        final Connection connection = this.destination.getConnection();
+        for (final String line : lines) {
+            System.out.println(line);
+            final CallableStatement sql = connection.prepareCall(line);
+            sql.execute();
         }
     }
 }
