@@ -2,6 +2,7 @@ package com.github.cchacin.cucumber.steps;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.MappingBuilder;
+import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
 import cucumber.api.DataTable;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -13,6 +14,7 @@ import java.util.List;
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.delete;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
+import static com.github.tomakehurst.wiremock.client.WireMock.matching;
 import static com.github.tomakehurst.wiremock.client.WireMock.post;
 import static com.github.tomakehurst.wiremock.client.WireMock.put;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlPathEqualTo;
@@ -38,8 +40,15 @@ public class CallsSteps {
         final List<Call> calls = data.asList(Call.class);
 
         for (Call call : calls) {
-            server.stubFor(call.getHttpMethod().willReturn(aResponse().withStatus(call.getStatusCode()).withBodyFile(call.getFilename())));
+
+            final ResponseDefinitionBuilder response = aResponse()
+                    .withStatus(call.getStatusCode())
+                    .withBodyFile(call.getFilename());
+
+            server.stubFor(call.getHttpMethod()
+                    .willReturn(response));
         }
+
     }
 
     @Value
@@ -53,9 +62,9 @@ public class CallsSteps {
         MappingBuilder getHttpMethod() {
             switch (getMethod().toUpperCase()) {
                 case "POST":
-                    return post(urlPathEqualTo(getUrl()));
+                    return post(urlPathEqualTo(getUrl())).withRequestBody(matching(".*"));
                 case "PUT":
-                    return put(urlPathEqualTo(getUrl()));
+                    return put(urlPathEqualTo(getUrl())).withRequestBody(matching(".*"));
                 case "DELETE":
                     return delete(urlPathEqualTo(getUrl()));
                 case "GET":
