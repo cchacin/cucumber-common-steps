@@ -57,7 +57,6 @@ public class CallsSteps {
         private String url;
         private int statusCode;
         private String filename;
-        private MappingBuilder builder;
 
         MappingBuilder getHttpMethod() {
             switch (getMethod().toUpperCase()) {
