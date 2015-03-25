@@ -56,14 +56,14 @@ public class Controller {
     @Path("/successful/get")
     @Produces("application/json")
     public Response successfulGET() {
-        return Response.ok(new Model("1", new Date(), new Date(), null, "", "")).header("a", "a").build();
+        return Response.ok(new Model(1L, new Date(), new Date(), null, "", "")).header("a", "a").build();
     }
 
     @GET
     @Path("/successful/get/params")
     @Produces("application/json")
     public Response successfulGETQueryParams(@QueryParam("param1") final String param1, @QueryParam("param2") final String param2) {
-        return Response.ok(new Model("1", new Date(), new Date(), null, param2, param1)).build();
+        return Response.ok(new Model(1L, new Date(), new Date(), null, param2, param1)).build();
     }
 
     @GET

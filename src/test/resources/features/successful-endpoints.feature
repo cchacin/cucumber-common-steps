@@ -10,19 +10,19 @@ Feature: Successful rest calls
     """
     [
       {
-        "created":"2014-07-16T00:00:00-07:00",
+        "created":"${json-unit.ignore}",
         "email":"cchacin@superbiz.org",
         "fullname":"Carlos",
         "id":101,
-        "modified":"2014-07-16T00:00:00-07:00",
+        "modified":"${json-unit.ignore}",
         "password":"passWorD"
       },
       {
-        "created":"2014-07-16T00:00:00-07:00",
+        "created":"${json-unit.ignore}",
         "email":"cchacin2@superbiz.org",
         "fullname":"Carlos2",
         "id":102,
-        "modified":"2014-07-16T00:00:00-07:00",
+        "modified":"${json-unit.ignore}",
         "password":"passWorD2"
       }
     ]
@@ -42,27 +42,27 @@ Feature: Successful rest calls
     """
     [
       {
-        "created":"2014-07-16T00:00:00-07:00",
+        "created":"${json-unit.ignore}",
         "email":"cchacin@superbiz.org",
         "fullname":"Carlos",
         "id":1,
-        "modified":"2014-07-16T00:00:00-07:00",
+        "modified":"${json-unit.ignore}",
         "password":"passw0rd"
       },
       {
-        "created":"2014-07-16T00:00:00-07:00",
+        "created":"${json-unit.ignore}",
         "email":"cchacin2@superbiz.org",
         "fullname":"Carlos2",
         "id":2,
-        "modified":"2014-07-16T00:00:00-07:00",
+        "modified":"${json-unit.ignore}",
         "password":"passw0rd2"
       },
       {
-        "created":"2014-07-16T00:00:00-07:00",
+        "created":"${json-unit.ignore}",
         "email":"cchacin3@superbiz.org",
         "fullname":"Carlos3",
         "id":3,
-        "modified":"2014-07-16T00:00:00-07:00",
+        "modified":"${json-unit.ignore}",
         "password":"passw0rd3"
       }
     ]
@@ -80,35 +80,35 @@ Feature: Successful rest calls
     """
     [
       {
-        "created":"2014-07-16T00:00:00-07:00",
+        "created":"${json-unit.ignore}",
         "email":"cchacin@superbiz.org",
         "fullname":"Carlos",
         "id":1,
-        "modified":"2014-07-16T00:00:00-07:00",
+        "modified":"${json-unit.ignore}",
         "password":"passw0rd"
       },
       {
-        "created":"2014-07-16T00:00:00-07:00",
+        "created":"${json-unit.ignore}",
         "email":"cchacin2@superbiz.org",
         "fullname":"Carlos2",
         "id":2,
-        "modified":"2014-07-16T00:00:00-07:00",
+        "modified":"${json-unit.ignore}",
         "password":"passw0rd2"
       },
       {
-        "created":"2014-07-16T00:00:00-07:00",
+        "created":"${json-unit.ignore}",
         "email":"cchacin3@superbiz.org",
         "fullname":"Carlos3",
         "id":3,
-        "modified":"2014-07-16T00:00:00-07:00",
+        "modified":"${json-unit.ignore}",
         "password":"passw0rd3"
       },
       {
-        "created":"2015-02-11T00:00:00-08:00",
+        "created":"${json-unit.ignore}",
         "email":"cchacin2@superbiz.org",
         "fullname":"Carlos2",
         "id":4,
-        "modified":"2015-02-11T00:00:00-08:00",
+        "modified":"${json-unit.ignore}",
         "password":"passw0rd"
       }
     ]

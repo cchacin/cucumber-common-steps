@@ -31,7 +31,7 @@ public class Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    String id;
+    Long id;
     @Column(name = "created")
     Date created;
     @Column(name = "modified")

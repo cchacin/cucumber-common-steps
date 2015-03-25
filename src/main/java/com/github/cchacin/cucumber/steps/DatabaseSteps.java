@@ -21,14 +21,12 @@ import com.ninja_squad.dbsetup.operation.Operation;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import gherkin.formatter.model.DataTableRow;
-import org.apache.commons.io.FileUtils;
+import org.apache.ibatis.jdbc.ScriptRunner;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
-import java.sql.CallableStatement;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -94,18 +92,7 @@ public class DatabaseSteps {
 
     @Given("^I have the following sql script \"([^\"]*)\"$")
     public void I_have_the_following_sql_script(final String script) throws Throwable {
-
-        final URL resource = Thread.currentThread()
-                .getContextClassLoader().getResource(script);
-        if (resource == null) {
-            return;
-        }
-        List<String> lines = FileUtils.readLines(new File(resource.toURI()), "UTF-8");
-        final Connection connection = this.destination.getConnection();
-        for (final String line : lines) {
-            System.out.println(line);
-            final CallableStatement sql = connection.prepareCall(line);
-            sql.execute();
-        }
+        new ScriptRunner(this.destination.getConnection())
+                .runScript(new BufferedReader(new FileReader(Thread.currentThread().getContextClassLoader().getResource(script).getPath())));
     }
 }
