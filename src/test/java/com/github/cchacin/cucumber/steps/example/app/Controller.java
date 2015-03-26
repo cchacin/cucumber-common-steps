@@ -129,6 +129,15 @@ public class Controller {
         return Response.ok(wrapper).build();
     }
 
+    @GET
+    @Path("/external/proxy/user/71e7cb11")
+    @Produces("application/json")
+    public Response mockExternalProxy() {
+        final WebClient client = WebClient.create("http://localhost:9090");
+        final Response response = client.accept(MediaType.APPLICATION_JSON).path("/user/71e7cb11").query("a", "a").get();
+        return Response.ok(response.getEntity()).build();
+    }
+
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
