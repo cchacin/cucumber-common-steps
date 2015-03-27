@@ -74,7 +74,7 @@ public class RestSteps {
         execute(method);
     }
 
-    private void execute(String method) {
+    private void execute(final String method) {
         this.response = ("GET".equals(method)) ? this.webClient.get() : this.webClient.head();
         assertThat(this.response.getStatus()).isBetween(200, 299);
     }

@@ -118,9 +118,12 @@ Feature: Successful rest calls
   Scenario: Mock external API
     Given The call to external service should be:
       | method | url                | statusCode | filename      |
-      | GET    | /user/71e7cb11?a=a | 200        | 71e7cb11.json |
-      | GET    | /user/71e7cb12?a=b | 200        | 71e7cb11.json |
-      | POST   | /user              | 201        |               |
+      | GET    | /user/71e7cb11?a=1 | 200        | 71e7cb11.json |
+      | GET    | /user/71e7cb11?a=2 | 200        | 71e7cb11.json |
+      | GET    | /user/71e7cb11?a=3 | 200        | 71e7cb11.json |
+      | GET    | /user/71e7cb11?a=4 | 200        | 71e7cb11.json |
+      | GET    | /user/71e7cb11?a=5 | 200        | 71e7cb11.json |
+      | POST   | /user?b=b          | 201        |               |
       | PUT    | /user/71e7cb11     | 204        |               |
       | DELETE | /user/71e7cb11     | 204        |               |
     When I make a GET call to "/test-app/external/call/user/71e7cb11" endpoint
@@ -128,25 +131,37 @@ Feature: Successful rest calls
     And response should be json:
     """
     {
-      "responses": [
+      "responses":[
         {
-          "status": 200
+          "status":201
         },
         {
-          "status": 201
+          "status":204
         },
         {
-          "status": 204
+          "status":204
         },
         {
-          "status": 204
+          "status":200
+        },
+        {
+          "status":200
+        },
+        {
+          "status":200
+        },
+        {
+          "status":200
+        },
+        {
+          "status":200
         }
       ]
     }
     """
 
   # EXTERNAL SERVICE PROXY
-  Scenario: Mock external API
+  Scenario: Mock external API as Proxy
     Given The call to external service should be:
       | method | url                | statusCode | filename      |
       | GET    | /user/71e7cb11?a=a | 200        | 71e7cb11.json |

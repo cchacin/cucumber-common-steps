@@ -27,22 +27,30 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMoc
 @Slf4j
 public class CallsSteps {
 
-    final WireMockServer server = new WireMockServer(wireMockConfig().port(9090));
+    private final WireMockServer server = new WireMockServer(wireMockConfig().port(9090));
 
     @Before
     public void setUp() {
-        server.start();
+        if (!server.isRunning()) {
+            server.start();
+        }
     }
 
     @After
     public void tearDown() {
-        server.stop();
+        if (server.isRunning()) {
+            server.stop();
+        }
     }
 
     @Given("^The call to external service should be:$")
     public void the_call_to_external_service_should_be(final DataTable data) throws Throwable {
 
         final List<Call> calls = data.asList(Call.class);
+
+
+        server.resetMappings();
+        server.resetScenarios();
 
         for (Call call : calls) {
 
@@ -54,13 +62,17 @@ public class CallsSteps {
             MappingBuilder mappingBuilder = call.getHttpMethod()
                     .willReturn(response);
             for (final Map.Entry<String, String> kv : call.buildQueryParams().entrySet()) {
-                mappingBuilder.withQueryParam(kv.getKey(), matching(kv.getValue()));
+                mappingBuilder = mappingBuilder.withQueryParam(kv.getKey(), matching(kv.getValue()));
             }
             server.stubFor(mappingBuilder);
 
         }
+//        server.saveMappings();
         log.info("Stub Mappings: \n{}", server.listAllStubMappings().getMappings());
 
+//        server.loadMappingsUsing(new JsonFileMappingsLoader(new ClasspathFileSource("mappings")));
+
+//        Thread.sleep(5 * 1_000);
     }
 
     @Value
@@ -69,8 +81,6 @@ public class CallsSteps {
         private String url;
         private int statusCode;
         private String filename;
-
-        private MappingBuilder builder;
 
         MappingBuilder getHttpMethod() {
             switch (getMethod().toUpperCase()) {

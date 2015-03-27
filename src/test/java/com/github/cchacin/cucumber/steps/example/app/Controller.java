@@ -18,10 +18,12 @@ import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Value;
 import org.apache.cxf.jaxrs.client.WebClient;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.HEAD;
@@ -38,6 +40,11 @@ import javax.ws.rs.core.UriInfo;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 @Path("/")
 @Stateless
@@ -51,6 +58,8 @@ public class Controller {
 
     @EJB
     ModelDao modelDao;
+
+    private final ExecutorService executor = Executors.newFixedThreadPool(10);
 
     @GET
     @Path("/successful/get")
@@ -108,25 +117,54 @@ public class Controller {
 
     @GET
     @Path("/external/call/user/71e7cb11")
+    @Consumes("application/json")
     @Produces("application/json")
     public Response mockExternalCall() {
         final WebClient client = WebClient.create("http://localhost:9090");
         final ResponseWrapper wrapper;
         final List<ResponseItem> items = Lists.newArrayList();
+        final List<ResponseItem> getItems = Lists.newArrayList();
 
-        final Response getResponse = client.accept(MediaType.APPLICATION_JSON).path("/user/71e7cb11").query("a", "a").get();
-        final Response postResponse = client.accept(MediaType.APPLICATION_JSON).back(true).path("/user").post(null);
+        List<Future<Response>> calls = Lists.newArrayList();
+        for (int i = 0; i < 5; i++) {
+            final WebClient getClient = WebClient.create("http://localhost:9090").accept(MediaType.APPLICATION_JSON).path("/user/71e7cb11").query("a", i + 1);
+            System.out.println(getClient.getCurrentURI());
+            final Future<Response> future = executor.submit(new GetResponse(getClient));
+            calls.add(future);
+        }
+
+        for (final Future<Response> responseFuture : calls) {
+            try {
+                final Response r = responseFuture.get();
+                getItems.add(new ResponseItem(r.getStatus()));
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
+        final Response postResponse = client.accept(MediaType.APPLICATION_JSON).back(true).path("/user").query("b", "b").post("{\"a\":\"a\"}");
         final Response putResponse = client.accept(MediaType.APPLICATION_JSON).back(true).path("/user/71e7cb11").put(null);
         final Response deleteResponse = client.accept(MediaType.APPLICATION_JSON).back(true).path("/user/71e7cb11").delete();
 
-        final List<Response> responseList = ImmutableList.of(getResponse, postResponse, putResponse, deleteResponse);
+        final List<Response> responseList = ImmutableList.of(postResponse, putResponse, deleteResponse);
 
         for (final Response response : responseList) {
             items.add(new ResponseItem(response.getStatus()));
         }
 
+        items.addAll(getItems);
+
         wrapper = new ResponseWrapper(items);
         return Response.ok(wrapper).build();
+    }
+
+    @Value
+    static class GetResponse implements Callable<Response> {
+        private WebClient client;
+
+        @Override
+        public Response call() throws Exception {
+            return client.get();
+        }
     }
 
     @GET
