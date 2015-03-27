@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.9765625" branch-rate="0.5" lines-covered="125" lines-valid="128" branches-covered="38" branches-valid="76" complexity="1.7096774193548387" version="2.0.3" timestamp="1427493864906">
+<coverage line-rate="0.9765625" branch-rate="0.5" lines-covered="125" lines-valid="128" branches-covered="38" branches-valid="76" complexity="1.7096774193548387" version="2.0.3" timestamp="1427494053008">
 	<sources>
 		<source>--source</source>
 		<source>/home/travis/build/cchacin/cucumber-common-steps/src/main/java</source>
