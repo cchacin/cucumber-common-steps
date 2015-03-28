@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.9779411764705882" branch-rate="0.5" lines-covered="133" lines-valid="136" branches-covered="38" branches-valid="76" complexity="1.6875" version="2.0.3" timestamp="1427578884793">
+<coverage line-rate="0.9779411764705882" branch-rate="0.5" lines-covered="133" lines-valid="136" branches-covered="38" branches-valid="76" complexity="1.6875" version="2.0.3" timestamp="1427579717937">
 	<sources>
 		<source>--source</source>
 		<source>/home/travis/build/cchacin/cucumber-common-steps/src/main/java</source>
@@ -414,7 +414,7 @@
 							<lines>
 								<line number="71" hits="11" branch="false"/>
 								<line number="72" hits="11" branch="false"/>
-								<line number="73" hits="11" branch="false"/>
+								<line number="73" hits="10" branch="false"/>
 							</lines>
 						</method>
 						<method name="I_make_a_GET_HEAD_call_to_endpoint_with_headers" signature="(Ljava/lang/String;Ljava/lang/String;Lcucumber/api/DataTable;)V" line-rate="1.0" branch-rate="1.0">
@@ -471,7 +471,7 @@
 								</line>
 								<line number="77" hits="12" branch="false"/>
 								<line number="79" hits="12" branch="false"/>
-								<line number="80" hits="12" branch="false"/>
+								<line number="80" hits="11" branch="false"/>
 							</lines>
 						</method>
 						<method name="fileContent" signature="(Ljava/lang/String;)Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
@@ -535,8 +535,8 @@
 						</method>
 						<method name="response_should_be_json" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="155" hits="9" branch="false"/>
-								<line number="157" hits="9" branch="false"/>
+								<line number="155" hits="8" branch="false"/>
+								<line number="157" hits="8" branch="false"/>
 							</lines>
 						</method>
 						<method name="response_should_be_json_responseBody" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0">
@@ -548,8 +548,8 @@
 						</method>
 						<method name="response_status_code_should_be" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="133" hits="16" branch="false"/>
-								<line number="135" hits="16" branch="false"/>
+								<line number="133" hits="15" branch="false"/>
+								<line number="135" hits="15" branch="false"/>
 							</lines>
 						</method>
 						<method name="setHeader" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0">
@@ -583,7 +583,7 @@
 						<line number="66" hits="16" branch="false"/>
 						<line number="71" hits="11" branch="false"/>
 						<line number="72" hits="11" branch="false"/>
-						<line number="73" hits="11" branch="false"/>
+						<line number="73" hits="10" branch="false"/>
 						<line number="76" hits="12" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
@@ -591,7 +591,7 @@
 						</line>
 						<line number="77" hits="12" branch="false"/>
 						<line number="79" hits="12" branch="false"/>
-						<line number="80" hits="12" branch="false"/>
+						<line number="80" hits="11" branch="false"/>
 						<line number="86" hits="3" branch="false"/>
 						<line number="87" hits="3" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
@@ -628,15 +628,15 @@
 						<line number="126" hits="2" branch="false"/>
 						<line number="127" hits="1" branch="false"/>
 						<line number="128" hits="1" branch="false"/>
-						<line number="133" hits="16" branch="false"/>
-						<line number="135" hits="16" branch="false"/>
+						<line number="133" hits="15" branch="false"/>
+						<line number="135" hits="15" branch="false"/>
 						<line number="140" hits="9" branch="false"/>
 						<line number="142" hits="9" branch="false"/>
 						<line number="148" hits="2" branch="false"/>
 						<line number="149" hits="2" branch="false"/>
 						<line number="150" hits="2" branch="false"/>
-						<line number="155" hits="9" branch="false"/>
-						<line number="157" hits="9" branch="false"/>
+						<line number="155" hits="8" branch="false"/>
+						<line number="157" hits="8" branch="false"/>
 						<line number="161" hits="5" branch="false"/>
 						<line number="162" hits="5" branch="false"/>
 						<line number="167" hits="1" branch="false"/>
