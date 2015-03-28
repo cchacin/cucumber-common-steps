@@ -113,6 +113,12 @@ Feature: Successful rest calls
       }
     ]
     """
+    And response json path list "$..fullname" should be:
+      | Carlos  |
+      | Carlos2 |
+      | Carlos3 |
+      | Carlos2 |
+    And response json path element "$[0].id" should be "1"
 
   # EXTERNAL SERVICE
   Scenario: Mock external API

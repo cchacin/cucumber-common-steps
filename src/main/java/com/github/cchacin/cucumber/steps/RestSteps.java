@@ -13,6 +13,7 @@
  */
 package com.github.cchacin.cucumber.steps;
 
+import com.jayway.jsonpath.JsonPath;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -27,6 +28,7 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Map;
 
 import static net.javacrumbs.jsonunit.fluent.JsonFluentAssert.assertThatJson;
@@ -37,6 +39,7 @@ public class RestSteps {
     private Response response;
 
     private WebClient webClient;
+    private String responseValue;
 
     final String fileContent(String filePath) throws URISyntaxException, IOException {
         final byte[] encoded = Files.readAllBytes(Paths.get(RestSteps.class.getResource(
@@ -44,11 +47,6 @@ public class RestSteps {
 
         return StandardCharsets.UTF_8.decode(ByteBuffer.wrap(encoded))
                 .toString();
-    }
-
-    final String responseValue() throws IOException {
-        return IOUtils
-                .toString((InputStream) this.response.getEntity());
     }
 
     final void setHeader(final String headerName, final String headerValue) {
@@ -74,8 +72,10 @@ public class RestSteps {
         execute(method);
     }
 
-    private void execute(final String method) {
+    private void execute(final String method) throws Exception {
         this.response = ("GET".equals(method)) ? this.webClient.get() : this.webClient.head();
+        this.responseValue = IOUtils
+                .toString((InputStream) this.response.getEntity());
         assertThat(this.response.getStatus()).isBetween(200, 299);
     }
 
@@ -86,6 +86,8 @@ public class RestSteps {
         this.webClient = createWebClient(endpointUrl);
         this.response = (method.equals("POST")) ? this.webClient.post(postBody) : this.webClient
                 .put(postBody);
+        this.responseValue = IOUtils
+                .toString((InputStream) this.response.getEntity());
         assertThat(this.response.getStatus()).isBetween(200, 299);
     }
 
@@ -101,6 +103,8 @@ public class RestSteps {
     public final void I_make_a_DELETE_call_to_endpoint(final String endpointUrl)
             throws Throwable {
         this.response = createWebClient(endpointUrl).delete();
+        this.responseValue = IOUtils
+                .toString((InputStream) this.response.getEntity());
         assertThat(this.response.getStatus()).isBetween(200, 299);
     }
 
@@ -148,19 +152,19 @@ public class RestSteps {
     @Then("^response should be json:$")
     public final void response_should_be_json(final String jsonResponseString)
             throws Throwable {
-        assertThatJson(responseValue()).ignoring("${json-unit.ignore}").isEqualTo(
+        assertThatJson(this.responseValue).ignoring("${json-unit.ignore}").isEqualTo(
                 jsonResponseString);
     }
 
     @Then("^response should be empty$")
     public final void response_should_be_empty() throws Throwable {
-        assertThat(responseValue()).isEmpty();
+        assertThat(this.responseValue).isEmpty();
     }
 
     @Then("^response should be file \"([^\"]*)\"$")
     public final void response_should_be_file(final String contentFilePath)
             throws Throwable {
-        assertThat(responseValue()).isEqualTo(fileContent(contentFilePath));
+        assertThat(this.responseValue).isEqualTo(fileContent(contentFilePath));
     }
 
     @Then("^response header \"([^\"]*)\" should be \"([^\"]*)\";$")
@@ -168,5 +172,17 @@ public class RestSteps {
                                                  final String headerValue) throws Throwable {
         assertThat(headerValue).isEqualTo(
                 this.response.getMetadata().getFirst(responseHeaderName));
+    }
+
+    @Then("^response json path list \"(.*?)\" should be:$")
+    public void response_json_path_list_should_be(final String jsonPath, final DataTable list) throws Throwable {
+        final List<String> responseList = JsonPath.read(this.responseValue, jsonPath);
+        assertThat(responseList).isEqualTo(list.asList(String.class));
+    }
+
+    @Then("^response json path element \"(.*?)\" should be \"(.*?)\"$")
+    public void response_json_path_element_should_be(final String jsonPath, final String value) throws Throwable {
+        final Object responseValue = JsonPath.read(this.responseValue, jsonPath);
+        assertThat(String.valueOf(responseValue)).isEqualTo(value);
     }
 }
