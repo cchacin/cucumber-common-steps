@@ -128,7 +128,6 @@ public class Controller {
         List<Future<Response>> calls = Lists.newArrayList();
         for (int i = 0; i < 5; i++) {
             final WebClient getClient = WebClient.create("http://localhost:9090").accept(MediaType.APPLICATION_JSON).path("/user/71e7cb11").query("a", i + 1);
-            System.out.println(getClient.getCurrentURI());
             final Future<Response> future = executor.submit(new GetResponse(getClient));
             calls.add(future);
         }

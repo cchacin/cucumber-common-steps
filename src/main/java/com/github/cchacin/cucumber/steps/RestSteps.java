@@ -76,7 +76,6 @@ public class RestSteps {
         this.response = ("GET".equals(method)) ? this.webClient.get() : this.webClient.head();
         this.responseValue = IOUtils
                 .toString((InputStream) this.response.getEntity());
-        assertThat(this.response.getStatus()).isBetween(200, 299);
     }
 
     @When("^I make a (POST|PUT) call to \"([^\"]*)\" endpoint with post body:$")
@@ -88,7 +87,6 @@ public class RestSteps {
                 .put(postBody);
         this.responseValue = IOUtils
                 .toString((InputStream) this.response.getEntity());
-        assertThat(this.response.getStatus()).isBetween(200, 299);
     }
 
     @When("^I make a (POST|PUT) call to \"([^\"]*)\" endpoint with post body in file \"([^\"]*)\"$")

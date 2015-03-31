@@ -1,6 +1,6 @@
+
 package com.github.cchacin.cucumber.steps;
 
-import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.MappingBuilder;
 import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
 import com.google.common.collect.Maps;
@@ -22,25 +22,18 @@ import static com.github.tomakehurst.wiremock.client.WireMock.matching;
 import static com.github.tomakehurst.wiremock.client.WireMock.post;
 import static com.github.tomakehurst.wiremock.client.WireMock.put;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlPathEqualTo;
-import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 
 @Slf4j
 public class CallsSteps {
 
-    private final WireMockServer server = new WireMockServer(wireMockConfig().port(9090));
-
     @Before
     public void setUp() {
-        if (!server.isRunning()) {
-            server.start();
-        }
+        Server.INSTANCE.start();
     }
 
     @After
     public void tearDown() {
-        if (server.isRunning()) {
-            server.stop();
-        }
+        Server.INSTANCE.stop();
     }
 
     @Given("^The call to external service should be:$")
@@ -60,10 +53,10 @@ public class CallsSteps {
             for (final Map.Entry<String, String> kv : call.buildQueryParams().entrySet()) {
                 mappingBuilder = mappingBuilder.withQueryParam(kv.getKey(), matching(kv.getValue()));
             }
-            server.stubFor(mappingBuilder);
+            Server.INSTANCE.get().stubFor(mappingBuilder);
 
         }
-        log.info("Stub Mappings: \n{}", server.listAllStubMappings().getMappings());
+        log.info("Stub Mappings: \n{}", Server.INSTANCE.get().listAllStubMappings().getMappings());
     }
 
     @Value
