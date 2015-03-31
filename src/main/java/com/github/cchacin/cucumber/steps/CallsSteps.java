@@ -48,10 +48,6 @@ public class CallsSteps {
 
         final List<Call> calls = data.asList(Call.class);
 
-
-        server.resetMappings();
-        server.resetScenarios();
-
         for (Call call : calls) {
 
             final ResponseDefinitionBuilder response = aResponse()
@@ -67,12 +63,7 @@ public class CallsSteps {
             server.stubFor(mappingBuilder);
 
         }
-//        server.saveMappings();
         log.info("Stub Mappings: \n{}", server.listAllStubMappings().getMappings());
-
-//        server.loadMappingsUsing(new JsonFileMappingsLoader(new ClasspathFileSource("mappings")));
-
-//        Thread.sleep(5 * 1_000);
     }
 
     @Value
