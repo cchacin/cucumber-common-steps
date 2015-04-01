@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.98125" branch-rate="0.5" lines-covered="157" lines-valid="160" branches-covered="38" branches-valid="76" complexity="1.6111111111111112" version="2.0.3" timestamp="1427846485036">
+<coverage line-rate="0.98125" branch-rate="0.5" lines-covered="157" lines-valid="160" branches-covered="38" branches-valid="76" complexity="1.6111111111111112" version="2.0.3" timestamp="1427846695405">
 	<sources>
 		<source>--source</source>
 		<source>/home/travis/build/cchacin/cucumber-common-steps/src/main/java</source>
@@ -534,8 +534,8 @@
 						</method>
 						<method name="response_should_be_json" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="153" hits="9" branch="false"/>
-								<line number="155" hits="9" branch="false"/>
+								<line number="153" hits="8" branch="false"/>
+								<line number="155" hits="8" branch="false"/>
 							</lines>
 						</method>
 						<method name="response_should_be_json_responseBody" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0">
@@ -549,7 +549,7 @@
 							<lines>
 								<line number="131" hits="32" branch="false"/>
 								<line number="132" hits="16" branch="false"/>
-								<line number="133" hits="16" branch="false"/>
+								<line number="133" hits="15" branch="false"/>
 							</lines>
 						</method>
 						<method name="setHeader" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0">
@@ -635,15 +635,15 @@
 						<line number="126" hits="1" branch="false"/>
 						<line number="131" hits="32" branch="false"/>
 						<line number="132" hits="16" branch="false"/>
-						<line number="133" hits="16" branch="false"/>
+						<line number="133" hits="15" branch="false"/>
 						<line number="138" hits="18" branch="false"/>
 						<line number="139" hits="9" branch="false"/>
 						<line number="140" hits="9" branch="false"/>
 						<line number="146" hits="2" branch="false"/>
 						<line number="147" hits="2" branch="false"/>
 						<line number="148" hits="2" branch="false"/>
-						<line number="153" hits="9" branch="false"/>
-						<line number="155" hits="9" branch="false"/>
+						<line number="153" hits="8" branch="false"/>
+						<line number="155" hits="8" branch="false"/>
 						<line number="159" hits="5" branch="false"/>
 						<line number="160" hits="5" branch="false"/>
 						<line number="165" hits="1" branch="false"/>
