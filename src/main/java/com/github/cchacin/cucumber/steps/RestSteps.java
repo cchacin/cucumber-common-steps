@@ -14,15 +14,13 @@
 package com.github.cchacin.cucumber.steps;
 
 import com.jayway.jsonpath.JsonPath;
+import com.jayway.restassured.response.Response;
+import com.jayway.restassured.specification.RequestSpecification;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.apache.commons.io.IOUtils;
-import org.apache.cxf.jaxrs.client.WebClient;
 
-import javax.ws.rs.core.Response;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
@@ -31,6 +29,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
+import static com.jayway.restassured.RestAssured.given;
 import static net.javacrumbs.jsonunit.fluent.JsonFluentAssert.assertThatJson;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -38,8 +37,9 @@ public class RestSteps {
 
     private Response response;
 
-    private WebClient webClient;
+    private RequestSpecification spec = given();
     private String responseValue;
+    private String basePath;
 
     final String fileContent(String filePath) throws URISyntaxException, IOException {
         final byte[] encoded = Files.readAllBytes(Paths.get(RestSteps.class.getResource(
@@ -50,43 +50,40 @@ public class RestSteps {
     }
 
     final void setHeader(final String headerName, final String headerValue) {
-        this.webClient.header(headerName, headerValue);
+        this.spec.header(headerName, headerValue);
     }
 
     final void setParam(final String paramName, final String paramValue) {
-        this.webClient.query(paramName, paramValue);
+        this.spec.param(paramName, paramValue);
     }
 
-    final WebClient createWebClient(final String endpointUrl) {
-        String url = endpointUrl;
+    final RequestSpecification createWebClient(final String endpointUrl) {
+        this.basePath = endpointUrl;
         if (!endpointUrl.startsWith("http")) {
-            url = "http://localhost:8080" + endpointUrl;
+            this.basePath = endpointUrl;
         }
-
-        return WebClient.create(url);
+        return given();
     }
 
     @When("^I make a (GET|HEAD) call to \"([^\"]*)\" endpoint$")
     public final void I_make_a_GET_HEAD_call_to_endpoint(final String method, final String endpointUrl) throws Throwable {
-        this.webClient = createWebClient(endpointUrl);
+        this.spec = createWebClient(endpointUrl);
         execute(method);
     }
 
     private void execute(final String method) throws Exception {
-        this.response = ("GET".equals(method)) ? this.webClient.get() : this.webClient.head();
-        this.responseValue = IOUtils
-                .toString((InputStream) this.response.getEntity());
+        this.response = ("GET".equals(method)) ? this.spec.get(this.basePath) : this.spec.head(this.basePath);
+        this.responseValue = this.response.asString();
     }
 
     @When("^I make a (POST|PUT) call to \"([^\"]*)\" endpoint with post body:$")
     public final void I_make_a_POST_PUT_call_to_endpoint_with_post_body(
             String method, String endpointUrl, final String postBody)
             throws Throwable {
-        this.webClient = createWebClient(endpointUrl);
-        this.response = (method.equals("POST")) ? this.webClient.post(postBody) : this.webClient
-                .put(postBody);
-        this.responseValue = IOUtils
-                .toString((InputStream) this.response.getEntity());
+        this.spec = createWebClient(endpointUrl).body(postBody);
+        this.response = (method.equals("POST")) ? this.spec.post(this.basePath) : this.spec
+                .put(this.basePath);
+        this.responseValue = this.response.asString();
     }
 
     @When("^I make a (POST|PUT) call to \"([^\"]*)\" endpoint with post body in file \"([^\"]*)\"$")
@@ -100,10 +97,8 @@ public class RestSteps {
     @When("^I make a DELETE call to \"([^\"]*)\" endpoint$")
     public final void I_make_a_DELETE_call_to_endpoint(final String endpointUrl)
             throws Throwable {
-        this.response = createWebClient(endpointUrl).delete();
-        this.responseValue = IOUtils
-                .toString((InputStream) this.response.getEntity());
-        assertThat(this.response.getStatus()).isBetween(200, 299);
+        this.response = createWebClient(endpointUrl).delete(endpointUrl);
+        this.responseValue = this.response.asString();
     }
 
     @When("^I make a (GET|HEAD) call to \"([^\"]*)\" endpoint with headers:$")
@@ -117,7 +112,7 @@ public class RestSteps {
 
     @When("^I make a (GET|HEAD) call to \"([^\"]*)\" endpoint with query params:$")
     public void i_make_a_GET_HEAD_call_to_endpoint_with_query_params(final String method, final String endpointUrl, final DataTable params) throws Throwable {
-        this.webClient = createWebClient(endpointUrl);
+        this.spec = createWebClient(endpointUrl);
         final Map<String, String> paramsMap = params.asMap(String.class, String.class);
         for (Map.Entry<String, String> entry : paramsMap.entrySet()) {
             this.setParam(entry.getKey(), entry.getValue());
@@ -128,7 +123,7 @@ public class RestSteps {
     @Then("^response status code should be \"([^\"]*)\"$")
     public final void response_status_code_should_be(final String statusCode)
             throws Throwable {
-        assertThat(this.response.getStatus()).isEqualTo(
+        assertThat(this.response.getStatusCode()).isEqualTo(
                 Integer.valueOf(statusCode));
     }
 
@@ -136,7 +131,7 @@ public class RestSteps {
     public final void response_content_type_should_be(final String contentType)
             throws Throwable {
         assertThat(contentType).isEqualTo(
-                this.response.getMetadata().getFirst("content-type"));
+                this.response.contentType());
     }
 
     @Then("^response should be json in file \"([^\"]*)\"$")
@@ -169,7 +164,7 @@ public class RestSteps {
     public final void response_header_should_be_(final String responseHeaderName,
                                                  final String headerValue) throws Throwable {
         assertThat(headerValue).isEqualTo(
-                this.response.getMetadata().getFirst(responseHeaderName));
+                this.response.headers().get(responseHeaderName).getValue());
     }
 
     @Then("^response json path list \"(.*?)\" should be:$")
