@@ -137,13 +137,6 @@
             <version>0.9.1</version>
         </dependency>
 
-        <!-- WireMock -->
-        <dependency>
-            <groupId>com.github.tomakehurst</groupId>
-            <artifactId>wiremock</artifactId>
-            <version>1.54</version>
-        </dependency>
-
         <!-- Findbugs -->
         <dependency>
             <groupId>net.sourceforge.findbugs</groupId>
@@ -176,6 +169,12 @@
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <version>3.2.8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.xebialabs.restito</groupId>
+            <artifactId>restito</artifactId>
+            <version>0.5</version>
         </dependency>
 
     </dependencies>

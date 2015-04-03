@@ -1,39 +1,44 @@
-
 package com.github.cchacin.cucumber.steps;
 
-import com.github.tomakehurst.wiremock.client.MappingBuilder;
-import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
-import com.google.common.collect.Maps;
+import com.google.common.collect.Lists;
+import com.xebialabs.restito.builder.stub.StubHttp;
+import com.xebialabs.restito.semantics.Condition;
+import com.xebialabs.restito.semantics.ConditionWithApplicables;
+import com.xebialabs.restito.server.StubServer;
 import cucumber.api.DataTable;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
+import org.glassfish.grizzly.http.util.HttpStatus;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-import static com.github.tomakehurst.wiremock.client.WireMock.delete;
-import static com.github.tomakehurst.wiremock.client.WireMock.get;
-import static com.github.tomakehurst.wiremock.client.WireMock.matching;
-import static com.github.tomakehurst.wiremock.client.WireMock.post;
-import static com.github.tomakehurst.wiremock.client.WireMock.put;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlPathEqualTo;
+import static com.xebialabs.restito.builder.stub.StubHttp.whenHttp;
+import static com.xebialabs.restito.semantics.Action.status;
+import static com.xebialabs.restito.semantics.Action.*;
+import static com.xebialabs.restito.semantics.Condition.delete;
+import static com.xebialabs.restito.semantics.Condition.get;
+import static com.xebialabs.restito.semantics.Condition.parameter;
+import static com.xebialabs.restito.semantics.Condition.post;
+import static com.xebialabs.restito.semantics.Condition.put;
 
 @Slf4j
 public class CallsSteps {
 
+    private StubServer server;
+    private StubHttp stubHttp;
+
     @Before
     public void setUp() {
-        Server.INSTANCE.start();
+        server = new StubServer(9090).run();
+        stubHttp = whenHttp(server);
     }
 
     @After
     public void tearDown() {
-        Server.INSTANCE.stop();
+        server.stop();
     }
 
     @Given("^The call to external service should be:$")
@@ -41,22 +46,10 @@ public class CallsSteps {
 
         final List<Call> calls = data.asList(Call.class);
 
-        for (Call call : calls) {
-
-            final ResponseDefinitionBuilder response = aResponse()
-                    .withStatus(call.getStatusCode())
-                    .withBodyFile(call.getFilename());
-
-
-            MappingBuilder mappingBuilder = call.getHttpMethod()
-                    .willReturn(response);
-            for (final Map.Entry<String, String> kv : call.buildQueryParams().entrySet()) {
-                mappingBuilder = mappingBuilder.withQueryParam(kv.getKey(), matching(kv.getValue()));
-            }
-            Server.INSTANCE.get().stubFor(mappingBuilder);
-
+        for (final Call call : calls) {
+            stubHttp.match(call.getHttpMethod(), call.buildQueryParams())
+                    .then(status(HttpStatus.getHttpStatus(call.getStatusCode())), resourceContent(Thread.currentThread().getContextClassLoader().getResource("fixtures/" + call.getFilename())));
         }
-        log.info("Stub Mappings: \n{}", Server.INSTANCE.get().listAllStubMappings().getMappings());
     }
 
     @Value
@@ -66,18 +59,18 @@ public class CallsSteps {
         private int statusCode;
         private String filename;
 
-        MappingBuilder getHttpMethod() {
+        ConditionWithApplicables getHttpMethod() {
             switch (getMethod().toUpperCase()) {
                 case "POST":
-                    return post(urlPathEqualTo(buildUrl())).withRequestBody(matching(".*"));
+                    return post(buildUrl());
                 case "PUT":
-                    return put(urlPathEqualTo(buildUrl())).withRequestBody(matching(".*"));
+                    return put(buildUrl());
                 case "DELETE":
-                    return delete(urlPathEqualTo(buildUrl()));
+                    return delete(buildUrl());
                 case "GET":
-                    return get(urlPathEqualTo(buildUrl()));
+                    return get(buildUrl());
                 default:
-                    return get(urlPathEqualTo(buildUrl()));
+                    return get(buildUrl());
             }
         }
 
@@ -85,16 +78,16 @@ public class CallsSteps {
             return (getUrl().contains("?")) ? getUrl().split("\\?")[0] : getUrl();
         }
 
-        HashMap<String, String> buildQueryParams() {
+        Condition buildQueryParams() {
             final String queryParamsStr = (getUrl().contains("?")) ? getUrl().split("\\?")[1] : null;
 
             final String[] kvs = queryParamsStr != null ? queryParamsStr.split("\\&") : new String[0];
-            final HashMap<String, String> queryParams = Maps.newHashMapWithExpectedSize(kvs.length);
+            List<Condition> conditions = Lists.newArrayList();
             for (final String kv : kvs) {
                 final String[] sp = kv.split("\\=");
-                queryParams.put(sp[0], sp[1]);
+                conditions.add(parameter(sp[0], sp[1]));
             }
-            return queryParams;
+            return Condition.composite(conditions.toArray(new Condition[conditions.size()]));
         }
     }
 }
