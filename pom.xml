@@ -164,6 +164,12 @@
             <groupId>com.xebialabs.restito</groupId>
             <artifactId>restito</artifactId>
             <version>0.5</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>junit</artifactId>
+                    <groupId>junit</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>
