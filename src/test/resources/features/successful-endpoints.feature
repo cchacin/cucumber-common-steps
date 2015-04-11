@@ -6,6 +6,7 @@ Feature: Successful rest calls
     When I make a GET call to "/test-app/users" endpoint
     Then response status code should be "200"
     And response content type should be "application/json"
+    And response json path list "$.*" should be of length 2
     And response should be json:
     """
     [
@@ -134,6 +135,7 @@ Feature: Successful rest calls
       | DELETE | /user/71e7cb11     | 204        |               |
     When I make a GET call to "/test-app/external/call/user/71e7cb11" endpoint
     Then response status code should be "200"
+    And response json path list "$.responses" should be of length 8
     And response should be json:
     """
     {
