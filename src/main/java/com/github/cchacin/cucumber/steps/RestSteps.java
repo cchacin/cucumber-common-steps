@@ -121,11 +121,10 @@ public class RestSteps {
         execute(method);
     }
 
-    @Then("^response status code should be \"([^\"]*)\"$")
-    public final void response_status_code_should_be(final String statusCode)
+    @Then("^response status code should be (\\d+)$")
+    public final void response_status_code_should_be(final int statusCode)
             throws Throwable {
-        assertThat(this.response.getStatusCode()).isEqualTo(
-                Integer.valueOf(statusCode));
+        assertThat(this.response.getStatusCode()).isEqualTo(statusCode);
     }
 
     @Then("^response content type should be \"([^\"]*)\"$")
@@ -180,7 +179,7 @@ public class RestSteps {
         assertThat(String.valueOf(responseValue)).isEqualTo(value);
     }
 
-    @Then("^response json path list \"(.*?)\" should be of length (\\d)$")
+    @Then("^response json path list \"(.*?)\" should be of length (\\d+)$")
     public void response_json_path_list_should_be_of_length(final String jsonPath, final int length) {
         final List<Object> responseList = JsonPath.read(this.responseValue, jsonPath);
         assertThat(responseList.size()).isEqualTo(length);
