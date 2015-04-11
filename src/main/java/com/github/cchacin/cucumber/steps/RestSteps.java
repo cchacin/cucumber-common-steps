@@ -16,9 +16,6 @@ package com.github.cchacin.cucumber.steps;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -28,6 +25,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
+
+import cucumber.api.DataTable;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 import static com.jayway.restassured.RestAssured.given;
 import static net.javacrumbs.jsonunit.fluent.JsonFluentAssert.assertThatJson;
@@ -120,11 +121,10 @@ public class RestSteps {
         execute(method);
     }
 
-    @Then("^response status code should be \"([^\"]*)\"$")
-    public final void response_status_code_should_be(final String statusCode)
+    @Then("^response status code should be (\\d+)$")
+    public final void response_status_code_should_be(final int statusCode)
             throws Throwable {
-        assertThat(this.response.getStatusCode()).isEqualTo(
-                Integer.valueOf(statusCode));
+        assertThat(this.response.getStatusCode()).isEqualTo(statusCode);
     }
 
     @Then("^response content type should be \"([^\"]*)\"$")
@@ -177,5 +177,11 @@ public class RestSteps {
     public void response_json_path_element_should_be(final String jsonPath, final String value) throws Throwable {
         final Object responseValue = JsonPath.read(this.responseValue, jsonPath);
         assertThat(String.valueOf(responseValue)).isEqualTo(value);
+    }
+
+    @Then("^response json path list \"(.*?)\" should be of length (\\d+)$")
+    public void response_json_path_list_should_be_of_length(final String jsonPath, final int length) {
+        final List<Object> responseList = JsonPath.read(this.responseValue, jsonPath);
+        assertThat(responseList.size()).isEqualTo(length);
     }
 }
