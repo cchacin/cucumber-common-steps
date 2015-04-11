@@ -180,7 +180,7 @@ public class RestSteps {
         assertThat(String.valueOf(responseValue)).isEqualTo(value);
     }
 
-    @Then("^response json path list \"(.*?)\" should be of length (.*?)$")
+    @Then("^response json path list \"(.*?)\" should be of length (\\d)$")
     public void response_json_path_list_should_be_of_length(final String jsonPath, final int length) {
         final List<Object> responseList = JsonPath.read(this.responseValue, jsonPath);
         assertThat(responseList.size()).isEqualTo(length);
