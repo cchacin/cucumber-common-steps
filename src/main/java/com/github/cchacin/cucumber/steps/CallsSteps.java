@@ -24,7 +24,6 @@ import static com.xebialabs.restito.semantics.Condition.parameter;
 import static com.xebialabs.restito.semantics.Condition.post;
 import static com.xebialabs.restito.semantics.Condition.put;
 
-@Slf4j
 public class CallsSteps {
 
     private StubServer server;

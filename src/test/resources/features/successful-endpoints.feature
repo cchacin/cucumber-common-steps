@@ -194,7 +194,6 @@ Feature: Successful rest calls
     When I make a GET call to "/test-app/successful/get" endpoint
     Then response status code should be 200
     And response content type should be "application/json"
-    And response header "a" should be "a";
     And response should be json in file "/responses/successful.json"
 
   Scenario:
@@ -206,9 +205,11 @@ Feature: Successful rest calls
   Scenario:
     When I make a GET call to "/test-app/successful/get" endpoint with headers:
       | Authorization | OAuth qwerqweqrqwerqwer |
+      | X-Request-Id  | test-request-id         |
     Then response status code should be 200
     And response content type should be "application/json"
-    And response header "a" should be "a";
+    And response header "Authorization" should be "OAuth qwerqweqrqwerqwer"
+    And response header "X-Request-Id" should be "test-request-id"
     And response should be json in file "/responses/successful.json"
 
   Scenario:
@@ -232,7 +233,6 @@ Feature: Successful rest calls
     When I make a GET call to "/test-app/successful/get" endpoint
     Then response status code should be 200
     And response content type should be "application/json"
-    And response header "a" should be "a";
     And response should be json:
     """
     {

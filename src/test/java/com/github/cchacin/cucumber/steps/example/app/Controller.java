@@ -23,28 +23,17 @@ import org.apache.cxf.jaxrs.client.WebClient;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.HEAD;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 @Path("/")
 @Stateless
@@ -52,9 +41,6 @@ public class Controller {
 
     @Context
     UriInfo uriInfo;
-
-    @Context
-    HttpHeaders headers;
 
     @EJB
     ModelDao modelDao;
@@ -64,8 +50,14 @@ public class Controller {
     @GET
     @Path("/successful/get")
     @Produces("application/json")
-    public Response successfulGET() {
-        return Response.ok(new Model(1L, new Date(), new Date(), null, "", "")).header("a", "a").build();
+    public Response successfulGET(@Context final HttpServletRequest request) {
+        Response.ResponseBuilder builder = Response.ok(new Model(1L, new Date(), new Date(), null, "", ""));
+        Enumeration<String> enumerations = request.getHeaderNames();
+        while(enumerations.hasMoreElements()) {
+            final String headerName = enumerations.nextElement();
+            builder.header(headerName, request.getHeader(headerName));
+        }
+        return builder.build();
     }
 
     @GET
@@ -91,7 +83,6 @@ public class Controller {
 
     @HEAD
     @Path("/successful/head")
-    @Produces("application/json")
     public Response successfulHEAD() {
         return Response.noContent().build();
     }
