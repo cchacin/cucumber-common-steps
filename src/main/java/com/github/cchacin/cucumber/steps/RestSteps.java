@@ -41,7 +41,7 @@ public class RestSteps {
     private String responseValue;
     private String basePath;
 
-    final String fileContent(String filePath) throws URISyntaxException, IOException {
+    final String fileContent(final String filePath) throws URISyntaxException, IOException {
 
         final URL url = Thread.currentThread().getContextClassLoader().getResource("./"+filePath);
         if(null == url){
