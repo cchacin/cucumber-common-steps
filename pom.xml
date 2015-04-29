@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>cucumber-common-steps</artifactId>
     <packaging>jar</packaging>
-    <version>0.2.4-SNAPSHOT</version>
+    <version>0.2.4</version>
 
     <parent>
         <groupId>com.github.cchacin</groupId>
@@ -19,7 +19,7 @@
         <url>scm:git:git@github.com:cchacin/cucumber-common-steps.git</url>
         <connection>scm:git:git@github.com:cchacin/cucumber-common-steps.git</connection>
         <developerConnection>scm:git:git@github.com:cchacin/cucumber-common-steps.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>v0.2.4</tag>
     </scm>
 
     <properties>
