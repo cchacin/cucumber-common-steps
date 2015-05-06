@@ -4,33 +4,34 @@
 [![Dependency Status](https://www.versioneye.com/user/projects/5407630bccc023c90d000098/badge.svg)](https://www.versioneye.com/user/projects/5407630bccc023c90d000098)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.cchacin/cucumber-common-steps/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.cchacin/cucumber-common-steps)
 
-Cucumber Common Steps
-=====================
+# Cucumber Common Steps
 
-This project is an intent to provide common steps definitions to make functional testing for REST API, Database setup, external service mocks and HTML pages
+This project is an intent to provide common steps definitions to make functional testing for REST API, Database setup, external service mocks, redis setup/assertions and HTML pages
 
 This is based on [cucumber-jvm](https://github.com/cucumber/cucumber-jvm) project.
 
 You need to specify your features in the gherkin language and run it with [cucumber-java](https://github.com/cucumber/cucumber-java-skeleton) or [cukespace](https://github.com/cukespace/cukespace) + [arquillian](http://arquillian.org/)
 
+* [Cucumber Common Steps] (#cucumber-common-steps)
+  * [Dependency](#dependency)
+  * [Call Restful APIs and assert Responses](#call-restful-apis-and-assert-responses)
+  * [Mock externals API calls](#mock-externals-api-calls)
+  * [Run the cucumber tests](#run-the-cucumber-tests)
 
-Getting Started
-===============
+## Dependency
 
-Add as dependency in your pom.xml:
+**Add as dependency in your pom.xml:**
 
 ```xml
 <dependency>
     <groupId>com.github.cchacin</groupId>
     <artifactId>cucumber-common-steps</artifactId>
-    <version>0.0.7</version>
+    <version>${version}</version>
     <scope>test</scope>
 </dependency>
 ```
 
-Write your feature in gherkin language in ```src/test/resources```
-
-
+## Database Setup
 **Steps for Database Setup and verification of Endpoints Results**
 
 Put your database connection properties in ```src/test/resources/test-db.properties```
@@ -41,6 +42,8 @@ database.driver=org.hsqldb.jdbcDriver
 database.user=SA
 database.password=
 ```
+
+Write your feature in gherkin language in ```src/test/resources/features/example.feature```
 
 *it should be used in ```Given``` steps to prepare the database*
 
@@ -102,6 +105,7 @@ database.password=
     """
 ```
 
+## Call Restful APIs and assert Responses
 **Steps to verify Restful API reponses**
 
 ```gherkin
@@ -190,7 +194,7 @@ database.password=
 ```
 
 
-*Mocking external API calls*
+## Mock externals API calls
 
 ```gherkin
   Scenario: Mock external API
@@ -231,12 +235,88 @@ And then put the payloads (convention over configuration) in ```src/test/resourc
 }
 ```
 
-Write a cucumber integration-test in ```src/test/java```:
+## Redis assertions and setup
+
+```gherkin
+Scenario: Redis Steps for Key/Value
+  Given I have the redis key "key1" with value "value1"
+  Given I have the redis key "key2" with value in file "responses/value2.text"
+  Given I have the redis key "key3" with value:
+  """
+  value3
+
+  """
+  Given I have the redis key "key4" with value "value4" with ttl 5 seconds
+  Then the redis key "key4" should be "value4"
+  Then the redis key "key3" should exists
+  Then the redis keys "key1,key2,key3" should exists
+  Then the redis keys should exists:
+    | key1 |
+    | key2 |
+    | key3 |
+  Then the redis key "key4" should not exists after 6 seconds
+  Then the redis key "key4" should not exists
+  Then the redis keys "key100,key200,key300" should not exists
+  Then the redis key "key1" should be "value1"
+  Then the redis key "key2" should be:
+  """
+  value2
+
+  """
+  Then the redis key "key3" should be file "responses/value3.text"
+
+Scenario: Redis Steps for Lists
+  Given I have the redis list "list1" with values "value1"
+  Given I have the redis list "list2" with values in file "responses/list2.text"
+  Given I have the redis list "list3" with values:
+    | value3   |
+    | value33  |
+    | value333 |
+  Given I have the redis list "list4" with values "value4" with ttl 5 seconds
+  Given I have the redis list "list5" with values "value5,value55,value555" with ttl 5 seconds
+  Then the redis list "list4" should be "value4"
+  Then the redis list "list5" should be "value5,value55,value555"
+  Given I have the redis list "list6" with values "value6,value66,value666"
+  Then the redis list "list6" should be:
+    | value6   |
+    | value66  |
+    | value666 |
+  Then the redis list "list3" should exists
+  Then the redis lists "list1,list2,list3" should exists
+  Then the redis lists should exists:
+    | list1 |
+    | list2 |
+    | list3 |
+  Then the redis list "list5" should not exists after 6 seconds
+  Then the redis list "list4" should not exists
+  Then the redis lists "list100,list200,list300" should not exists
+  Given I have the redis list "list7" with values "value7,value77,value777"
+  Then the redis list "list7" should be file "responses/list7.text"
+
+```
+
+## Run the cucumber tests
+
+**Write a cucumber integration-test in ```src/test/java```:**
 
 ```java
-@Glues({RestSteps.class, DatabaseSteps.class})
-@Features({"features/successful-endpoints.feature"})
-@RunWith(ArquillianCucumber.class)
-public class UsersEndpointITest {
+import org.junit.runner.RunWith;
+
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        features = {
+                "casspath:features"
+        },
+        glue = {
+                "com.github.cchacin.cucumber.steps"
+        },
+        format = {
+                "pretty"
+        }
+)
+public class HotelServiceStory {
 }
 ```
