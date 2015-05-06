@@ -37,6 +37,7 @@
         <jsonunit.version>1.5.4</jsonunit.version>
         <lombok.version>1.16.4</lombok.version>
         <restassured.version>2.4.1</restassured.version>
+        <jedis.version>2.6.2</jedis.version>
     </properties>
 
     <repositories>
@@ -139,6 +140,13 @@
             <artifactId>annotations</artifactId>
             <version>1.3.2</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- Jedis -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${jedis.version}</version>
         </dependency>
 
         <!-- Lombok -->
