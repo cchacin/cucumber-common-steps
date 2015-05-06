@@ -16,6 +16,7 @@ You need to specify your features in the gherkin language and run it with [cucum
   * [Dependency](#dependency)
   * [Call Restful APIs and assert Responses](#call-restful-apis-and-assert-responses)
   * [Mock externals API calls](#mock-externals-api-calls)
+  * [Redis assertions and setup] (#redis-assertions-and-setup)
   * [Run the cucumber tests](#run-the-cucumber-tests)
 
 ## Dependency
@@ -317,6 +318,6 @@ import cucumber.api.junit.Cucumber;
                 "pretty"
         }
 )
-public class HotelServiceStory {
+public class MyCucumberStory {
 }
 ```
