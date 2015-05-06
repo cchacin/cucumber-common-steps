@@ -319,19 +319,30 @@ Feature: Successful rest calls
     """
     Then the redis key "key3" should be file "responses/value3.text"
 
-#  Scenario: Redis Steps for Lists
-#    Given I have the redis list "key1" with values "value1"
-#    Given I have the redis list "key2" with values in file "responses/values2.text"
-#    Given I have the redis list "key3" with values:
-#      | value3   |
-#      | value33  |
-#      | value333 |
-#    Given I have the redis list "key4" with value "value4" with ttl 5 seconds
-#    Then the redis list "key4" should be "value4"
-#    Then the redis list "key4" should not exists after 6 seconds
-#    Then the redis list "key1" should be "value1"
-#    Then the redis list "key2" should be:
-#      | value2  |
-#      | value22 |
-#      | value32 |
-#    Then the redis key "key3" should be file "responses/values3.text"
+  Scenario: Redis Steps for Lists
+    Given I have the redis list "list1" with values "value1"
+    Given I have the redis list "list2" with values in file "responses/list2.text"
+    Given I have the redis list "list3" with values:
+      | value3   |
+      | value33  |
+      | value333 |
+    Given I have the redis list "list4" with values "value4" with ttl 5 seconds
+    Given I have the redis list "list5" with values "value5,value55,value555" with ttl 5 seconds
+    Then the redis list "list4" should be "value4"
+    Then the redis list "list5" should be "value5,value55,value555"
+    Given I have the redis list "list6" with values "value6,value66,value666"
+    Then the redis list "list6" should be:
+      | value6   |
+      | value66  |
+      | value666 |
+    Then the redis list "list3" should exists
+    Then the redis lists "list1,list2,list3" should exists
+    Then the redis lists should exists:
+      | list1 |
+      | list2 |
+      | list3 |
+    Then the redis list "list5" should not exists after 6 seconds
+    Then the redis list "list4" should not exists
+    Then the redis lists "list100,list200,list300" should not exists
+    Given I have the redis list "list7" with values "value7,value77,value777"
+    Then the redis list "list7" should be file "responses/list7.text"
