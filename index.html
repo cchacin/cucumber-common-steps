@@ -1,34 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
+    <meta charset="UTF-8">
     <title>Cucumber Common Steps by cchacin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
-
   <body>
-    <header>
-      <div class="inner">
-        <h1>Cucumber Common Steps</h1>
-        <h2>Cucumber common steps definitions</h2>
-        <a href="https://github.com/cchacin/cucumber-common-steps" class="button"><small>View project on</small> GitHub</a>
-      </div>
-    </header>
+    <section class="page-header">
+      <h1 class="project-name">Cucumber Common Steps</h1>
+      <h2 class="project-tagline">Cucumber common steps definitions</h2>
+      <a href="https://github.com/cchacin/cucumber-common-steps" class="btn">View on GitHub</a>
+      <a href="https://github.com/cchacin/cucumber-common-steps/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/cchacin/cucumber-common-steps/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <p><a href="https://travis-ci.org/cchacin/cucumber-common-steps.svg?branch=master"><img src="https://travis-ci.org/cchacin/cucumber-common-steps.svg?branch=master" alt="Build Status"></a>
+    <section class="main-content">
+      <p><a href="https://travis-ci.org/cchacin/cucumber-common-steps.svg?branch=master"><img src="https://travis-ci.org/cchacin/cucumber-common-steps.svg?branch=master" alt="Build Status"></a>
 <a href="https://coveralls.io/r/cchacin/cucumber-common-steps?branch=master"><img src="https://img.shields.io/coveralls/cchacin/cucumber-common-steps.svg" alt="Coverage Status"></a>
 <a href="http://waffle.io/cchacin/cucumber-common-steps"><img src="https://badge.waffle.io/cchacin/cucumber-common-steps.svg?label=ready&amp;title=Ready" alt="Stories in Ready"></a>
 <a href="https://www.versioneye.com/user/projects/5407630bccc023c90d000098"><img src="https://www.versioneye.com/user/projects/5407630bccc023c90d000098/badge.svg" alt="Dependency Status"></a>
@@ -51,7 +42,7 @@
 <div class="highlight highlight-xml"><pre>&lt;<span class="pl-ent">dependency</span>&gt;
     &lt;<span class="pl-ent">groupId</span>&gt;com.github.cchacin&lt;/<span class="pl-ent">groupId</span>&gt;
     &lt;<span class="pl-ent">artifactId</span>&gt;cucumber-common-steps&lt;/<span class="pl-ent">artifactId</span>&gt;
-    &lt;<span class="pl-ent">version</span>&gt;0.0.6&lt;/<span class="pl-ent">version</span>&gt;
+    &lt;<span class="pl-ent">version</span>&gt;0.0.7&lt;/<span class="pl-ent">version</span>&gt;
     &lt;<span class="pl-ent">scope</span>&gt;test&lt;/<span class="pl-ent">scope</span>&gt;
 &lt;/<span class="pl-ent">dependency</span>&gt;</pre></div>
 
@@ -68,190 +59,211 @@
 
 <p><em>it should be used in <code>Given</code> steps to prepare the database</em></p>
 
-<div class="highlight highlight-gherkin"><pre>  <span class="pl-k">Scenario</span>:<span class="pl-s1"> Retrieve users list</span>
-    <span class="pl-k">Given </span>I have only the following rows in the <span class="pl-s1">"models"</span> table:
-<span class="pl-k">      | <span class="pl-s2">id</span> | <span class="pl-s2">created</span>             | <span class="pl-s2">modified</span>            | <span class="pl-s2">email</span>                | <span class="pl-s2">fullname</span> | <span class="pl-s2">password</span> |</span>
-<span class="pl-k">      | <span class="pl-s2">1</span>  | <span class="pl-s2">2014</span>-<span class="pl-s2">07</span>-<span class="pl-s2">16</span> <span class="pl-s2">00</span>:<span class="pl-s2">00</span>:<span class="pl-s2">00</span> | <span class="pl-s2">2014</span>-<span class="pl-s2">07</span>-<span class="pl-s2">16</span> <span class="pl-s2">00</span>:<span class="pl-s2">00</span>:<span class="pl-s2">00</span> | <span class="pl-s2">cchacin</span>@<span class="pl-s2">superbiz</span>.<span class="pl-s2">org</span> | <span class="pl-s2">Carlos</span>   | <span class="pl-s2">passw0rd</span> |</span>
-    <span class="pl-k">When </span>I make a GET call to <span class="pl-s1">"/users"</span> endpoint
-    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"200"</span>
-    <span class="pl-k">And </span>response content type should be <span class="pl-s1">"application/json"</span>
+<div class="highlight highlight-gherkin"><pre>  <span class="pl-k">Scenario</span>:<span class="pl-s"> Retrieve users list</span>
+    <span class="pl-k">Given </span>I have only the following rows in the <span class="pl-s">"models"</span> table:
+<span class="pl-k">      | <span class="pl-s1">id</span> | <span class="pl-s1">created</span>             | <span class="pl-s1">modified</span>            | <span class="pl-s1">email</span>                | <span class="pl-s1">fullname</span> | <span class="pl-s1">password</span> |</span>
+<span class="pl-k">      | <span class="pl-s1">1</span>  | <span class="pl-s1">2014</span>-<span class="pl-s1">07</span>-<span class="pl-s1">16</span> <span class="pl-s1">00</span>:<span class="pl-s1">00</span>:<span class="pl-s1">00</span> | <span class="pl-s1">2014</span>-<span class="pl-s1">07</span>-<span class="pl-s1">16</span> <span class="pl-s1">00</span>:<span class="pl-s1">00</span>:<span class="pl-s1">00</span> | <span class="pl-s1">cchacin</span>@<span class="pl-s1">superbiz</span>.<span class="pl-s1">org</span> | <span class="pl-s1">Carlos</span>   | <span class="pl-s1">passw0rd</span> |</span>
+    <span class="pl-k">When </span>I make a GET call to <span class="pl-s">"/users"</span> endpoint
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s">"200"</span>
+    <span class="pl-k">And </span>response content type should be <span class="pl-s">"application/json"</span>
     <span class="pl-k">And </span>response should be json:
-    <span class="pl-s1">"""</span>
-<span class="pl-s1">    {</span>
-<span class="pl-s1">      "model":</span>
-<span class="pl-s1">        [</span>
-<span class="pl-s1">          {</span>
-<span class="pl-s1">              "id": 1,</span>
-<span class="pl-s1">              "created": "${json-unit.ignore}",</span>
-<span class="pl-s1">              "modified": "${json-unit.ignore}",</span>
-<span class="pl-s1">              "email": "cchacin@superbiz.org",</span>
-<span class="pl-s1">              "fullname": "Carlos",</span>
-<span class="pl-s1">              "password": "passw0rd"</span>
-<span class="pl-s1">          }</span>
-<span class="pl-s1">        ]</span>
-<span class="pl-s1">    }</span>
-<span class="pl-s1">    """</span>
+    <span class="pl-s">"""</span>
+<span class="pl-s">    {</span>
+<span class="pl-s">      "model":</span>
+<span class="pl-s">        [</span>
+<span class="pl-s">          {</span>
+<span class="pl-s">              "id": 1,</span>
+<span class="pl-s">              "created": "${json-unit.ignore}",</span>
+<span class="pl-s">              "modified": "${json-unit.ignore}",</span>
+<span class="pl-s">              "email": "cchacin@superbiz.org",</span>
+<span class="pl-s">              "fullname": "Carlos",</span>
+<span class="pl-s">              "password": "passw0rd"</span>
+<span class="pl-s">          }</span>
+<span class="pl-s">        ]</span>
+<span class="pl-s">    }</span>
+<span class="pl-s">    """</span>
 
-  <span class="pl-k">Scenario</span>:<span class="pl-s1"> Retrieve users list</span>
-    <span class="pl-k">Given </span>I have the following rows in the <span class="pl-s1">"models"</span> table:
-<span class="pl-k">      | <span class="pl-s2">id</span> | <span class="pl-s2">created</span>             | <span class="pl-s2">modified</span>            | <span class="pl-s2">email</span>                 | <span class="pl-s2">fullname</span> | <span class="pl-s2">password</span> |</span>
-<span class="pl-k">      | <span class="pl-s2">2</span>  | <span class="pl-s2">2015</span>-<span class="pl-s2">02</span>-<span class="pl-s2">11</span> <span class="pl-s2">00</span>:<span class="pl-s2">00</span>:<span class="pl-s2">00</span> | <span class="pl-s2">2015</span>-<span class="pl-s2">02</span>-<span class="pl-s2">11</span> <span class="pl-s2">00</span>:<span class="pl-s2">00</span>:<span class="pl-s2">00</span> | <span class="pl-s2">cchacin2</span>@<span class="pl-s2">superbiz</span>.<span class="pl-s2">org</span> | <span class="pl-s2">Carlos2</span>  | <span class="pl-s2">passw0rd</span> |</span>
-    <span class="pl-k">When </span>I make a GET call to <span class="pl-s1">"/users"</span> endpoint
-    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"200"</span>
-    <span class="pl-k">And </span>response content type should be <span class="pl-s1">"application/json"</span>
+  <span class="pl-k">Scenario</span>:<span class="pl-s"> Retrieve users list</span>
+    <span class="pl-k">Given </span>I have the following rows in the <span class="pl-s">"models"</span> table:
+<span class="pl-k">      | <span class="pl-s1">id</span> | <span class="pl-s1">created</span>             | <span class="pl-s1">modified</span>            | <span class="pl-s1">email</span>                 | <span class="pl-s1">fullname</span> | <span class="pl-s1">password</span> |</span>
+<span class="pl-k">      | <span class="pl-s1">2</span>  | <span class="pl-s1">2015</span>-<span class="pl-s1">02</span>-<span class="pl-s1">11</span> <span class="pl-s1">00</span>:<span class="pl-s1">00</span>:<span class="pl-s1">00</span> | <span class="pl-s1">2015</span>-<span class="pl-s1">02</span>-<span class="pl-s1">11</span> <span class="pl-s1">00</span>:<span class="pl-s1">00</span>:<span class="pl-s1">00</span> | <span class="pl-s1">cchacin2</span>@<span class="pl-s1">superbiz</span>.<span class="pl-s1">org</span> | <span class="pl-s1">Carlos2</span>  | <span class="pl-s1">passw0rd</span> |</span>
+    <span class="pl-k">When </span>I make a GET call to <span class="pl-s">"/users"</span> endpoint
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s">"200"</span>
+    <span class="pl-k">And </span>response content type should be <span class="pl-s">"application/json"</span>
     <span class="pl-k">And </span>response should be json:
-    <span class="pl-s1">"""</span>
-<span class="pl-s1">    {</span>
-<span class="pl-s1">      "model":</span>
-<span class="pl-s1">        [</span>
-<span class="pl-s1">          {</span>
-<span class="pl-s1">              "id": 1,</span>
-<span class="pl-s1">              "created": "${json-unit.ignore}",</span>
-<span class="pl-s1">              "modified": "${json-unit.ignore}",</span>
-<span class="pl-s1">              "email": "cchacin@superbiz.org",</span>
-<span class="pl-s1">              "fullname": "Carlos",</span>
-<span class="pl-s1">              "password": "passw0rd"</span>
-<span class="pl-s1">          },</span>
-<span class="pl-s1">          {</span>
-<span class="pl-s1">              "id": 2,</span>
-<span class="pl-s1">              "created": "${json-unit.ignore}",</span>
-<span class="pl-s1">              "modified": "${json-unit.ignore}",</span>
-<span class="pl-s1">              "email": "cchacin2@superbiz.org",</span>
-<span class="pl-s1">              "fullname": "Carlos2",</span>
-<span class="pl-s1">              "password": "passw0rd"</span>
-<span class="pl-s1">          }</span>
-<span class="pl-s1">        ]</span>
-<span class="pl-s1">    }</span>
-<span class="pl-s1">    """</span></pre></div>
+    <span class="pl-s">"""</span>
+<span class="pl-s">    {</span>
+<span class="pl-s">      "model":</span>
+<span class="pl-s">        [</span>
+<span class="pl-s">          {</span>
+<span class="pl-s">              "id": 1,</span>
+<span class="pl-s">              "created": "${json-unit.ignore}",</span>
+<span class="pl-s">              "modified": "${json-unit.ignore}",</span>
+<span class="pl-s">              "email": "cchacin@superbiz.org",</span>
+<span class="pl-s">              "fullname": "Carlos",</span>
+<span class="pl-s">              "password": "passw0rd"</span>
+<span class="pl-s">          },</span>
+<span class="pl-s">          {</span>
+<span class="pl-s">              "id": 2,</span>
+<span class="pl-s">              "created": "${json-unit.ignore}",</span>
+<span class="pl-s">              "modified": "${json-unit.ignore}",</span>
+<span class="pl-s">              "email": "cchacin2@superbiz.org",</span>
+<span class="pl-s">              "fullname": "Carlos2",</span>
+<span class="pl-s">              "password": "passw0rd"</span>
+<span class="pl-s">          }</span>
+<span class="pl-s">        ]</span>
+<span class="pl-s">    }</span>
+<span class="pl-s">    """</span></pre></div>
 
 <p><strong>Steps to verify Restful API reponses</strong></p>
 
 <div class="highlight highlight-gherkin"><pre>  <span class="pl-k">Scenario</span>:
-    <span class="pl-k">When </span>I make a GET call to <span class="pl-s1">"/zen"</span> endpoint in host <span class="pl-s1">"https://api.github.com"</span>
-    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"200"</span>
-    <span class="pl-k">And </span>response content type should be <span class="pl-s1">"text/plain;charset=utf-8"</span>
+    <span class="pl-k">When </span>I make a GET call to <span class="pl-s">"/zen"</span> endpoint in host <span class="pl-s">"https://api.github.com"</span>
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s">"200"</span>
+    <span class="pl-k">And </span>response content type should be <span class="pl-s">"text/plain;charset=utf-8"</span>
 
   <span class="pl-k">Scenario</span>:
-    <span class="pl-k">When </span>I make a GET call to <span class="pl-s1">"/successful/get"</span> endpoint
-    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"200"</span>
-    <span class="pl-k">And </span>response content type should be <span class="pl-s1">"application/json"</span>
-    <span class="pl-k">And </span>response header <span class="pl-s1">"a"</span> should be <span class="pl-s1">"a"</span>;
-    <span class="pl-k">And </span>response should be json in file <span class="pl-s1">"/responses/successful.json"</span>
+    <span class="pl-k">When </span>I make a GET call to <span class="pl-s">"/successful/get"</span> endpoint
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s">"200"</span>
+    <span class="pl-k">And </span>response content type should be <span class="pl-s">"application/json"</span>
+    <span class="pl-k">And </span>response header <span class="pl-s">"a"</span> should be <span class="pl-s">"a"</span>;
+    <span class="pl-k">And </span>response should be json in file <span class="pl-s">"/responses/successful.json"</span>
 
   <span class="pl-k">Scenario</span>:
-    <span class="pl-k">When </span>I make a GET call to <span class="pl-s1">"/successful/get/csv"</span> endpoint
-    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"200"</span>
-    <span class="pl-k">And </span>response content type should be <span class="pl-s1">"text/csv"</span>
-    <span class="pl-k">And </span>response should be file <span class="pl-s1">"/responses/sample.csv"</span>
+    <span class="pl-k">When </span>I make a GET call to <span class="pl-s">"/successful/get/csv"</span> endpoint
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s">"200"</span>
+    <span class="pl-k">And </span>response content type should be <span class="pl-s">"text/csv"</span>
+    <span class="pl-k">And </span>response should be file <span class="pl-s">"/responses/sample.csv"</span>
 
   <span class="pl-k">Scenario</span>:
-    <span class="pl-k">When </span>I make a GET call to <span class="pl-s1">"/successful/get"</span> endpoint with header <span class="pl-s1">"Authorization"</span> with value <span class="pl-s1">"OAuth qwerqweqrqwerqwer"</span>
-    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"200"</span>
-    <span class="pl-k">And </span>response content type should be <span class="pl-s1">"application/json"</span>
-    <span class="pl-k">And </span>response header <span class="pl-s1">"a"</span> should be <span class="pl-s1">"a"</span>;
-    <span class="pl-k">And </span>response should be json in file <span class="pl-s1">"/responses/successful.json"</span>
+    <span class="pl-k">When </span>I make a GET call to <span class="pl-s">"/successful/get"</span> endpoint with header <span class="pl-s">"Authorization"</span> with value <span class="pl-s">"OAuth qwerqweqrqwerqwer"</span>
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s">"200"</span>
+    <span class="pl-k">And </span>response content type should be <span class="pl-s">"application/json"</span>
+    <span class="pl-k">And </span>response header <span class="pl-s">"a"</span> should be <span class="pl-s">"a"</span>;
+    <span class="pl-k">And </span>response should be json in file <span class="pl-s">"/responses/successful.json"</span>
 
   <span class="pl-k">Scenario</span>:
-    <span class="pl-k">When </span>I make a GET call to <span class="pl-s1">"/successful/get"</span> endpoint with headers:
-<span class="pl-k">      | <span class="pl-s2">headerName</span>    | <span class="pl-s2">headerValue</span>             |</span>
-<span class="pl-k">      | <span class="pl-s2">Authorization</span> | <span class="pl-s2">OAuth</span> <span class="pl-s2">qwerqweqrqwerqwer</span> |</span>
-    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"200"</span>
-    <span class="pl-k">And </span>response content type should be <span class="pl-s1">"application/json"</span>
-    <span class="pl-k">And </span>response header <span class="pl-s1">"a"</span> should be <span class="pl-s1">"a"</span>;
-    <span class="pl-k">And </span>response should be json in file <span class="pl-s1">"/responses/successful.json"</span>
+    <span class="pl-k">When </span>I make a GET call to <span class="pl-s">"/successful/get"</span> endpoint with headers:
+<span class="pl-k">      | <span class="pl-s1">headerName</span>    | <span class="pl-s1">headerValue</span>             |</span>
+<span class="pl-k">      | <span class="pl-s1">Authorization</span> | <span class="pl-s1">OAuth</span> <span class="pl-s1">qwerqweqrqwerqwer</span> |</span>
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s">"200"</span>
+    <span class="pl-k">And </span>response content type should be <span class="pl-s">"application/json"</span>
+    <span class="pl-k">And </span>response header <span class="pl-s">"a"</span> should be <span class="pl-s">"a"</span>;
+    <span class="pl-k">And </span>response should be json in file <span class="pl-s">"/responses/successful.json"</span>
 
   <span class="pl-k">Scenario</span>:
-    <span class="pl-k">When </span>I make a GET call to <span class="pl-s1">"/successful/get"</span> endpoint
-    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"200"</span>
-    <span class="pl-k">And </span>response content type should be <span class="pl-s1">"application/json"</span>
-    <span class="pl-k">And </span>response header <span class="pl-s1">"a"</span> should be <span class="pl-s1">"a"</span>;
+    <span class="pl-k">When </span>I make a GET call to <span class="pl-s">"/successful/get"</span> endpoint
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s">"200"</span>
+    <span class="pl-k">And </span>response content type should be <span class="pl-s">"application/json"</span>
+    <span class="pl-k">And </span>response header <span class="pl-s">"a"</span> should be <span class="pl-s">"a"</span>;
     <span class="pl-k">And </span>response should be json:
-    <span class="pl-s1">"""</span>
-<span class="pl-s1">    {</span>
-<span class="pl-s1">      "id": "${json-unit.ignore}",</span>
-<span class="pl-s1">      "created": "${json-unit.ignore}",</span>
-<span class="pl-s1">      "modified": "${json-unit.ignore}",</span>
-<span class="pl-s1">      "password": "",</span>
-<span class="pl-s1">      "fullname": ""</span>
-<span class="pl-s1">    }</span>
-<span class="pl-s1">    """</span>
+    <span class="pl-s">"""</span>
+<span class="pl-s">    {</span>
+<span class="pl-s">      "id": "${json-unit.ignore}",</span>
+<span class="pl-s">      "created": "${json-unit.ignore}",</span>
+<span class="pl-s">      "modified": "${json-unit.ignore}",</span>
+<span class="pl-s">      "password": "",</span>
+<span class="pl-s">      "fullname": ""</span>
+<span class="pl-s">    }</span>
+<span class="pl-s">    """</span>
 
   <span class="pl-k">Scenario</span>:
-    <span class="pl-k">When </span>I make a HEAD call to <span class="pl-s1">"/successful/head"</span> endpoint
-    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"204"</span>
+    <span class="pl-k">When </span>I make a HEAD call to <span class="pl-s">"/successful/head"</span> endpoint
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s">"204"</span>
     <span class="pl-k">And </span>response should be empty
 
   <span class="pl-k">Scenario</span>:
-    <span class="pl-k">When </span>I make a PUT call to <span class="pl-s1">"/successful/put"</span> endpoint with post body:
-    <span class="pl-s1">"""</span>
-<span class="pl-s1">    {</span>
-<span class="pl-s1">    }</span>
-<span class="pl-s1">    """</span>
-    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"204"</span>
+    <span class="pl-k">When </span>I make a PUT call to <span class="pl-s">"/successful/put"</span> endpoint with post body:
+    <span class="pl-s">"""</span>
+<span class="pl-s">    {</span>
+<span class="pl-s">    }</span>
+<span class="pl-s">    """</span>
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s">"204"</span>
     <span class="pl-k">And </span>response should be empty
 
   <span class="pl-k">Scenario</span>:
-    <span class="pl-k">When </span>I make a POST call to <span class="pl-s1">"/successful/post"</span> endpoint with post body:
-    <span class="pl-s1">"""</span>
-<span class="pl-s1">    {</span>
-<span class="pl-s1">    }</span>
-<span class="pl-s1">    """</span>
-    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"201"</span>
+    <span class="pl-k">When </span>I make a POST call to <span class="pl-s">"/successful/post"</span> endpoint with post body:
+    <span class="pl-s">"""</span>
+<span class="pl-s">    {</span>
+<span class="pl-s">    }</span>
+<span class="pl-s">    """</span>
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s">"201"</span>
     <span class="pl-k">And </span>response should be empty
 
   <span class="pl-k">Scenario</span>:
-    <span class="pl-k">When </span>I make a POST call to <span class="pl-s1">"/successful/post"</span> endpoint with post body in file <span class="pl-s1">"/requests/post_request.json"</span>
-    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"201"</span>
+    <span class="pl-k">When </span>I make a POST call to <span class="pl-s">"/successful/post"</span> endpoint with post body in file <span class="pl-s">"/requests/post_request.json"</span>
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s">"201"</span>
     <span class="pl-k">And </span>response should be empty
 
   <span class="pl-k">Scenario</span>:
-    <span class="pl-k">When </span>I make a DELETE call to <span class="pl-s1">"/successful/delete"</span> endpoint
-    <span class="pl-k">Then </span>response status code should be <span class="pl-s1">"204"</span>
+    <span class="pl-k">When </span>I make a DELETE call to <span class="pl-s">"/successful/delete"</span> endpoint
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s">"204"</span>
     <span class="pl-k">And </span>response should be empty</pre></div>
 
-<p>Write your application (if needed):</p>
+<p><em>Mocking external API calls</em></p>
 
-<div class="highlight highlight-java"><pre>@Path(<span class="pl-s1"><span class="pl-pds">"</span>/<span class="pl-pds">"</span></span>)
-@<span class="pl-stj">Stateless</span>
-<span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">Controller</span> {
+<div class="highlight highlight-gherkin"><pre>  <span class="pl-k">Scenario</span>:<span class="pl-s"> Mock external API</span>
+    <span class="pl-k">Given </span>The call to external service should be:
+<span class="pl-k">      | <span class="pl-s1">method</span> | <span class="pl-s1">url</span>            | <span class="pl-s1">statusCode</span> |</span>
+<span class="pl-k">      | <span class="pl-s1">GET</span>    | /<span class="pl-s1">user</span>/<span class="pl-s1">71e7cb11</span> | <span class="pl-s1">200</span>        |</span>
+<span class="pl-k">      | <span class="pl-s1">POST</span>   | /<span class="pl-s1">user</span>          | <span class="pl-s1">201</span>        |</span>
+<span class="pl-k">      | <span class="pl-s1">PUT</span>    | /<span class="pl-s1">user</span>/<span class="pl-s1">71e7cb11</span> | <span class="pl-s1">204</span>        |</span>
+<span class="pl-k">      | <span class="pl-s1">DELETE</span> | /<span class="pl-s1">user</span>/<span class="pl-s1">71e7cb11</span> | <span class="pl-s1">204</span>        |</span>
+    <span class="pl-k">When </span>I make a GET call to <span class="pl-s">"/external/call/user/71e7cb11"</span> endpoint
+    <span class="pl-k">Then </span>response status code should be <span class="pl-s">"200"</span>
+    <span class="pl-k">And </span>response should be json:
+    <span class="pl-s">"""</span>
+<span class="pl-s">    {</span>
+<span class="pl-s">      "responses": [</span>
+<span class="pl-s">        {</span>
+<span class="pl-s">          "status": 200</span>
+<span class="pl-s">        },</span>
+<span class="pl-s">        {</span>
+<span class="pl-s">          "status": 201</span>
+<span class="pl-s">        },</span>
+<span class="pl-s">        {</span>
+<span class="pl-s">          "status": 204</span>
+<span class="pl-s">        },</span>
+<span class="pl-s">        {</span>
+<span class="pl-s">          "status": 204</span>
+<span class="pl-s">        }</span>
+<span class="pl-s">      ]</span>
+<span class="pl-s">    }</span>
+<span class="pl-s">    """</span></pre></div>
 
-    <span class="pl-st">@EJB</span>
-    <span class="pl-stj">ModelDao</span> modelDao;
+<p>And then put the payloads (convention over configuration) in <code>src/test/resources/restito</code>: i.e. <code>get.user.71e7cb11.json</code></p>
 
-    <span class="pl-st">@GET</span>
-    <span class="pl-st">@Path</span>(<span class="pl-s1"><span class="pl-pds">"</span>/users<span class="pl-pds">"</span></span>)
-    <span class="pl-st">@Produces</span>(<span class="pl-s1"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
-    <span class="pl-s">public</span> <span class="pl-st">List&lt;<span class="pl-stj">Model</span>&gt;</span> <span class="pl-en">successfulGETUsers</span>() {
-        <span class="pl-k">return</span> modelDao<span class="pl-k">.</span>get();
-    }
+<div class="highlight highlight-json"><pre>{
+    <span class="pl-s"><span class="pl-pds">"</span>sample<span class="pl-pds">"</span></span>: <span class="pl-c1">21</span>
 }</pre></div>
 
 <p>Write a cucumber integration-test in <code>src/test/java</code>:</p>
 
-<div class="highlight highlight-java"><pre>@Glues({<span class="pl-stj">RestSteps</span><span class="pl-k">.</span>class, <span class="pl-stj">DatabaseSteps</span><span class="pl-k">.</span>class})
-@Features({<span class="pl-s1"><span class="pl-pds">"</span>features/successful-endpoints.feature<span class="pl-pds">"</span></span>})
-@RunWith(<span class="pl-stj">ArquillianCucumber</span><span class="pl-k">.</span>class)
-<span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">UsersEndpointITest</span> {
+<div class="highlight highlight-java"><pre>@Glues({<span class="pl-smi">RestSteps</span><span class="pl-k">.</span>class, <span class="pl-smi">DatabaseSteps</span><span class="pl-k">.</span>class})
+@Features({<span class="pl-s"><span class="pl-pds">"</span>features/successful-endpoints.feature<span class="pl-pds">"</span></span>})
+@RunWith(<span class="pl-smi">ArquillianCucumber</span><span class="pl-k">.</span>class)
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">UsersEndpointITest</span> {
 }</pre></div>
-        </section>
 
-        <aside id="sidebar">
-          <a href="https://github.com/cchacin/cucumber-common-steps/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/cchacin/cucumber-common-steps/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/cchacin/cucumber-common-steps">Cucumber Common Steps</a> is maintained by <a href="https://github.com/cchacin">cchacin</a>.</span>
 
-          <p class="repo-owner"><a href="https://github.com/cchacin/cucumber-common-steps"></a> is maintained by <a href="https://github.com/cchacin">cchacin</a>.</p>
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
 
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
-    </div>
+    </section>
 
-  
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker(" UA-4142851-5");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
   </body>
 </html>
+
