@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.9621212121212122" branch-rate="0.45588235294117646" lines-covered="127" lines-valid="132" branches-covered="31" branches-valid="68" complexity="1.6129032258064515" version="2.1.1" timestamp="1430868547211">
+<coverage line-rate="0.7388535031847133" branch-rate="0.4189189189189189" lines-covered="116" lines-valid="157" branches-covered="31" branches-valid="74" complexity="1.5" version="2.1.1" timestamp="1430881121712">
 	<sources>
 		<source>--source</source>
 		<source>/home/travis/build/cchacin/cucumber-common-steps/src/main/java</source>
 	</sources>
 	<packages>
-		<package name="com.github.cchacin.cucumber.steps" line-rate="0.9621212121212122" branch-rate="0.45588235294117646" complexity="1.6129032258064515">
+		<package name="com.github.cchacin.cucumber.steps" line-rate="0.7388535031847133" branch-rate="0.4189189189189189" complexity="1.5">
 			<classes>
 				<class name="com.github.cchacin.cucumber.steps.CallsSteps" filename="com/github/cchacin/cucumber/steps/CallsSteps.java" line-rate="1.0" branch-rate="1.0" complexity="3.1666666666666665">
 					<methods>
@@ -19,15 +19,15 @@
 						</method>
 						<method name="setUp" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="34" hits="16" branch="false"/>
-								<line number="35" hits="16" branch="false"/>
-								<line number="36" hits="16" branch="false"/>
+								<line number="34" hits="17" branch="false"/>
+								<line number="35" hits="17" branch="false"/>
+								<line number="36" hits="17" branch="false"/>
 							</lines>
 						</method>
 						<method name="tearDown" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="40" hits="16" branch="false"/>
-								<line number="41" hits="16" branch="false"/>
+								<line number="40" hits="17" branch="false"/>
+								<line number="41" hits="17" branch="false"/>
 							</lines>
 						</method>
 						<method name="the_call_to_external_service_should_be" signature="(Lcucumber/api/DataTable;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
@@ -39,7 +39,6 @@
 									</conditions>
 								</line>
 								<line number="49" hits="9" branch="false"/>
-								<line number="50" hits="9" branch="false"/>
 								<line number="51" hits="9" branch="false"/>
 								<line number="52" hits="2" branch="false"/>
 							</lines>
@@ -47,11 +46,11 @@
 					</methods>
 					<lines>
 						<line number="27" hits="1" branch="false"/>
-						<line number="34" hits="16" branch="false"/>
-						<line number="35" hits="16" branch="false"/>
-						<line number="36" hits="16" branch="false"/>
-						<line number="40" hits="16" branch="false"/>
-						<line number="41" hits="16" branch="false"/>
+						<line number="34" hits="17" branch="false"/>
+						<line number="35" hits="17" branch="false"/>
+						<line number="36" hits="17" branch="false"/>
+						<line number="40" hits="17" branch="false"/>
+						<line number="41" hits="17" branch="false"/>
 						<line number="46" hits="2" branch="false"/>
 						<line number="48" hits="2" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
@@ -59,7 +58,6 @@
 							</conditions>
 						</line>
 						<line number="49" hits="9" branch="false"/>
-						<line number="50" hits="9" branch="false"/>
 						<line number="51" hits="9" branch="false"/>
 						<line number="52" hits="2" branch="false"/>
 						<line number="54" hits="1" branch="false"/>
@@ -239,13 +237,12 @@
 						<line number="89" hits="9" branch="false"/>
 					</lines>
 				</class>
-				<class name="com.github.cchacin.cucumber.steps.DatabaseSteps" filename="com/github/cchacin/cucumber/steps/DatabaseSteps.java" line-rate="0.972972972972973" branch-rate="1.0" complexity="1.1666666666666667">
+				<class name="com.github.cchacin.cucumber.steps.DatabaseSteps" filename="com/github/cchacin/cucumber/steps/DatabaseSteps.java" line-rate="0.967741935483871" branch-rate="1.0" complexity="1.1666666666666667">
 					<methods>
-						<method name="&lt;clinit&gt;" signature="()V" line-rate="0.875" branch-rate="1.0" complexity="0">
+						<method name="&lt;clinit&gt;" signature="()V" line-rate="0.8571428571428571" branch-rate="1.0" complexity="0">
 							<lines>
 								<line number="39" hits="1" branch="false"/>
-								<line number="42" hits="2" branch="false"/>
-								<line number="43" hits="1" branch="false"/>
+								<line number="42" hits="1" branch="false"/>
 								<line number="44" hits="1" branch="false"/>
 								<line number="45" hits="1" branch="false"/>
 								<line number="46" hits="0" branch="false"/>
@@ -256,10 +253,7 @@
 						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
 								<line number="37" hits="1" branch="false"/>
-								<line number="50" hits="2" branch="false"/>
-								<line number="51" hits="1" branch="false"/>
-								<line number="52" hits="1" branch="false"/>
-								<line number="53" hits="1" branch="false"/>
+								<line number="50" hits="1" branch="false"/>
 							</lines>
 						</method>
 						<method name="I_have_only_the_following_rows_in_the_table" signature="(Ljava/lang/String;Lcucumber/api/DataTable;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
@@ -272,7 +266,6 @@
 						<method name="I_have_the_following_sql_script" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
 							<lines>
 								<line number="95" hits="1" branch="false"/>
-								<line number="96" hits="1" branch="false"/>
 								<line number="97" hits="1" branch="false"/>
 							</lines>
 						</method>
@@ -306,8 +299,7 @@
 								</line>
 								<line number="75" hits="4" branch="false"/>
 								<line number="76" hits="4" branch="false"/>
-								<line number="77" hits="8" branch="false"/>
-								<line number="78" hits="4" branch="false"/>
+								<line number="77" hits="4" branch="false"/>
 								<line number="79" hits="4" branch="false"/>
 								<line number="80" hits="4" branch="false"/>
 								<line number="82" hits="2" branch="false"/>
@@ -318,17 +310,13 @@
 					<lines>
 						<line number="37" hits="1" branch="false"/>
 						<line number="39" hits="1" branch="false"/>
-						<line number="42" hits="2" branch="false"/>
-						<line number="43" hits="1" branch="false"/>
+						<line number="42" hits="1" branch="false"/>
 						<line number="44" hits="1" branch="false"/>
 						<line number="45" hits="1" branch="false"/>
 						<line number="46" hits="0" branch="false"/>
 						<line number="47" hits="1" branch="false"/>
 						<line number="48" hits="1" branch="false"/>
-						<line number="50" hits="2" branch="false"/>
-						<line number="51" hits="1" branch="false"/>
-						<line number="52" hits="1" branch="false"/>
-						<line number="53" hits="1" branch="false"/>
+						<line number="50" hits="1" branch="false"/>
 						<line number="58" hits="1" branch="false"/>
 						<line number="59" hits="1" branch="false"/>
 						<line number="64" hits="1" branch="false"/>
@@ -344,8 +332,7 @@
 						</line>
 						<line number="75" hits="4" branch="false"/>
 						<line number="76" hits="4" branch="false"/>
-						<line number="77" hits="8" branch="false"/>
-						<line number="78" hits="4" branch="false"/>
+						<line number="77" hits="4" branch="false"/>
 						<line number="79" hits="4" branch="false"/>
 						<line number="80" hits="4" branch="false"/>
 						<line number="82" hits="2" branch="false"/>
@@ -355,252 +342,411 @@
 						<line number="90" hits="3" branch="false"/>
 						<line number="91" hits="3" branch="false"/>
 						<line number="95" hits="1" branch="false"/>
-						<line number="96" hits="1" branch="false"/>
 						<line number="97" hits="1" branch="false"/>
 					</lines>
 				</class>
-				<class name="com.github.cchacin.cucumber.steps.RestSteps" filename="com/github/cchacin/cucumber/steps/RestSteps.java" line-rate="0.9682539682539683" branch-rate="0.875" complexity="1.263157894736842">
+				<class name="com.github.cchacin.cucumber.steps.RedisKeyValueSteps" filename="com/github/cchacin/cucumber/steps/RedisKeyValueSteps.java" line-rate="0.0" branch-rate="0.0" complexity="1.2307692307692308">
 					<methods>
-						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
+						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="36" hits="1" branch="false"/>
-								<line number="40" hits="1" branch="false"/>
+								<line number="12" hits="0" branch="false"/>
+								<line number="13" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="I_make_a_DELETE_call_to_endpoint" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+						<method name="I_have_the_redis_key_with_value" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="99" hits="1" branch="false"/>
-								<line number="100" hits="1" branch="false"/>
-								<line number="101" hits="1" branch="false"/>
+								<line number="17" hits="0" branch="false"/>
+								<line number="18" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="I_make_a_GET_HEAD_call_to_endpoint" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+						<method name="I_have_the_redis_key_with_value_" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="69" hits="10" branch="false"/>
-								<line number="70" hits="10" branch="false"/>
-								<line number="71" hits="10" branch="false"/>
+								<line number="27" hits="0" branch="false"/>
+								<line number="28" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="I_make_a_GET_HEAD_call_to_endpoint_with_headers" signature="(Ljava/lang/String;Ljava/lang/String;Lcucumber/api/DataTable;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+						<method name="I_have_the_redis_key_with_value_in_file" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="105" hits="1" branch="false"/>
-								<line number="106" hits="1" branch="false"/>
-								<line number="107" hits="1" branch="false"/>
-								<line number="108" hits="1" branch="false"/>
+								<line number="22" hits="0" branch="false"/>
+								<line number="23" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="I_make_a_POST_PUT_call_to_endpoint_with_post_body" signature="(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+						<method name="I_have_the_redis_key_with_value_with_ttl" signature="(Ljava/lang/String;Ljava/lang/String;I)V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="82" hits="3" branch="false"/>
-								<line number="83" hits="3" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="84" hits="1" branch="false"/>
-								<line number="85" hits="3" branch="false"/>
-								<line number="86" hits="3" branch="false"/>
-							</lines>
-						</method>
-						<method name="I_make_a_POST_PUT_call_to_endpoint_with_post_body_in_file" signature="(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
-							<lines>
-								<line number="92" hits="2" branch="false"/>
-								<line number="93" hits="1" branch="false"/>
-								<line number="94" hits="1" branch="false"/>
-							</lines>
-						</method>
-						<method name="createWebClient" signature="(Ljava/lang/String;)Lcom/jayway/restassured/specification/RequestSpecification;" line-rate="1.0" branch-rate="1.0" complexity="0">
-							<lines>
-								<line number="60" hits="16" branch="false"/>
-								<line number="61" hits="16" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="62" hits="15" branch="false"/>
-								<line number="64" hits="16" branch="false"/>
-							</lines>
-						</method>
-						<method name="execute" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
-							<lines>
-								<line number="74" hits="12" branch="true" condition-coverage="100% (2/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="100%"/>
-									</conditions>
-								</line>
-								<line number="75" hits="12" branch="false"/>
-								<line number="76" hits="12" branch="false"/>
-							</lines>
-						</method>
-						<method name="fileContent" signature="(Ljava/lang/String;)Ljava/lang/String;" line-rate="0.7142857142857143" branch-rate="0.5" complexity="0">
-							<lines>
-								<line number="46" hits="4" branch="false"/>
-								<line number="47" hits="4" branch="true" condition-coverage="50% (1/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="50%"/>
-									</conditions>
-								</line>
+								<line number="47" hits="0" branch="false"/>
 								<line number="48" hits="0" branch="false"/>
-								<line number="50" hits="0" branch="false"/>
-								<line number="53" hits="4" branch="false"/>
-								<line number="55" hits="4" branch="false"/>
-								<line number="56" hits="4" branch="false"/>
+								<line number="49" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="i_make_a_GET_HEAD_call_to_endpoint_with_query_params" signature="(Ljava/lang/String;Ljava/lang/String;Lcucumber/api/DataTable;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+						<method name="the_redis_key_should_be" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="112" hits="1" branch="false"/>
-								<line number="113" hits="1" branch="false"/>
-								<line number="114" hits="1" branch="false"/>
-								<line number="115" hits="1" branch="false"/>
+								<line number="32" hits="0" branch="false"/>
+								<line number="33" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="response_content_type_should_be" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+						<method name="the_redis_key_should_be_" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="126" hits="18" branch="false"/>
-								<line number="127" hits="9" branch="false"/>
-								<line number="128" hits="9" branch="false"/>
+								<line number="37" hits="0" branch="false"/>
+								<line number="38" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="response_header_should_be_" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+						<method name="the_redis_key_should_be_file" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="159" hits="2" branch="false"/>
-								<line number="160" hits="2" branch="false"/>
+								<line number="42" hits="0" branch="false"/>
+								<line number="43" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="response_json_path_element_should_be" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+						<method name="the_redis_key_should_exists" signature="(Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="170" hits="1" branch="false"/>
-								<line number="171" hits="1" branch="false"/>
-								<line number="172" hits="1" branch="false"/>
+								<line number="59" hits="0" branch="false"/>
+								<line number="60" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="response_json_path_list_should_be" signature="(Ljava/lang/String;Lcucumber/api/DataTable;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+						<method name="the_redis_key_should_not_exists" signature="(Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="164" hits="1" branch="false"/>
-								<line number="165" hits="1" branch="false"/>
-								<line number="166" hits="1" branch="false"/>
+								<line number="64" hits="0" branch="false"/>
+								<line number="65" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="response_json_path_list_should_be_of_length" signature="(Ljava/lang/String;I)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+						<method name="the_redis_key_should_not_exists_after_seconds" signature="(Ljava/lang/String;I)V" line-rate="0.0" branch-rate="1.0" complexity="0">
 							<lines>
-								<line number="176" hits="2" branch="false"/>
-								<line number="177" hits="2" branch="false"/>
-								<line number="178" hits="2" branch="false"/>
+								<line number="53" hits="0" branch="false"/>
+								<line number="54" hits="0" branch="false"/>
+								<line number="55" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="response_should_be_empty" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
+						<method name="the_redis_keys_should_exists" signature="(Lcucumber/api/DataTable;)V" line-rate="0.0" branch-rate="0.0" complexity="0">
 							<lines>
-								<line number="147" hits="5" branch="false"/>
-								<line number="148" hits="5" branch="false"/>
+								<line number="69" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="70" hits="0" branch="false"/>
+								<line number="71" hits="0" branch="false"/>
+								<line number="72" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="response_should_be_file" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+						<method name="the_redis_keys_should_exists" signature="(Ljava/lang/String;)V" line-rate="0.0" branch-rate="0.0" complexity="0">
 							<lines>
-								<line number="153" hits="1" branch="false"/>
-								<line number="154" hits="1" branch="false"/>
+								<line number="76" hits="0" branch="false"/>
+								<line number="77" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="78" hits="0" branch="false"/>
+								<line number="80" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="response_should_be_json" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+						<method name="the_redis_keys_should_not_exists" signature="(Ljava/lang/String;)V" line-rate="0.0" branch-rate="0.0" complexity="0">
 							<lines>
-								<line number="141" hits="9" branch="false"/>
-								<line number="143" hits="9" branch="false"/>
-							</lines>
-						</method>
-						<method name="response_should_be_json_responseBody" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
-							<lines>
-								<line number="134" hits="2" branch="false"/>
-								<line number="135" hits="2" branch="false"/>
-								<line number="136" hits="2" branch="false"/>
-							</lines>
-						</method>
-						<method name="response_status_code_should_be" signature="(I)V" line-rate="1.0" branch-rate="1.0" complexity="0">
-							<lines>
-								<line number="120" hits="16" branch="false"/>
-								<line number="121" hits="16" branch="false"/>
+								<line number="84" hits="0" branch="false"/>
+								<line number="85" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="86" hits="0" branch="false"/>
+								<line number="88" hits="0" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="36" hits="1" branch="false"/>
-						<line number="40" hits="1" branch="false"/>
-						<line number="46" hits="4" branch="false"/>
-						<line number="47" hits="4" branch="true" condition-coverage="50% (1/2)">
+						<line number="12" hits="0" branch="false"/>
+						<line number="13" hits="0" branch="false"/>
+						<line number="17" hits="0" branch="false"/>
+						<line number="18" hits="0" branch="false"/>
+						<line number="22" hits="0" branch="false"/>
+						<line number="23" hits="0" branch="false"/>
+						<line number="27" hits="0" branch="false"/>
+						<line number="28" hits="0" branch="false"/>
+						<line number="32" hits="0" branch="false"/>
+						<line number="33" hits="0" branch="false"/>
+						<line number="37" hits="0" branch="false"/>
+						<line number="38" hits="0" branch="false"/>
+						<line number="42" hits="0" branch="false"/>
+						<line number="43" hits="0" branch="false"/>
+						<line number="47" hits="0" branch="false"/>
+						<line number="48" hits="0" branch="false"/>
+						<line number="49" hits="0" branch="false"/>
+						<line number="53" hits="0" branch="false"/>
+						<line number="54" hits="0" branch="false"/>
+						<line number="55" hits="0" branch="false"/>
+						<line number="59" hits="0" branch="false"/>
+						<line number="60" hits="0" branch="false"/>
+						<line number="64" hits="0" branch="false"/>
+						<line number="65" hits="0" branch="false"/>
+						<line number="69" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="70" hits="0" branch="false"/>
+						<line number="71" hits="0" branch="false"/>
+						<line number="72" hits="0" branch="false"/>
+						<line number="76" hits="0" branch="false"/>
+						<line number="77" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="78" hits="0" branch="false"/>
+						<line number="80" hits="0" branch="false"/>
+						<line number="84" hits="0" branch="false"/>
+						<line number="85" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="86" hits="0" branch="false"/>
+						<line number="88" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="com.github.cchacin.cucumber.steps.RestSteps" filename="com/github/cchacin/cucumber/steps/RestSteps.java" line-rate="1.0" branch-rate="1.0" complexity="1.1666666666666667">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="30" hits="1" branch="false"/>
+								<line number="34" hits="1" branch="false"/>
+							</lines>
+						</method>
+						<method name="I_make_a_DELETE_call_to_endpoint" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="79" hits="1" branch="false"/>
+								<line number="80" hits="1" branch="false"/>
+								<line number="81" hits="1" branch="false"/>
+							</lines>
+						</method>
+						<method name="I_make_a_GET_HEAD_call_to_endpoint" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="49" hits="10" branch="false"/>
+								<line number="50" hits="10" branch="false"/>
+								<line number="51" hits="10" branch="false"/>
+							</lines>
+						</method>
+						<method name="I_make_a_GET_HEAD_call_to_endpoint_with_headers" signature="(Ljava/lang/String;Ljava/lang/String;Lcucumber/api/DataTable;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="85" hits="1" branch="false"/>
+								<line number="86" hits="1" branch="false"/>
+								<line number="87" hits="1" branch="false"/>
+								<line number="88" hits="1" branch="false"/>
+							</lines>
+						</method>
+						<method name="I_make_a_POST_PUT_call_to_endpoint_with_post_body" signature="(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="62" hits="3" branch="false"/>
+								<line number="63" hits="3" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="65" hits="3" branch="false"/>
+								<line number="66" hits="3" branch="false"/>
+							</lines>
+						</method>
+						<method name="I_make_a_POST_PUT_call_to_endpoint_with_post_body_in_file" signature="(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="72" hits="1" branch="false"/>
+								<line number="74" hits="1" branch="false"/>
+							</lines>
+						</method>
+						<method name="createWebClient" signature="(Ljava/lang/String;)Lcom/jayway/restassured/specification/RequestSpecification;" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="40" hits="16" branch="false"/>
+								<line number="41" hits="16" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="42" hits="15" branch="false"/>
+								<line number="44" hits="16" branch="false"/>
+							</lines>
+						</method>
+						<method name="execute" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="54" hits="12" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="55" hits="12" branch="false"/>
+								<line number="56" hits="12" branch="false"/>
+							</lines>
+						</method>
+						<method name="i_make_a_GET_HEAD_call_to_endpoint_with_query_params" signature="(Ljava/lang/String;Ljava/lang/String;Lcucumber/api/DataTable;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="92" hits="1" branch="false"/>
+								<line number="93" hits="1" branch="false"/>
+								<line number="94" hits="1" branch="false"/>
+								<line number="95" hits="1" branch="false"/>
+							</lines>
+						</method>
+						<method name="response_content_type_should_be" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="106" hits="9" branch="false"/>
+								<line number="108" hits="9" branch="false"/>
+							</lines>
+						</method>
+						<method name="response_header_should_be_" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="139" hits="2" branch="false"/>
+								<line number="140" hits="2" branch="false"/>
+							</lines>
+						</method>
+						<method name="response_json_path_element_should_be" signature="(Ljava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="150" hits="1" branch="false"/>
+								<line number="151" hits="1" branch="false"/>
+								<line number="152" hits="1" branch="false"/>
+							</lines>
+						</method>
+						<method name="response_json_path_list_should_be" signature="(Ljava/lang/String;Lcucumber/api/DataTable;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="144" hits="1" branch="false"/>
+								<line number="145" hits="1" branch="false"/>
+								<line number="146" hits="1" branch="false"/>
+							</lines>
+						</method>
+						<method name="response_json_path_list_should_be_of_length" signature="(Ljava/lang/String;I)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="156" hits="2" branch="false"/>
+								<line number="157" hits="2" branch="false"/>
+								<line number="158" hits="2" branch="false"/>
+							</lines>
+						</method>
+						<method name="response_should_be_empty" signature="()V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="127" hits="5" branch="false"/>
+								<line number="128" hits="5" branch="false"/>
+							</lines>
+						</method>
+						<method name="response_should_be_file" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="133" hits="1" branch="false"/>
+								<line number="134" hits="1" branch="false"/>
+							</lines>
+						</method>
+						<method name="response_should_be_json" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="121" hits="9" branch="false"/>
+								<line number="123" hits="9" branch="false"/>
+							</lines>
+						</method>
+						<method name="response_should_be_json_responseBody" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="114" hits="2" branch="false"/>
+								<line number="115" hits="2" branch="false"/>
+								<line number="116" hits="2" branch="false"/>
+							</lines>
+						</method>
+						<method name="response_status_code_should_be" signature="(I)V" line-rate="1.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="100" hits="16" branch="false"/>
+								<line number="101" hits="16" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="30" hits="1" branch="false"/>
+						<line number="34" hits="1" branch="false"/>
+						<line number="40" hits="16" branch="false"/>
+						<line number="41" hits="16" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="42" hits="15" branch="false"/>
+						<line number="44" hits="16" branch="false"/>
+						<line number="49" hits="10" branch="false"/>
+						<line number="50" hits="10" branch="false"/>
+						<line number="51" hits="10" branch="false"/>
+						<line number="54" hits="12" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="55" hits="12" branch="false"/>
+						<line number="56" hits="12" branch="false"/>
+						<line number="62" hits="3" branch="false"/>
+						<line number="63" hits="3" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="65" hits="3" branch="false"/>
+						<line number="66" hits="3" branch="false"/>
+						<line number="72" hits="1" branch="false"/>
+						<line number="74" hits="1" branch="false"/>
+						<line number="79" hits="1" branch="false"/>
+						<line number="80" hits="1" branch="false"/>
+						<line number="81" hits="1" branch="false"/>
+						<line number="85" hits="1" branch="false"/>
+						<line number="86" hits="1" branch="false"/>
+						<line number="87" hits="1" branch="false"/>
+						<line number="88" hits="1" branch="false"/>
+						<line number="92" hits="1" branch="false"/>
+						<line number="93" hits="1" branch="false"/>
+						<line number="94" hits="1" branch="false"/>
+						<line number="95" hits="1" branch="false"/>
+						<line number="100" hits="16" branch="false"/>
+						<line number="101" hits="16" branch="false"/>
+						<line number="106" hits="9" branch="false"/>
+						<line number="108" hits="9" branch="false"/>
+						<line number="114" hits="2" branch="false"/>
+						<line number="115" hits="2" branch="false"/>
+						<line number="116" hits="2" branch="false"/>
+						<line number="121" hits="9" branch="false"/>
+						<line number="123" hits="9" branch="false"/>
+						<line number="127" hits="5" branch="false"/>
+						<line number="128" hits="5" branch="false"/>
+						<line number="133" hits="1" branch="false"/>
+						<line number="134" hits="1" branch="false"/>
+						<line number="139" hits="2" branch="false"/>
+						<line number="140" hits="2" branch="false"/>
+						<line number="144" hits="1" branch="false"/>
+						<line number="145" hits="1" branch="false"/>
+						<line number="146" hits="1" branch="false"/>
+						<line number="150" hits="1" branch="false"/>
+						<line number="151" hits="1" branch="false"/>
+						<line number="152" hits="1" branch="false"/>
+						<line number="156" hits="2" branch="false"/>
+						<line number="157" hits="2" branch="false"/>
+						<line number="158" hits="2" branch="false"/>
+					</lines>
+				</class>
+				<class name="com.github.cchacin.cucumber.steps.Utility" filename="com/github/cchacin/cucumber/steps/Utility.java" line-rate="0.6666666666666666" branch-rate="0.5" complexity="3.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0" complexity="0">
+							<lines>
+								<line number="11" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="fileContent" signature="(Ljava/lang/String;)Ljava/lang/String;" line-rate="0.8" branch-rate="0.5" complexity="0">
+							<lines>
+								<line number="15" hits="4" branch="false"/>
+								<line number="16" hits="4" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="17" hits="0" branch="false"/>
+								<line number="22" hits="4" branch="false"/>
+								<line number="24" hits="4" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="11" hits="0" branch="false"/>
+						<line number="15" hits="4" branch="false"/>
+						<line number="16" hits="4" branch="true" condition-coverage="50% (1/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="50%"/>
 							</conditions>
 						</line>
-						<line number="48" hits="0" branch="false"/>
-						<line number="50" hits="0" branch="false"/>
-						<line number="53" hits="4" branch="false"/>
-						<line number="55" hits="4" branch="false"/>
-						<line number="56" hits="4" branch="false"/>
-						<line number="60" hits="16" branch="false"/>
-						<line number="61" hits="16" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="62" hits="15" branch="false"/>
-						<line number="64" hits="16" branch="false"/>
-						<line number="69" hits="10" branch="false"/>
-						<line number="70" hits="10" branch="false"/>
-						<line number="71" hits="10" branch="false"/>
-						<line number="74" hits="12" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="75" hits="12" branch="false"/>
-						<line number="76" hits="12" branch="false"/>
-						<line number="82" hits="3" branch="false"/>
-						<line number="83" hits="3" branch="true" condition-coverage="100% (2/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="100%"/>
-							</conditions>
-						</line>
-						<line number="84" hits="1" branch="false"/>
-						<line number="85" hits="3" branch="false"/>
-						<line number="86" hits="3" branch="false"/>
-						<line number="92" hits="2" branch="false"/>
-						<line number="93" hits="1" branch="false"/>
-						<line number="94" hits="1" branch="false"/>
-						<line number="99" hits="1" branch="false"/>
-						<line number="100" hits="1" branch="false"/>
-						<line number="101" hits="1" branch="false"/>
-						<line number="105" hits="1" branch="false"/>
-						<line number="106" hits="1" branch="false"/>
-						<line number="107" hits="1" branch="false"/>
-						<line number="108" hits="1" branch="false"/>
-						<line number="112" hits="1" branch="false"/>
-						<line number="113" hits="1" branch="false"/>
-						<line number="114" hits="1" branch="false"/>
-						<line number="115" hits="1" branch="false"/>
-						<line number="120" hits="16" branch="false"/>
-						<line number="121" hits="16" branch="false"/>
-						<line number="126" hits="18" branch="false"/>
-						<line number="127" hits="9" branch="false"/>
-						<line number="128" hits="9" branch="false"/>
-						<line number="134" hits="2" branch="false"/>
-						<line number="135" hits="2" branch="false"/>
-						<line number="136" hits="2" branch="false"/>
-						<line number="141" hits="9" branch="false"/>
-						<line number="143" hits="9" branch="false"/>
-						<line number="147" hits="5" branch="false"/>
-						<line number="148" hits="5" branch="false"/>
-						<line number="153" hits="1" branch="false"/>
-						<line number="154" hits="1" branch="false"/>
-						<line number="159" hits="2" branch="false"/>
-						<line number="160" hits="2" branch="false"/>
-						<line number="164" hits="1" branch="false"/>
-						<line number="165" hits="1" branch="false"/>
-						<line number="166" hits="1" branch="false"/>
-						<line number="170" hits="1" branch="false"/>
-						<line number="171" hits="1" branch="false"/>
-						<line number="172" hits="1" branch="false"/>
-						<line number="176" hits="2" branch="false"/>
-						<line number="177" hits="2" branch="false"/>
-						<line number="178" hits="2" branch="false"/>
+						<line number="17" hits="0" branch="false"/>
+						<line number="22" hits="4" branch="false"/>
+						<line number="24" hits="4" branch="false"/>
 					</lines>
 				</class>
 			</classes>
