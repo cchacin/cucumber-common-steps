@@ -15,6 +15,8 @@ package com.github.cchacin.cucumber.steps.rest;
 
 import com.github.cchacin.cucumber.steps.CallsSteps;
 import com.github.cchacin.cucumber.steps.DatabaseSteps;
+import com.github.cchacin.cucumber.steps.RedisKeyValueSteps;
+import com.github.cchacin.cucumber.steps.RedisListSteps;
 import com.github.cchacin.cucumber.steps.RestSteps;
 import cucumber.runtime.arquillian.ArquillianCucumber;
 import cucumber.runtime.arquillian.api.Features;
@@ -26,7 +28,7 @@ import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.runner.RunWith;
 
-@Glues({RestSteps.class, DatabaseSteps.class, CallsSteps.class})
+@Glues({RestSteps.class, DatabaseSteps.class, CallsSteps.class, RedisKeyValueSteps.class, RedisListSteps.class})
 @Features({"features/successful-endpoints.feature"})
 @RunWith(ArquillianCucumber.class)
 public class RestfulSuccessTest {
