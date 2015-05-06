@@ -37,7 +37,7 @@
         <jsonunit.version>1.5.4</jsonunit.version>
         <lombok.version>1.16.4</lombok.version>
         <restassured.version>2.4.1</restassured.version>
-        <jedis.version>2.6.2</jedis.version>
+        <jedis.version>2.7.2</jedis.version>
     </properties>
 
     <repositories>
