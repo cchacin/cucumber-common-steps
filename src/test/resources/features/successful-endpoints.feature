@@ -288,3 +288,50 @@ Feature: Successful rest calls
     When I make a DELETE call to "/test-app/successful/delete" endpoint
     Then response status code should be 204
     And response should be empty
+
+  #######
+  # REDIS
+  #######
+  Scenario: Redis Steps for Key/Value
+    Given I have the redis key "key1" with value "value1"
+    Given I have the redis key "key2" with value in file "responses/value2.text"
+    Given I have the redis key "key3" with value:
+    """
+    value3
+
+    """
+    Given I have the redis key "key4" with value "value4" with ttl 5 seconds
+    Then the redis key "key4" should be "value4"
+    Then the redis key "key3" should exists
+    Then the redis keys "key1,key2,key3" should exists
+    Then the redis keys should exists:
+      | key1 |
+      | key2 |
+      | key3 |
+    Then the redis key "key4" should not exists after 6 seconds
+    Then the redis key "key4" should not exists
+    Then the redis keys "key100,key200,key300" should not exists
+    Then the redis key "key1" should be "value1"
+    Then the redis key "key2" should be:
+    """
+    value2
+
+    """
+    Then the redis key "key3" should be file "responses/value3.text"
+
+#  Scenario: Redis Steps for Lists
+#    Given I have the redis list "key1" with values "value1"
+#    Given I have the redis list "key2" with values in file "responses/values2.text"
+#    Given I have the redis list "key3" with values:
+#      | value3   |
+#      | value33  |
+#      | value333 |
+#    Given I have the redis list "key4" with value "value4" with ttl 5 seconds
+#    Then the redis list "key4" should be "value4"
+#    Then the redis list "key4" should not exists after 6 seconds
+#    Then the redis list "key1" should be "value1"
+#    Then the redis list "key2" should be:
+#      | value2  |
+#      | value22 |
+#      | value32 |
+#    Then the redis key "key3" should be file "responses/values3.text"
