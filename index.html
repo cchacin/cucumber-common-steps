@@ -258,6 +258,65 @@
 }</pre></div>
 
 <h2>
+<a id="redis-assertions-and-setup" class="anchor" href="#redis-assertions-and-setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Redis assertions and setup</h2>
+
+<div class="highlight highlight-gherkin"><pre><span class="pl-k">Scenario</span>:<span class="pl-s"> Redis Steps for Key/Value</span>
+  <span class="pl-k">Given </span>I have the redis key <span class="pl-s">"key1"</span> with value <span class="pl-s">"value1"</span>
+  <span class="pl-k">Given </span>I have the redis key <span class="pl-s">"key2"</span> with value in file <span class="pl-s">"responses/value2.text"</span>
+  <span class="pl-k">Given </span>I have the redis key <span class="pl-s">"key3"</span> with value:
+  <span class="pl-s">"""</span>
+<span class="pl-s">  value3</span>
+<span class="pl-s"></span>
+<span class="pl-s">  """</span>
+  <span class="pl-k">Given </span>I have the redis key <span class="pl-s">"key4"</span> with value <span class="pl-s">"value4"</span> with ttl 5 seconds
+  <span class="pl-k">Then </span>the redis key <span class="pl-s">"key4"</span> should be <span class="pl-s">"value4"</span>
+  <span class="pl-k">Then </span>the redis key <span class="pl-s">"key3"</span> should exists
+  <span class="pl-k">Then </span>the redis keys <span class="pl-s">"key1,key2,key3"</span> should exists
+  <span class="pl-k">Then </span>the redis keys should exists:
+<span class="pl-k">    | <span class="pl-s1">key1</span> |</span>
+<span class="pl-k">    | <span class="pl-s1">key2</span> |</span>
+<span class="pl-k">    | <span class="pl-s1">key3</span> |</span>
+  <span class="pl-k">Then </span>the redis key <span class="pl-s">"key4"</span> should not exists after 6 seconds
+  <span class="pl-k">Then </span>the redis key <span class="pl-s">"key4"</span> should not exists
+  <span class="pl-k">Then </span>the redis keys <span class="pl-s">"key100,key200,key300"</span> should not exists
+  <span class="pl-k">Then </span>the redis key <span class="pl-s">"key1"</span> should be <span class="pl-s">"value1"</span>
+  <span class="pl-k">Then </span>the redis key <span class="pl-s">"key2"</span> should be:
+  <span class="pl-s">"""</span>
+<span class="pl-s">  value2</span>
+<span class="pl-s"></span>
+<span class="pl-s">  """</span>
+  <span class="pl-k">Then </span>the redis key <span class="pl-s">"key3"</span> should be file <span class="pl-s">"responses/value3.text"</span>
+
+<span class="pl-k">Scenario</span>:<span class="pl-s"> Redis Steps for Lists</span>
+  <span class="pl-k">Given </span>I have the redis list <span class="pl-s">"list1"</span> with values <span class="pl-s">"value1"</span>
+  <span class="pl-k">Given </span>I have the redis list <span class="pl-s">"list2"</span> with values in file <span class="pl-s">"responses/list2.text"</span>
+  <span class="pl-k">Given </span>I have the redis list <span class="pl-s">"list3"</span> with values:
+<span class="pl-k">    | <span class="pl-s1">value3</span>   |</span>
+<span class="pl-k">    | <span class="pl-s1">value33</span>  |</span>
+<span class="pl-k">    | <span class="pl-s1">value333</span> |</span>
+  <span class="pl-k">Given </span>I have the redis list <span class="pl-s">"list4"</span> with values <span class="pl-s">"value4"</span> with ttl 5 seconds
+  <span class="pl-k">Given </span>I have the redis list <span class="pl-s">"list5"</span> with values <span class="pl-s">"value5,value55,value555"</span> with ttl 5 seconds
+  <span class="pl-k">Then </span>the redis list <span class="pl-s">"list4"</span> should be <span class="pl-s">"value4"</span>
+  <span class="pl-k">Then </span>the redis list <span class="pl-s">"list5"</span> should be <span class="pl-s">"value5,value55,value555"</span>
+  <span class="pl-k">Given </span>I have the redis list <span class="pl-s">"list6"</span> with values <span class="pl-s">"value6,value66,value666"</span>
+  <span class="pl-k">Then </span>the redis list <span class="pl-s">"list6"</span> should be:
+<span class="pl-k">    | <span class="pl-s1">value6</span>   |</span>
+<span class="pl-k">    | <span class="pl-s1">value66</span>  |</span>
+<span class="pl-k">    | <span class="pl-s1">value666</span> |</span>
+  <span class="pl-k">Then </span>the redis list <span class="pl-s">"list3"</span> should exists
+  <span class="pl-k">Then </span>the redis lists <span class="pl-s">"list1,list2,list3"</span> should exists
+  <span class="pl-k">Then </span>the redis lists should exists:
+<span class="pl-k">    | <span class="pl-s1">list1</span> |</span>
+<span class="pl-k">    | <span class="pl-s1">list2</span> |</span>
+<span class="pl-k">    | <span class="pl-s1">list3</span> |</span>
+  <span class="pl-k">Then </span>the redis list <span class="pl-s">"list5"</span> should not exists after 6 seconds
+  <span class="pl-k">Then </span>the redis list <span class="pl-s">"list4"</span> should not exists
+  <span class="pl-k">Then </span>the redis lists <span class="pl-s">"list100,list200,list300"</span> should not exists
+  <span class="pl-k">Given </span>I have the redis list <span class="pl-s">"list7"</span> with values <span class="pl-s">"value7,value77,value777"</span>
+  <span class="pl-k">Then </span>the redis list <span class="pl-s">"list7"</span> should be file <span class="pl-s">"responses/list7.text"</span>
+</pre></div>
+
+<h2>
 <a id="run-the-cucumber-tests" class="anchor" href="#run-the-cucumber-tests" aria-hidden="true"><span class="octicon octicon-link"></span></a>Run the cucumber tests</h2>
 
 <p><strong>Write a cucumber integration-test in <code>src/test/java</code>:</strong></p>
