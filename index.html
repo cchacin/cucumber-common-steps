@@ -28,25 +28,39 @@
 <h1>
 <a id="cucumber-common-steps" class="anchor" href="#cucumber-common-steps" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cucumber Common Steps</h1>
 
-<p>This project is an intent to provide common steps definitions to make functional testing for REST API, Database setup, external service mocks and HTML pages</p>
+<p>This project is an intent to provide common steps definitions to make functional testing for REST API, Database setup, external service mocks, redis setup/assertions and HTML pages</p>
 
 <p>This is based on <a href="https://github.com/cucumber/cucumber-jvm">cucumber-jvm</a> project.</p>
 
 <p>You need to specify your features in the gherkin language and run it with <a href="https://github.com/cucumber/cucumber-java-skeleton">cucumber-java</a> or <a href="https://github.com/cukespace/cukespace">cukespace</a> + <a href="http://arquillian.org/">arquillian</a></p>
 
-<h1>
-<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting Started</h1>
+<ul>
+<li>
+<a href="#cucumber-common-steps">Cucumber Common Steps</a>
 
-<p>Add as dependency in your pom.xml:</p>
+<ul>
+<li><a href="#dependency">Dependency</a></li>
+<li><a href="#call-restful-apis-and-assert-responses">Call Restful APIs and assert Responses</a></li>
+<li><a href="#mock-externals-api-calls">Mock externals API calls</a></li>
+<li><a href="#run-the-cucumber-tests">Run the cucumber tests</a></li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="dependency" class="anchor" href="#dependency" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dependency</h2>
+
+<p><strong>Add as dependency in your pom.xml:</strong></p>
 
 <div class="highlight highlight-xml"><pre>&lt;<span class="pl-ent">dependency</span>&gt;
     &lt;<span class="pl-ent">groupId</span>&gt;com.github.cchacin&lt;/<span class="pl-ent">groupId</span>&gt;
     &lt;<span class="pl-ent">artifactId</span>&gt;cucumber-common-steps&lt;/<span class="pl-ent">artifactId</span>&gt;
-    &lt;<span class="pl-ent">version</span>&gt;0.0.7&lt;/<span class="pl-ent">version</span>&gt;
+    &lt;<span class="pl-ent">version</span>&gt;${version}&lt;/<span class="pl-ent">version</span>&gt;
     &lt;<span class="pl-ent">scope</span>&gt;test&lt;/<span class="pl-ent">scope</span>&gt;
 &lt;/<span class="pl-ent">dependency</span>&gt;</pre></div>
 
-<p>Write your feature in gherkin language in <code>src/test/resources</code></p>
+<h2>
+<a id="database-setup" class="anchor" href="#database-setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Database Setup</h2>
 
 <p><strong>Steps for Database Setup and verification of Endpoints Results</strong></p>
 
@@ -56,6 +70,8 @@
 <span class="pl-k">database.driver</span>=org.hsqldb.jdbcDriver
 <span class="pl-k">database.user</span>=SA
 <span class="pl-k">database.password</span>=</pre></div>
+
+<p>Write your feature in gherkin language in <code>src/test/resources/features/example.feature</code></p>
 
 <p><em>it should be used in <code>Given</code> steps to prepare the database</em></p>
 
@@ -114,6 +130,9 @@
 <span class="pl-s">        ]</span>
 <span class="pl-s">    }</span>
 <span class="pl-s">    """</span></pre></div>
+
+<h2>
+<a id="call-restful-apis-and-assert-responses" class="anchor" href="#call-restful-apis-and-assert-responses" aria-hidden="true"><span class="octicon octicon-link"></span></a>Call Restful APIs and assert Responses</h2>
 
 <p><strong>Steps to verify Restful API reponses</strong></p>
 
@@ -200,7 +219,8 @@
     <span class="pl-k">Then </span>response status code should be <span class="pl-s">"204"</span>
     <span class="pl-k">And </span>response should be empty</pre></div>
 
-<p><em>Mocking external API calls</em></p>
+<h2>
+<a id="mock-externals-api-calls" class="anchor" href="#mock-externals-api-calls" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mock externals API calls</h2>
 
 <div class="highlight highlight-gherkin"><pre>  <span class="pl-k">Scenario</span>:<span class="pl-s"> Mock external API</span>
     <span class="pl-k">Given </span>The call to external service should be:
@@ -237,12 +257,29 @@
     <span class="pl-s"><span class="pl-pds">"</span>sample<span class="pl-pds">"</span></span>: <span class="pl-c1">21</span>
 }</pre></div>
 
-<p>Write a cucumber integration-test in <code>src/test/java</code>:</p>
+<h2>
+<a id="run-the-cucumber-tests" class="anchor" href="#run-the-cucumber-tests" aria-hidden="true"><span class="octicon octicon-link"></span></a>Run the cucumber tests</h2>
 
-<div class="highlight highlight-java"><pre>@Glues({<span class="pl-smi">RestSteps</span><span class="pl-k">.</span>class, <span class="pl-smi">DatabaseSteps</span><span class="pl-k">.</span>class})
-@Features({<span class="pl-s"><span class="pl-pds">"</span>features/successful-endpoints.feature<span class="pl-pds">"</span></span>})
-@RunWith(<span class="pl-smi">ArquillianCucumber</span><span class="pl-k">.</span>class)
-<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">UsersEndpointITest</span> {
+<p><strong>Write a cucumber integration-test in <code>src/test/java</code>:</strong></p>
+
+<div class="highlight highlight-java"><pre><span class="pl-k">import</span> <span class="pl-smi">org.junit.runner.RunWith</span>;
+
+<span class="pl-k">import</span> <span class="pl-smi">cucumber.api.CucumberOptions</span>;
+<span class="pl-k">import</span> <span class="pl-smi">cucumber.api.junit.Cucumber</span>;
+
+@RunWith(<span class="pl-smi">Cucumber</span><span class="pl-k">.</span>class)
+@CucumberOptions(
+        features <span class="pl-k">=</span> {
+                <span class="pl-s"><span class="pl-pds">"</span>casspath:features<span class="pl-pds">"</span></span>
+        },
+        glue <span class="pl-k">=</span> {
+                <span class="pl-s"><span class="pl-pds">"</span>com.github.cchacin.cucumber.steps<span class="pl-pds">"</span></span>
+        },
+        format <span class="pl-k">=</span> {
+                <span class="pl-s"><span class="pl-pds">"</span>pretty<span class="pl-pds">"</span></span>
+        }
+)
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">HotelServiceStory</span> {
 }</pre></div>
 
       <footer class="site-footer">
