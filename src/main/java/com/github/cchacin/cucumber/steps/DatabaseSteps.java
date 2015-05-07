@@ -119,14 +119,16 @@ public class DatabaseSteps {
         queryBuilder.append(String.format("SELECT * FROM %s WHERE ", tableName));
         queryBuilder.append(StringUtils.join(columns, " = ? AND "));
         queryBuilder.append(" = ?;");
-        PreparedStatement stmt = getConnection().prepareStatement(queryBuilder.toString());
-        for (DataTableRow row : rows.subList(1, rows.size())) {
-            List<String> rowValues = row.getCells();
-            for (int i = 0; i < columns.size(); i++) {
-                stmt.setString(i + 1, rowValues.get(i));
+        try (Connection conn = getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(queryBuilder.toString());
+            for (DataTableRow row : rows.subList(1, rows.size())) {
+                List<String> rowValues = row.getCells();
+                for (int i = 0; i < columns.size(); i++) {
+                    stmt.setString(i + 1, rowValues.get(i));
+                }
+                ResultSet rs = stmt.executeQuery();
+                assertThat(rs.next()).isTrue();
             }
-            ResultSet rs = stmt.executeQuery();
-            assertThat(rs.next()).isTrue();
         }
     }
 
