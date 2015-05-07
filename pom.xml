@@ -36,7 +36,8 @@
         <openejb.version>4.7.1</openejb.version>
         <jsonunit.version>1.5.4</jsonunit.version>
         <lombok.version>1.16.4</lombok.version>
-        <restassured.version>2.4.0</restassured.version>
+        <restassured.version>2.4.1</restassured.version>
+        <jedis.version>2.7.2</jedis.version>
     </properties>
 
     <repositories>
@@ -141,6 +142,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Jedis -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${jedis.version}</version>
+        </dependency>
+
         <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -181,7 +189,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.6</version>
+                <version>2.7</version>
                 <configuration>
                     <check>true</check>
                     <format>xml</format>
@@ -208,7 +216,7 @@
                     <plugin>
                         <groupId>org.eluder.coveralls</groupId>
                         <artifactId>coveralls-maven-plugin</artifactId>
-                        <version>3.0.1</version>
+                        <version>3.1.0</version>
                     </plugin>
                 </plugins>
             </build>
