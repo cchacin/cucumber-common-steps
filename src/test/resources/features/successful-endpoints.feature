@@ -346,3 +346,13 @@ Feature: Successful rest calls
     Then the redis lists "list100,list200,list300" should not exists
     Given I have the redis list "list7" with values "value7,value77,value777"
     Then the redis list "list7" should be file "responses/list7.text"
+
+  Scenario: Database check exists
+    Given I have only the following rows in the "models" table:
+      | id | created             | modified            | email                 | fullname | password |
+      | 4  | 2015-02-11 00:00:00 | 2015-02-11 00:00:00 | cchacin2@superbiz.org | Carlos2  | passw0rd |
+      | 5  | 2015-02-11 00:00:00 | 2015-02-11 00:00:00 | cchacin3@superbiz.org | Carlos3  | passw0rd |
+    Then I should have the following rows in the "models" table:
+      | id | created             | modified            | email                 | fullname | password |
+      | 4  | 2015-02-11 00:00:00 | 2015-02-11 00:00:00 | cchacin2@superbiz.org | Carlos2  | passw0rd |
+      | 5  | 2015-02-11 00:00:00 | 2015-02-11 00:00:00 | cchacin3@superbiz.org | Carlos3  | passw0rd |

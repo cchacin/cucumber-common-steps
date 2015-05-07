@@ -18,21 +18,31 @@ import com.ninja_squad.dbsetup.destination.Destination;
 import com.ninja_squad.dbsetup.destination.DriverManagerDestination;
 import com.ninja_squad.dbsetup.operation.Insert;
 import com.ninja_squad.dbsetup.operation.Operation;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Given;
-import gherkin.formatter.model.DataTableRow;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import cucumber.api.DataTable;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import gherkin.formatter.model.DataTableRow;
+
 import static com.ninja_squad.dbsetup.Operations.deleteAllFrom;
 import static com.ninja_squad.dbsetup.operation.CompositeOperation.sequenceOf;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class DatabaseSteps {
 
@@ -94,5 +104,38 @@ public class DatabaseSteps {
     public void I_have_the_following_sql_script(final String script) throws Throwable {
         new ScriptRunner(this.destination.getConnection())
                 .runScript(new BufferedReader(new FileReader(Thread.currentThread().getContextClassLoader().getResource(script).getPath())));
+    }
+
+    @Then("^I should have the following rows in the \"([^\"]*)\" table:$")
+    public void I_should_have_the_following_rows_in_the_table(
+        final String tableName, final DataTable data) throws SQLException, ClassNotFoundException {
+        exists(tableName, data);
+    }
+
+    void exists(final String tableName, final DataTable data) throws SQLException, ClassNotFoundException {
+        final List<DataTableRow> rows = data.getGherkinRows();
+        final List<String> columns = rows.get(0).getCells();
+        final StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append(String.format("SELECT %s FROM %s WHERE ", StringUtils.join(columns, ","), tableName));
+        queryBuilder.append(StringUtils.join(columns, " = ? AND "));
+        queryBuilder.append(" = ?;");
+        try (Connection conn = getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(queryBuilder.toString());
+            for (DataTableRow row : rows.subList(1, rows.size())) {
+                List<String> rowValues = row.getCells();
+                for (int i = 0; i < columns.size(); i++) {
+                    stmt.setString(i + 1, rowValues.get(i));
+                }
+                final ResultSet rs = stmt.executeQuery();
+                assertThat(rs.next()).isTrue();
+            }
+        }
+    }
+
+    private Connection getConnection() throws ClassNotFoundException, SQLException {
+        Class.forName(properties.getProperty("database.driver"));
+        return DriverManager.getConnection(properties.getProperty("database.url"),
+                                           properties.getProperty("database.user"),
+                                           properties.getProperty("database.password"));
     }
 }
