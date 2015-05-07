@@ -107,7 +107,7 @@ public class DatabaseSteps {
     }
 
     @Then("^I should have the following rows in the \"([^\"]*)\" table:$")
-    public void I_have_the_following_rows_in_the_table(
+    public void I_should_have_the_following_rows_in_the_table(
         final String tableName, final DataTable data) throws SQLException, ClassNotFoundException {
         exists(tableName, data);
     }
@@ -115,8 +115,8 @@ public class DatabaseSteps {
     void exists(final String tableName, final DataTable data) throws SQLException, ClassNotFoundException {
         final List<DataTableRow> rows = data.getGherkinRows();
         final List<String> columns = rows.get(0).getCells();
-        StringBuilder queryBuilder = new StringBuilder();
-        queryBuilder.append(String.format("SELECT * FROM %s WHERE ", tableName));
+        final StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append(String.format("SELECT %s FROM %s WHERE ", StringUtils.join(columns, ","), tableName));
         queryBuilder.append(StringUtils.join(columns, " = ? AND "));
         queryBuilder.append(" = ?;");
         try (Connection conn = getConnection()) {
@@ -126,7 +126,7 @@ public class DatabaseSteps {
                 for (int i = 0; i < columns.size(); i++) {
                     stmt.setString(i + 1, rowValues.get(i));
                 }
-                ResultSet rs = stmt.executeQuery();
+                final ResultSet rs = stmt.executeQuery();
                 assertThat(rs.next()).isTrue();
             }
         }
