@@ -1,8 +1,6 @@
 language: java
 jdk:
   - openjdk7
-  - oraclejdk7
-  - oraclejdk8
 before_script:
   - sudo apt-get -qq update > /dev/null
   - sudo apt-get -qq install graphviz > /dev/null
@@ -18,8 +16,8 @@ install: true
 script:
   - mvn clean compile cobertura:cobertura
 after_success:
-  - mvn javadoc:javadoc coveralls:report
-  - ./update-gh-pages.sh
+  - mvn coveralls:report
+  #- ./update-gh-pages.sh
 env:
   global:
   - secure: EQ0gLiDj+vMXhjeE+yPCaGdsEshapNH/JVc/f0nwGc4Z3uzC6/8mK4/eYZ9pAcMXoO5sQjBGVFS2e8wOvnOUTs9hSkV3/NXmL2R/AGbHRGr/mkVRkq3FcjC7YB2dNdVLLFdEIA/dviQXwyFqkiQ28wvVEz65BjYSEcqGiJ1BLgA=
