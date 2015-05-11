@@ -28,7 +28,7 @@ import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.runner.RunWith;
 
-@Glues({RestSteps.class, DatabaseSteps.class, CallsSteps.class, RedisKeyValueSteps.class, RedisListSteps.class})
+@Glues({RestSteps.class, DatabaseSteps.class, CallsSteps.class})
 @Features({"features/successful-endpoints.feature"})
 @RunWith(ArquillianCucumber.class)
 public class RestfulSuccessTest {
