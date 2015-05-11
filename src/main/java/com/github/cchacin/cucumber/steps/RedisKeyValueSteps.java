@@ -15,11 +15,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RedisKeyValueSteps {
     private final JedisPool jedisPool = new JedisPool("localhost");
 
-    private Jedis getJedis(final Integer db){
+    private Jedis getJedis(final Integer db) {
         final Jedis jedis = jedisPool.getResource();
-        if(db != null) {
+        if (db != null) {
             jedis.select(db);
-        }else{
+        } else {
             jedis.select(0);
         }
         return jedis;
