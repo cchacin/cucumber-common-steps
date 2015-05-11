@@ -293,59 +293,59 @@ Feature: Successful rest calls
   # REDIS
   #######
   Scenario: Redis Steps for Key/Value
-    Given I have the redis key "key1" with value "value1"
-    Given I have the redis key "key2" with value in file "responses/value2.text"
-    Given I have the redis key "key3" with value:
+    Given I have the redis key "key1" in database 0 with value "value1"
+    Given I have the redis key "key2" in database 0 with value in file "responses/value2.text"
+    Given I have the redis key "key3" in database 0 with value:
     """
     value3
 
     """
-    Given I have the redis key "key4" with value "value4" with ttl 5 seconds
-    Then the redis key "key4" should be "value4"
-    Then the redis key "key3" should exists
-    Then the redis keys "key1,key2,key3" should exists
-    Then the redis keys should exists:
+    Given I have the redis key "key4" in database 0 with value "value4" with ttl 5 seconds
+    Then the redis key "key4" in database 0 should be "value4"
+    Then the redis key "key3" should exist in database 0
+    Then the redis keys "key1,key2,key3" should exist in database 0
+    Then the redis keys should exist in database 0:
       | key1 |
       | key2 |
       | key3 |
-    Then the redis key "key4" should not exists after 6 seconds
-    Then the redis key "key4" should not exists
-    Then the redis keys "key100,key200,key300" should not exists
-    Then the redis key "key1" should be "value1"
-    Then the redis key "key2" should be:
+    Then the redis key "key4" in database 0 should not exist after 6 seconds
+    Then the redis key "key4" should not exist in database 0
+    Then the redis keys "key100,key200,key300" should not exist in database 0
+    Then the redis key "key1" in database 0 should be "value1"
+    Then the redis key "key2" in database 0 should be:
     """
     value2
 
     """
-    Then the redis key "key3" should be file "responses/value3.text"
+    Then the redis key "key3" in database 0 should be file "responses/value3.text"
 
   Scenario: Redis Steps for Lists
-    Given I have the redis list "list1" with values "value1"
-    Given I have the redis list "list2" with values in file "responses/list2.text"
-    Given I have the redis list "list3" with values:
+    Given I have the redis list "list1" in database 0 with values "value1"
+    Given I have the redis list "list2" in database 0 with values in file "responses/list2.text"
+    Given I have the redis list "list3" in database 0 with values:
       | value3   |
       | value33  |
       | value333 |
-    Given I have the redis list "list4" with values "value4" with ttl 5 seconds
-    Given I have the redis list "list5" with values "value5,value55,value555" with ttl 5 seconds
-    Then the redis list "list4" should be "value4"
-    Then the redis list "list5" should be "value5,value55,value555"
-    Given I have the redis list "list6" with values "value6,value66,value666"
-    Then the redis list "list6" should be:
+    Given I have the redis list "list4" in database 0 with values "value4" with ttl 5 seconds
+    Given I have the redis list "list5" in database 0 with values "value5,value55,value555" with ttl 5 seconds
+    Then the redis list "list4" in database 0 should be "value4"
+    Then the redis list "list5" in database 0 should be "value5,value55,value555"
+    Given I have the redis list "list6" in database 0 with values "value6,value66,value666"
+    Then the redis list "list6" in database 0 should be:
       | value6   |
       | value66  |
       | value666 |
-    Then the redis list "list3" should exists
-    Then the redis lists "list1,list2,list3" should exists
-    Then the redis lists should exists:
+    Then the redis list "list3" should exist in database 0
+    Then the redis lists "list1,list2,list3" should exist in database 0
+    Then the redis lists should exist in database 0:
       | list1 |
       | list2 |
       | list3 |
-    Then the redis list "list5" should not exists after 6 seconds
-    Then the redis list "list4" should not exists
-    Then the redis lists "list100,list200,list300" should not exists
-    Given I have the redis list "list7" with values "value7,value77,value777"
-    Then the redis list "list7" should be file "responses/list7.text"
+    Then the redis list "list5" in database 0 should not exist after 6 seconds
+    Then the redis list "list4" should not exist in database 0
+    Then the redis lists "list100,list200,list300" should not exist in database 0
+    Given I have the redis list "list7" in database 0 with values "value7,value77,value777"
+    Then the redis list "list7" in database 0 should be file "responses/list7.text"
 
   Scenario: Database check exists
     Given I have only the following rows in the "models" table:
