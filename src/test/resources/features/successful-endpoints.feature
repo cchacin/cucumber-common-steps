@@ -291,12 +291,12 @@ Feature: Successful rest calls
 
 
   Scenario: Redis steps for scored members
-    Given I have the redis scored member "scoredMember1" in database 1 with score "1.23" and value "value1"
-    And I have the redis scored members "scoredMember2" in database 2 with values:
+    Given I have the redis scored member "scoredMember1" in the db 1 with score "1.23" and value "value1"
+    And I have the redis scored members "scoredMember2" in the db 2 with values:
       | value2 | 2.34 |
       | value3 | 3.45 |
-    Then I should have the redis scored member "scoredMember1" in database 1 with score "1.23" and value "value1"
-    And I should have the redis scored members "scoredMember2" in database 2 with values:
+    Then I should have the redis scored member "scoredMember1" in the db 1 with score "1.23" and value "value1"
+    And I should have the redis scored members "scoredMember2" in the db 2 with values:
       | value2 | 2.34 |
       | value3 | 3.45 |
 
