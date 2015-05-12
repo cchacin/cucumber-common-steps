@@ -296,6 +296,33 @@ Scenario: Redis Steps for Lists
 
 ```
 
+
+## Database assertions
+You need to put your database connection properties in ```src/test/resources/test-db.properties```
+
+```properties
+database.url=jdbc:mysql://localhost/myapp_test
+database.driver=com.mysql.jdbc.Driver
+database.user=root
+database.password=
+```
+Write your feature in gherkin language in ```src/test/resources/features/example.feature```
+
+*it should be used in ```Then``` steps to check the database*
+
+```gherkin
+Scenario: Database check exists
+    Given I have only the following rows in the "models" table:
+      | id | created             | modified            | email                 | fullname | password |
+      | 4  | 2015-02-11 00:00:00 | 2015-02-11 00:00:00 | cchacin2@superbiz.org | Carlos2  | passw0rd |
+      | 5  | 2015-02-11 00:00:00 | 2015-02-11 00:00:00 | cchacin3@superbiz.org | Carlos3  | passw0rd |
+    Then I should have the following rows in the "models" table:
+      | id | created             | modified            | email                 | fullname | password |
+      | 4  | 2015-02-11 00:00:00 | 2015-02-11 00:00:00 | cchacin2@superbiz.org | Carlos2  | passw0rd |
+      | 5  | 2015-02-11 00:00:00 | 2015-02-11 00:00:00 | cchacin3@superbiz.org | Carlos3  | passw0rd |
+
+```
+
 ## Run the cucumber tests
 
 **Write a cucumber integration-test in ```src/test/java```:**

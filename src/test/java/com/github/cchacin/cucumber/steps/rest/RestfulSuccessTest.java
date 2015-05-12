@@ -30,10 +30,9 @@ import com.github.cchacin.cucumber.steps.CallsSteps;
 import com.github.cchacin.cucumber.steps.DatabaseSteps;
 import com.github.cchacin.cucumber.steps.RedisKeyValueSteps;
 import com.github.cchacin.cucumber.steps.RedisListSteps;
+import com.github.cchacin.cucumber.steps.RedisScoredMembersSteps;
 import com.github.cchacin.cucumber.steps.RestSteps;
-import cucumber.runtime.arquillian.ArquillianCucumber;
-import cucumber.runtime.arquillian.api.Features;
-import cucumber.runtime.arquillian.api.Glues;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -41,7 +40,11 @@ import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.runner.RunWith;
 
-@Glues({RestSteps.class, DatabaseSteps.class, CallsSteps.class, RedisKeyValueSteps.class, RedisListSteps.class})
+import cucumber.runtime.arquillian.ArquillianCucumber;
+import cucumber.runtime.arquillian.api.Features;
+import cucumber.runtime.arquillian.api.Glues;
+
+@Glues({RestSteps.class, DatabaseSteps.class, CallsSteps.class, RedisKeyValueSteps.class, RedisListSteps.class, RedisScoredMembersSteps.class})
 @Features({
         "features/successful-endpoints.feature",
         "features/redis.feature"

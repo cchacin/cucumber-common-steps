@@ -290,6 +290,16 @@ Feature: Successful rest calls
     And response should be empty
 
 
+  Scenario: Redis steps for scored members
+    Given I have the redis scored member "scoredMember1" in the db 1 with score "1.23" and value "value1"
+    And I have the redis scored members "scoredMember2" in the db 2 with values:
+      | value2 | 2.34 |
+      | value3 | 3.45 |
+    Then I should have the redis scored member "scoredMember1" in the db 1 with score "1.23" and value "value1"
+    And I should have the redis scored members "scoredMember2" in the db 2 with values:
+      | value2 | 2.34 |
+      | value3 | 3.45 |
+
   Scenario: Database check exists
     Given I have only the following rows in the "models" table:
       | id | created             | modified            | email                 | fullname | password |
