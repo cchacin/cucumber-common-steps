@@ -67,11 +67,7 @@ public class Controller {
     @Produces("application/json")
     public Response successfulGET(@Context final HttpServletRequest request) {
         Response.ResponseBuilder builder = Response.ok(new Model(1L, new Date(), new Date(), null, "", ""));
-        Enumeration<String> enumerations = request.getHeaderNames();
-        while(enumerations.hasMoreElements()) {
-            final String headerName = enumerations.nextElement();
-            builder.header(headerName, request.getHeader(headerName));
-        }
+        buildResponseHeaders(builder, request);
         return builder.build();
     }
 
@@ -117,15 +113,27 @@ public class Controller {
     @PUT
     @Path("/successful/headers/put")
     @Consumes("application/json")
-    public Response successfulHeadersPUT(final String body) {
-        return Response.noContent().build();
+    public Response successfulHeadersPUT(@Context final HttpServletRequest request, final String body) {
+        Response.ResponseBuilder builder = Response.noContent();
+        buildResponseHeaders(builder, request);
+        return builder.build();
     }
 
     @POST
     @Path("/successful/headers/post")
     @Consumes("application/json")
-    public Response successfulHeadersPOST(final String body) {
-        return Response.created(uriInfo.getAbsolutePathBuilder().path("1").build()).build();
+    public Response successfulHeadersPOST(@Context final HttpServletRequest request, final String body) {
+        Response.ResponseBuilder builder = Response.created(uriInfo.getAbsolutePathBuilder().path("1").build());
+        buildResponseHeaders(builder, request);
+        return builder.build();
+    }
+
+    private void buildResponseHeaders(final Response.ResponseBuilder builder, final HttpServletRequest request) {
+        Enumeration<String> enumerations = request.getHeaderNames();
+        while(enumerations.hasMoreElements()) {
+            final String headerName = enumerations.nextElement();
+            builder.header(headerName, request.getHeader(headerName));
+        }
     }
 
     @DELETE
