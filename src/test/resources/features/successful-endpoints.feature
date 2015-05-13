@@ -264,6 +264,12 @@ Feature: Successful rest calls
     Then response status code should be 204
     And response should be empty
 
+  Scenario: PUT call with headers
+    When I make a PUT call to "/test-app/successful/headers/put" endpoint with post body in file "/requests/post_request.json" and headers:
+      | Content-Type | application/json |
+    Then response status code should be 204
+    And response should be empty
+
   #######
   # POST
   #######
@@ -273,6 +279,12 @@ Feature: Successful rest calls
     {
     }
     """
+    Then response status code should be 201
+    And response should be empty
+
+  Scenario: POST call with headers
+    When I make a POST call to "/test-app/successful/headers/post" endpoint with post body in file "/requests/post_request.json" and headers:
+      | Content-Type | application/json |
     Then response status code should be 201
     And response should be empty
 
