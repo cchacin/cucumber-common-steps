@@ -29,11 +29,14 @@ package com.github.cchacin.cucumber.steps;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.List;
+
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-
-import java.util.List;
 
 import static com.github.cchacin.cucumber.steps.Utility.fileContent;
 import static com.jayway.restassured.RestAssured.given;
@@ -105,6 +108,15 @@ public class RestSteps {
         this.spec = createWebClient(endpointUrl);
         this.spec = this.spec.params(params.asMap(String.class, String.class));
         execute(method);
+    }
+
+    @When("^I make a (POST|PUT) call to \"(.*?)\" endpoint with post body in file \"(.*?)\" and headers:$")
+    public void I_make_a_POST_PUT_call_to_endpoint_with_post_body_in_file_and_headers(
+        final String method, final String endpointUrl, final String postBodyFilePath, final DataTable headers)
+        throws IOException, URISyntaxException {
+        this.spec = createWebClient(endpointUrl).headers(headers.asMap(String.class, String.class)).body(fileContent(postBodyFilePath));
+        this.response = (method.equals("POST")) ? this.spec.post(this.basePath) : this.spec.put(this.basePath);
+        this.responseValue = this.response.asString();
     }
 
     @Then("^response status code should be (\\d+)$")

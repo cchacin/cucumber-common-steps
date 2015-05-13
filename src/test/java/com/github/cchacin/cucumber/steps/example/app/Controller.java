@@ -15,25 +15,40 @@ package com.github.cchacin.cucumber.steps.example.app;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Value;
+
 import org.apache.cxf.jaxrs.client.WebClient;
+
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.HEAD;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.concurrent.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Value;
 
 @Path("/")
 @Stateless
@@ -52,11 +67,7 @@ public class Controller {
     @Produces("application/json")
     public Response successfulGET(@Context final HttpServletRequest request) {
         Response.ResponseBuilder builder = Response.ok(new Model(1L, new Date(), new Date(), null, "", ""));
-        Enumeration<String> enumerations = request.getHeaderNames();
-        while(enumerations.hasMoreElements()) {
-            final String headerName = enumerations.nextElement();
-            builder.header(headerName, request.getHeader(headerName));
-        }
+        buildResponseHeaders(builder, request);
         return builder.build();
     }
 
@@ -97,6 +108,32 @@ public class Controller {
     @Path("/successful/post")
     public Response successfulPOST(final String body) {
         return Response.created(uriInfo.getAbsolutePathBuilder().path("1").build()).build();
+    }
+
+    @PUT
+    @Path("/successful/headers/put")
+    @Consumes("application/json")
+    public Response successfulHeadersPUT(@Context final HttpServletRequest request, final String body) {
+        Response.ResponseBuilder builder = Response.noContent();
+        buildResponseHeaders(builder, request);
+        return builder.build();
+    }
+
+    @POST
+    @Path("/successful/headers/post")
+    @Consumes("application/json")
+    public Response successfulHeadersPOST(@Context final HttpServletRequest request, final String body) {
+        Response.ResponseBuilder builder = Response.created(uriInfo.getAbsolutePathBuilder().path("1").build());
+        buildResponseHeaders(builder, request);
+        return builder.build();
+    }
+
+    private void buildResponseHeaders(final Response.ResponseBuilder builder, final HttpServletRequest request) {
+        Enumeration<String> enumerations = request.getHeaderNames();
+        while(enumerations.hasMoreElements()) {
+            final String headerName = enumerations.nextElement();
+            builder.header(headerName, request.getHeader(headerName));
+        }
     }
 
     @DELETE

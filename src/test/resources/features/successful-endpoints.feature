@@ -264,6 +264,16 @@ Feature: Successful rest calls
     Then response status code should be 204
     And response should be empty
 
+  Scenario: PUT call with headers
+    When I make a PUT call to "/test-app/successful/headers/put" endpoint with post body in file "/requests/post_request.json" and headers:
+      | Content-Type | application/json |
+      | Authorization | OAuth qwerqweqrqwerqwer |
+      | X-Request-Id  | test-request-id         |
+    Then response status code should be 204
+    And response should be empty
+    And response header "Authorization" should be "OAuth qwerqweqrqwerqwer"
+    And response header "X-Request-Id" should be "test-request-id"
+
   #######
   # POST
   #######
@@ -275,6 +285,16 @@ Feature: Successful rest calls
     """
     Then response status code should be 201
     And response should be empty
+
+  Scenario: POST call with headers
+    When I make a POST call to "/test-app/successful/headers/post" endpoint with post body in file "/requests/post_request.json" and headers:
+      | Content-Type | application/json |
+      | Authorization | OAuth qwerqweqrqwerqwer |
+      | X-Request-Id  | test-request-id         |
+    Then response status code should be 201
+    And response should be empty
+    And response header "Authorization" should be "OAuth qwerqweqrqwerqwer"
+    And response header "X-Request-Id" should be "test-request-id"
 
   Scenario:
     When I make a POST call to "/test-app/successful/post" endpoint with post body in file "/requests/post_request.json"
