@@ -31,6 +31,7 @@ import com.github.cchacin.cucumber.steps.DatabaseSteps;
 import com.github.cchacin.cucumber.steps.RedisKeyValueSteps;
 import com.github.cchacin.cucumber.steps.RedisListSteps;
 import com.github.cchacin.cucumber.steps.RedisScoredMembersSteps;
+import com.github.cchacin.cucumber.steps.RedisSteps;
 import com.github.cchacin.cucumber.steps.RestSteps;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -44,7 +45,13 @@ import cucumber.runtime.arquillian.ArquillianCucumber;
 import cucumber.runtime.arquillian.api.Features;
 import cucumber.runtime.arquillian.api.Glues;
 
-@Glues({RestSteps.class, DatabaseSteps.class, CallsSteps.class, RedisKeyValueSteps.class, RedisListSteps.class, RedisScoredMembersSteps.class})
+@Glues({RestSteps.class,
+        DatabaseSteps.class,
+        CallsSteps.class,
+        RedisKeyValueSteps.class,
+        RedisListSteps.class,
+        RedisScoredMembersSteps.class,
+        RedisSteps.class})
 @Features({
         "features/successful-endpoints.feature",
         "features/redis.feature"

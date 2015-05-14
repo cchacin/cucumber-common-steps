@@ -306,6 +306,12 @@ Scenario: Redis Steps for Lists
   Given I have the redis list "list7" with values "value7,value77,value777"
   Then the redis list "list7" should be file "responses/list7.text"
 
+Scenario: Redis Steps for Cleaning Database
+    Given I have the redis key "key" in the db 8 with value "value"
+    Then I have the redis key "key" in the db 8 with value "value"
+    Given I have cleaned db 8
+    Then the redis key "key" in the db 8 should not exists
+
 ```
 
 
