@@ -17,7 +17,13 @@ script:
   - mvn clean compile cobertura:cobertura
 after_success:
   - mvn coveralls:report
-  #- ./update-gh-pages.sh
+  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+        - mvn deploy --settings ~/settings.xml
+    fi
+  - if [[ "$TRAVIS_BRANCH" == "releases" ]]; then
+        - echo "<settings><servers><server><id>ossrh</id><username>\${env.SONATYPE_USERNAME}</username><password>\${env.SONATYPE_PASSWORD}</password></server></servers></settings>" > ~/settings.xml
+        - mvn clean release:prepare release:perform
+    fi
 env:
   global:
   - secure: EQ0gLiDj+vMXhjeE+yPCaGdsEshapNH/JVc/f0nwGc4Z3uzC6/8mK4/eYZ9pAcMXoO5sQjBGVFS2e8wOvnOUTs9hSkV3/NXmL2R/AGbHRGr/mkVRkq3FcjC7YB2dNdVLLFdEIA/dviQXwyFqkiQ28wvVEz65BjYSEcqGiJ1BLgA=
