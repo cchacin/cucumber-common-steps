@@ -13,7 +13,6 @@
  */
 package com.github.cchacin.cucumber.steps;
 
-import com.google.common.collect.Lists;
 import com.xebialabs.restito.builder.stub.StubHttp;
 import com.xebialabs.restito.semantics.Condition;
 import com.xebialabs.restito.semantics.ConditionWithApplicables;
@@ -23,14 +22,14 @@ import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import lombok.Value;
-import lombok.extern.slf4j.Slf4j;
 import org.glassfish.grizzly.http.util.HttpStatus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.xebialabs.restito.builder.stub.StubHttp.whenHttp;
+import static com.xebialabs.restito.semantics.Action.resourceContent;
 import static com.xebialabs.restito.semantics.Action.status;
-import static com.xebialabs.restito.semantics.Action.*;
 import static com.xebialabs.restito.semantics.Condition.delete;
 import static com.xebialabs.restito.semantics.Condition.get;
 import static com.xebialabs.restito.semantics.Condition.parameter;
@@ -94,7 +93,7 @@ public class CallsSteps {
             final String queryParamsStr = (getUrl().contains("?")) ? getUrl().split("\\?")[1] : null;
 
             final String[] kvs = queryParamsStr != null ? queryParamsStr.split("\\&") : new String[0];
-            List<Condition> conditions = Lists.newArrayList();
+            final List<Condition> conditions = new ArrayList<>();
             for (final String kv : kvs) {
                 final String[] sp = kv.split("\\=");
                 conditions.add(parameter(sp[0], sp[1]));
