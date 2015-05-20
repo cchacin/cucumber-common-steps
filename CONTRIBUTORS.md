@@ -1,5 +1,4 @@
-# Cucumber Common Steps Contributors (sorted alphabeticaly)
-
+# Contributors (sorted alphabeticaly)
 
 * **[Carlos Chacin](https://github.com/cchacin)**
 
