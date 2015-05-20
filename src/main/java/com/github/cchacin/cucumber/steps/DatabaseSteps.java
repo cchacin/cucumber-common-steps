@@ -1,9 +1,9 @@
 /**
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -99,7 +99,7 @@ public class DatabaseSteps {
   @Given("^I have the following sql script \"([^\"]*)\"$")
   public void I_have_the_following_sql_script(final String script) throws Throwable {
     new ScriptRunner(this.destination.getConnection()).runScript(new BufferedReader(new FileReader(
-            Thread.currentThread().getContextClassLoader().getResource(script).getPath())));
+        Thread.currentThread().getContextClassLoader().getResource(script).getPath())));
   }
 
   @Then("^I should have the following rows in the \"([^\"]*)\" table:$")
