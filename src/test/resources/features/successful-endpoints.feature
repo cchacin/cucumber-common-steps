@@ -266,7 +266,7 @@ Feature: Successful rest calls
 
   Scenario: PUT call with headers
     When I make a PUT call to "/test-app/successful/headers/put" endpoint with post body in file "/requests/post_request.json" and headers:
-      | Content-Type | application/json |
+      | Content-Type  | application/json        |
       | Authorization | OAuth qwerqweqrqwerqwer |
       | X-Request-Id  | test-request-id         |
     Then response status code should be 204
@@ -288,7 +288,7 @@ Feature: Successful rest calls
 
   Scenario: POST call with headers
     When I make a POST call to "/test-app/successful/headers/post" endpoint with post body in file "/requests/post_request.json" and headers:
-      | Content-Type | application/json |
+      | Content-Type  | application/json        |
       | Authorization | OAuth qwerqweqrqwerqwer |
       | X-Request-Id  | test-request-id         |
     Then response status code should be 201
