@@ -29,7 +29,7 @@
         <!-- Version strings -->
         <cukespace.version>1.6.0</cukespace.version>
         <cucumber.version>1.2.2</cucumber.version>
-        <tomee.version>1.7.1</tomee.version>
+        <tomee.version>1.7.2</tomee.version>
         <junit.version>4.12</junit.version>
         <assertj.version>2.0.0</assertj.version>
         <javaee.version>6.0-6</javaee.version>
@@ -168,7 +168,7 @@
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
-            <version>3.2.8</version>
+            <version>3.3.0</version>
         </dependency>
 
         <dependency>
