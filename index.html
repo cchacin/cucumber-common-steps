@@ -138,7 +138,7 @@
 <p><strong>Steps to verify Restful API reponses</strong></p>
 
 <div class="highlight highlight-gherkin"><pre>  <span class="pl-k">Scenario</span>:
-    <span class="pl-k">When </span>I make a GET call to <span class="pl-s">"/zen"</span> endpoint in host <span class="pl-s">"https://api.github.com"</span>
+    <span class="pl-k">When </span>I make a GET call to <span class="pl-s">"https://api.github.com/zen?z=1"</span> endpoint
     <span class="pl-k">Then </span>response status code should be <span class="pl-s">"200"</span>
     <span class="pl-k">And </span>response content type should be <span class="pl-s">"text/plain;charset=utf-8"</span>
 
@@ -201,6 +201,12 @@
     <span class="pl-k">Then </span>response status code should be <span class="pl-s">"204"</span>
     <span class="pl-k">And </span>response should be empty
 
+  <span class="pl-k">Scenario</span>:<span class="pl-s"> PUT call with headers</span>
+    <span class="pl-k">When </span>I make a PUT call to <span class="pl-s">"/test-app/successful/headers/put"</span> endpoint with post body in file <span class="pl-s">"/requests/post_request.json"</span> and headers:
+<span class="pl-k">      | <span class="pl-s1">Content</span>-<span class="pl-s1">Type</span> | <span class="pl-s1">application</span>/<span class="pl-s1">json</span> |</span>
+    <span class="pl-k">Then </span>response status code should be 204
+    <span class="pl-k">And </span>response should be empty
+
   <span class="pl-k">Scenario</span>:
     <span class="pl-k">When </span>I make a POST call to <span class="pl-s">"/successful/post"</span> endpoint with post body:
     <span class="pl-s">"""</span>
@@ -208,6 +214,12 @@
 <span class="pl-s">    }</span>
 <span class="pl-s">    """</span>
     <span class="pl-k">Then </span>response status code should be <span class="pl-s">"201"</span>
+    <span class="pl-k">And </span>response should be empty
+
+  <span class="pl-k">Scenario</span>:<span class="pl-s"> POST call with headers</span>
+    <span class="pl-k">When </span>I make a POST call to <span class="pl-s">"/test-app/successful/headers/post"</span> endpoint with post body in file <span class="pl-s">"/requests/post_request.json"</span> and headers:
+<span class="pl-k">      | <span class="pl-s1">Content</span>-<span class="pl-s1">Type</span> | <span class="pl-s1">application</span>/<span class="pl-s1">json</span> |</span>
+    <span class="pl-k">Then </span>response status code should be 201
     <span class="pl-k">And </span>response should be empty
 
   <span class="pl-k">Scenario</span>:
@@ -315,6 +327,49 @@
   <span class="pl-k">Then </span>the redis lists <span class="pl-s">"list100,list200,list300"</span> should not exists
   <span class="pl-k">Given </span>I have the redis list <span class="pl-s">"list7"</span> with values <span class="pl-s">"value7,value77,value777"</span>
   <span class="pl-k">Then </span>the redis list <span class="pl-s">"list7"</span> should be file <span class="pl-s">"responses/list7.text"</span>
+
+<span class="pl-k">Scenario</span>:<span class="pl-s"> Redis Steps for Cleaning Database</span>
+  <span class="pl-k">Given </span>I have the redis key <span class="pl-s">"key"</span> in the db 8 with value <span class="pl-s">"value"</span>
+  <span class="pl-k">Then </span>I have the redis key <span class="pl-s">"key"</span> in the db 8 with value <span class="pl-s">"value"</span>
+  <span class="pl-k">Given </span>I have cleaned redis db 8
+  <span class="pl-k">Then </span>the redis key <span class="pl-s">"key"</span> in the db 8 should not exists
+
+<span class="pl-k">Scenario</span>:<span class="pl-s"> Redis Steps for Cleaning All Databases</span>
+  <span class="pl-k">Given </span>I have the redis key <span class="pl-s">"key"</span> in the db 0 with value <span class="pl-s">"value"</span>
+  <span class="pl-k">And </span>I have the redis key <span class="pl-s">"key"</span> in the db 3 with value <span class="pl-s">"value"</span>
+  <span class="pl-k">And </span>I have the redis key <span class="pl-s">"key"</span> in the db 7 with value <span class="pl-s">"value"</span>
+  <span class="pl-k">Then </span>I have the redis key <span class="pl-s">"key"</span> in the db 0 with value <span class="pl-s">"value"</span>
+  <span class="pl-k">And </span>I have the redis key <span class="pl-s">"key"</span> in the db 3 with value <span class="pl-s">"value"</span>
+  <span class="pl-k">And </span>I have the redis key <span class="pl-s">"key"</span> in the db 7 with value <span class="pl-s">"value"</span>
+  <span class="pl-k">Given </span>I have cleaned redis
+  <span class="pl-k">Then </span>the redis key <span class="pl-s">"key"</span> in the db 0 should not exists
+  <span class="pl-k">And </span>the redis key <span class="pl-s">"key"</span> in the db 3 should not exists
+  <span class="pl-k">And </span>the redis key <span class="pl-s">"key"</span> in the db 7 should not exists
+</pre></div>
+
+<h2>
+<a id="database-assertions" class="anchor" href="#database-assertions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Database assertions</h2>
+
+<p>You need to put your database connection properties in <code>src/test/resources/test-db.properties</code></p>
+
+<div class="highlight highlight-properties"><pre><span class="pl-k">database.url</span>=jdbc:mysql://localhost/myapp_test
+<span class="pl-k">database.driver</span>=com.mysql.jdbc.Driver
+<span class="pl-k">database.user</span>=root
+<span class="pl-k">database.password</span>=</pre></div>
+
+<p>Write your feature in gherkin language in <code>src/test/resources/features/example.feature</code></p>
+
+<p><em>it should be used in <code>Then</code> steps to check the database</em></p>
+
+<div class="highlight highlight-gherkin"><pre><span class="pl-k">Scenario</span>:<span class="pl-s"> Database check exists</span>
+    <span class="pl-k">Given </span>I have only the following rows in the <span class="pl-s">"models"</span> table:
+<span class="pl-k">      | <span class="pl-s1">id</span> | <span class="pl-s1">created</span>             | <span class="pl-s1">modified</span>            | <span class="pl-s1">email</span>                 | <span class="pl-s1">fullname</span> | <span class="pl-s1">password</span> |</span>
+<span class="pl-k">      | <span class="pl-s1">4</span>  | <span class="pl-s1">2015</span>-<span class="pl-s1">02</span>-<span class="pl-s1">11</span> <span class="pl-s1">00</span>:<span class="pl-s1">00</span>:<span class="pl-s1">00</span> | <span class="pl-s1">2015</span>-<span class="pl-s1">02</span>-<span class="pl-s1">11</span> <span class="pl-s1">00</span>:<span class="pl-s1">00</span>:<span class="pl-s1">00</span> | <span class="pl-s1">cchacin2</span>@<span class="pl-s1">superbiz</span>.<span class="pl-s1">org</span> | <span class="pl-s1">Carlos2</span>  | <span class="pl-s1">passw0rd</span> |</span>
+<span class="pl-k">      | <span class="pl-s1">5</span>  | <span class="pl-s1">2015</span>-<span class="pl-s1">02</span>-<span class="pl-s1">11</span> <span class="pl-s1">00</span>:<span class="pl-s1">00</span>:<span class="pl-s1">00</span> | <span class="pl-s1">2015</span>-<span class="pl-s1">02</span>-<span class="pl-s1">11</span> <span class="pl-s1">00</span>:<span class="pl-s1">00</span>:<span class="pl-s1">00</span> | <span class="pl-s1">cchacin3</span>@<span class="pl-s1">superbiz</span>.<span class="pl-s1">org</span> | <span class="pl-s1">Carlos3</span>  | <span class="pl-s1">passw0rd</span> |</span>
+    <span class="pl-k">Then </span>I should have the following rows in the <span class="pl-s">"models"</span> table:
+<span class="pl-k">      | <span class="pl-s1">id</span> | <span class="pl-s1">created</span>             | <span class="pl-s1">modified</span>            | <span class="pl-s1">email</span>                 | <span class="pl-s1">fullname</span> | <span class="pl-s1">password</span> |</span>
+<span class="pl-k">      | <span class="pl-s1">4</span>  | <span class="pl-s1">2015</span>-<span class="pl-s1">02</span>-<span class="pl-s1">11</span> <span class="pl-s1">00</span>:<span class="pl-s1">00</span>:<span class="pl-s1">00</span> | <span class="pl-s1">2015</span>-<span class="pl-s1">02</span>-<span class="pl-s1">11</span> <span class="pl-s1">00</span>:<span class="pl-s1">00</span>:<span class="pl-s1">00</span> | <span class="pl-s1">cchacin2</span>@<span class="pl-s1">superbiz</span>.<span class="pl-s1">org</span> | <span class="pl-s1">Carlos2</span>  | <span class="pl-s1">passw0rd</span> |</span>
+<span class="pl-k">      | <span class="pl-s1">5</span>  | <span class="pl-s1">2015</span>-<span class="pl-s1">02</span>-<span class="pl-s1">11</span> <span class="pl-s1">00</span>:<span class="pl-s1">00</span>:<span class="pl-s1">00</span> | <span class="pl-s1">2015</span>-<span class="pl-s1">02</span>-<span class="pl-s1">11</span> <span class="pl-s1">00</span>:<span class="pl-s1">00</span>:<span class="pl-s1">00</span> | <span class="pl-s1">cchacin3</span>@<span class="pl-s1">superbiz</span>.<span class="pl-s1">org</span> | <span class="pl-s1">Carlos3</span>  | <span class="pl-s1">passw0rd</span> |</span>
 </pre></div>
 
 <h2>
