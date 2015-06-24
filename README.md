@@ -111,7 +111,7 @@ Write your feature in gherkin language in ```src/test/resources/features/example
 
 ```gherkin
   Scenario:
-    When I make a GET call to "/zen" endpoint in host "https://api.github.com"
+    When I make a GET call to "https://api.github.com/zen?z=1" endpoint
     Then response status code should be "200"
     And response content type should be "text/plain;charset=utf-8"
 
