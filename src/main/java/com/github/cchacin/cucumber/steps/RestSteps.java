@@ -1,9 +1,9 @@
 /**
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -22,22 +22,22 @@
  */
 package com.github.cchacin.cucumber.steps;
 
-import static com.github.cchacin.cucumber.steps.Utility.fileContent;
-import static com.jayway.restassured.RestAssured.given;
-import static net.javacrumbs.jsonunit.fluent.JsonFluentAssert.assertThatJson;
-import static org.assertj.core.api.Assertions.assertThat;
+import com.jayway.jsonpath.JsonPath;
+import com.jayway.restassured.response.Response;
+import com.jayway.restassured.specification.RequestSpecification;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import com.jayway.jsonpath.JsonPath;
-import com.jayway.restassured.response.Response;
-import com.jayway.restassured.specification.RequestSpecification;
-
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
+import static com.github.cchacin.cucumber.steps.Utility.fileContent;
+import static com.jayway.restassured.RestAssured.given;
+import static net.javacrumbs.jsonunit.fluent.JsonFluentAssert.assertThatJson;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class RestSteps {
 
@@ -177,5 +177,12 @@ public class RestSteps {
   public void response_json_path_list_should_be_of_length(final String jsonPath, final int length) {
     final List<Object> responseList = JsonPath.read(this.responseValue, jsonPath);
     assertThat(responseList.size()).isEqualTo(length);
+  }
+
+  @Then("^response json path list \"(.*?)\" should be at least of length (\\d+)$")
+  public void response_json_path_list_should_be_at_least_of_length(final String jsonPath,
+                                                                   final int length) {
+    final List<Object> responseList = JsonPath.read(this.responseValue, jsonPath);
+    assertThat(responseList.size()).isGreaterThanOrEqualTo(length);
   }
 }

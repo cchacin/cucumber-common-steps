@@ -7,6 +7,8 @@ Feature: Successful rest calls
     Then response status code should be 200
     And response content type should be "application/json"
     And response json path list "$.*" should be of length 2
+    And response json path list "$.*" should be at least of length 1
+    And response json path list "$.*" should be at least of length 2
     And response should be json:
     """
     [
