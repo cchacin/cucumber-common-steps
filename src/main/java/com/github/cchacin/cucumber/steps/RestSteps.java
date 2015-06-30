@@ -1,9 +1,9 @@
 /**
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -181,7 +181,7 @@ public class RestSteps {
 
   @Then("^response json path list \"(.*?)\" should be at least of length (\\d+)$")
   public void response_json_path_list_should_be_at_least_of_length(final String jsonPath,
-                                                                   final int length) {
+      final int length) {
     final List<Object> responseList = JsonPath.read(this.responseValue, jsonPath);
     assertThat(responseList.size()).isGreaterThanOrEqualTo(length);
   }
