@@ -34,10 +34,11 @@
         <javaee.version>6.0-6</javaee.version>
         <dbsetup.version>1.6.0</dbsetup.version>
         <openejb.version>4.7.1</openejb.version>
-        <jsonunit.version>1.5.6</jsonunit.version>
-        <lombok.version>1.16.4</lombok.version>
-        <restassured.version>2.4.1</restassured.version>
+        <jsonunit.version>1.6.1</jsonunit.version>
+        <lombok.version>1.16.6</lombok.version>
+        <restassured.version>2.5.0</restassured.version>
         <jedis.version>2.7.3</jedis.version>
+        <restito.version>0.7</restito.version>
     </properties>
 
     <repositories>
@@ -173,7 +174,7 @@
         <dependency>
             <groupId>com.xebialabs.restito</groupId>
             <artifactId>restito</artifactId>
-            <version>0.6</version>
+            <version>${restito.version}</version>
             <exclusions>
                 <exclusion>
                     <artifactId>junit</artifactId>
@@ -234,7 +235,7 @@
                     <plugin>
                         <groupId>org.eluder.coveralls</groupId>
                         <artifactId>coveralls-maven-plugin</artifactId>
-                        <version>3.1.0</version>
+                        <version>4.0.0</version>
                     </plugin>
                 </plugins>
             </build>
