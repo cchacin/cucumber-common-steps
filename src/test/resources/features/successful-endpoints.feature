@@ -371,3 +371,15 @@ Feature: Successful rest calls
       }
     ]
     """
+
+     ## Array Order doesn't mather
+  Scenario: Retrieve users list without order
+    Given I have only the following rows in the "models" table:
+      | id | created             | modified            | email                 | fullname | password  |
+      | 1  | 2014-07-16 00:00:00 | 2014-07-16 00:00:00 | cchacin@superbiz.org  | Carlos   | passw0rd  |
+      | 2  | 2014-07-16 00:00:00 | 2014-07-16 00:00:00 | cchacin2@superbiz.org | Carlos2  | passw0rd2 |
+      | 3  | 2014-07-16 00:00:00 | 2014-07-16 00:00:00 | cchacin3@superbiz.org | Carlos3  | passw0rd3 |
+    When I make a GET call to "/test-app/users" endpoint
+    Then response status code should be 200
+    And response content type should be "application/json"
+    And response should be json in file "/responses/orderUsers.json" ignoring array order
