@@ -331,3 +331,55 @@ Feature: Successful rest calls
       | id | created             | modified            | email                 | fullname | password |
       | 4  | 2015-02-11 00:00:00 | 2015-02-11 00:00:00 | cchacin2@superbiz.org | Carlos2  | passw0rd |
       | 5  | 2015-02-11 00:00:00 | 2015-02-11 00:00:00 | cchacin3@superbiz.org | Carlos3  | passw0rd |
+
+  ## Array Order doesn't mather
+  Scenario: Retrieve users list without order
+    Given I have only the following rows in the "models" table:
+      | id | created             | modified            | email                 | fullname | password  |
+      | 1  | 2014-07-16 00:00:00 | 2014-07-16 00:00:00 | cchacin@superbiz.org  | Carlos   | passw0rd  |
+      | 2  | 2014-07-16 00:00:00 | 2014-07-16 00:00:00 | cchacin2@superbiz.org | Carlos2  | passw0rd2 |
+      | 3  | 2014-07-16 00:00:00 | 2014-07-16 00:00:00 | cchacin3@superbiz.org | Carlos3  | passw0rd3 |
+    When I make a GET call to "/test-app/users" endpoint
+    Then response status code should be 200
+    And response content type should be "application/json"
+    And response should be json ignoring array order:
+    """
+    [
+      {
+        "created":"${json-unit.ignore}",
+        "email":"cchacin2@superbiz.org",
+        "fullname":"Carlos2",
+        "id":2,
+        "modified":"${json-unit.ignore}",
+        "password":"passw0rd2"
+      },
+      {
+        "created":"${json-unit.ignore}",
+        "email":"cchacin@superbiz.org",
+        "fullname":"Carlos",
+        "id":1,
+        "modified":"${json-unit.ignore}",
+        "password":"passw0rd"
+      },
+      {
+        "created":"${json-unit.ignore}",
+        "email":"cchacin3@superbiz.org",
+        "fullname":"Carlos3",
+        "id":3,
+        "modified":"${json-unit.ignore}",
+        "password":"passw0rd3"
+      }
+    ]
+    """
+
+     ## Array Order doesn't mather
+  Scenario: Retrieve users list without order
+    Given I have only the following rows in the "models" table:
+      | id | created             | modified            | email                 | fullname | password  |
+      | 1  | 2014-07-16 00:00:00 | 2014-07-16 00:00:00 | cchacin@superbiz.org  | Carlos   | passw0rd  |
+      | 2  | 2014-07-16 00:00:00 | 2014-07-16 00:00:00 | cchacin2@superbiz.org | Carlos2  | passw0rd2 |
+      | 3  | 2014-07-16 00:00:00 | 2014-07-16 00:00:00 | cchacin3@superbiz.org | Carlos3  | passw0rd3 |
+    When I make a GET call to "/test-app/users" endpoint
+    Then response status code should be 200
+    And response content type should be "application/json"
+    And response should be json in file "/responses/orderUsers.json" ignoring array order

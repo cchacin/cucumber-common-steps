@@ -1,0 +1,26 @@
+[
+  {
+    "created":"${json-unit.ignore}",
+    "email":"cchacin2@superbiz.org",
+    "fullname":"Carlos2",
+    "id":2,
+    "modified":"${json-unit.ignore}",
+    "password":"passw0rd2"
+  },
+  {
+    "created":"${json-unit.ignore}",
+    "email":"cchacin@superbiz.org",
+    "fullname":"Carlos",
+    "id":1,
+    "modified":"${json-unit.ignore}",
+    "password":"passw0rd"
+  },
+  {
+    "created":"${json-unit.ignore}",
+    "email":"cchacin3@superbiz.org",
+    "fullname":"Carlos3",
+    "id":3,
+    "modified":"${json-unit.ignore}",
+    "password":"passw0rd3"
+  }
+]

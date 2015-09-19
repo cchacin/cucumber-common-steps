@@ -33,6 +33,7 @@ import java.util.List;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import net.javacrumbs.jsonunit.core.Option;
 
 import static com.github.cchacin.cucumber.steps.Utility.fileContent;
 import static com.jayway.restassured.RestAssured.given;
@@ -137,10 +138,24 @@ public class RestSteps {
     this.response_should_be_json(content);
   }
 
+  @Then("^response should be json in file \"(.*?)\" ignoring array order$")
+  public final void response_should_be_json_ignoring_array_oders_responseBody(
+      final String contentFilePath) throws Throwable {
+    final String content = fileContent(contentFilePath);
+    this.response_should_be_json_ignoring_array_order(content);
+  }
+
   @Then("^response should be json:$")
   public final void response_should_be_json(final String jsonResponseString) throws Throwable {
     assertThatJson(this.responseValue).ignoring("${json-unit.ignore}")
         .isEqualTo(jsonResponseString);
+  }
+
+  @Then("^response should be json ignoring array order:$")
+  public final void response_should_be_json_ignoring_array_order(final String jsonResponseString)
+      throws Throwable {
+    assertThatJson(this.responseValue).ignoring("${json-unit.ignore}")
+        .when(Option.IGNORING_ARRAY_ORDER).isEqualTo(jsonResponseString);
   }
 
   @Then("^response should be empty$")
