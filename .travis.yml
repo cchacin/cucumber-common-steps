@@ -3,9 +3,6 @@ language: java
 jdk:
   - openjdk7
 before_script:
-  - sudo apt-get -qq update > /dev/null
-  - sudo apt-get -qq install graphviz > /dev/null
-  - chmod +x update-gh-pages.sh
   - mysql -e 'create database myapp_test;'
 services:
   - mysql
