@@ -1,34 +1,20 @@
 /**
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- * <p/>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p/>
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-/**
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- * <p/>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p/>
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.tomitribe.beryllium;
 
@@ -68,7 +54,7 @@ public class RestSteps {
   }
 
   @When("^I make a (GET|HEAD) call to \"(.*?)\" endpoint$")
-  public final void I_make_a_GET_HEAD_call_to_endpoint(final String method, final String endpointUrl)
+  public final void iMakeAGetHeadCallToEndpoint(final String method, final String endpointUrl)
       throws Throwable {
     this.spec = createWebClient(endpointUrl);
     execute(method);
@@ -81,8 +67,9 @@ public class RestSteps {
   }
 
   @When("^I make a (POST|PUT) call to \"(.*?)\" endpoint with post body:$")
-  public final void I_make_a_POST_PUT_call_to_endpoint_with_post_body(String method,
-      String endpointUrl, final String postBody) throws Throwable {
+  public final void iMakeAPostPutCallToEndpointWithPostBody(String method,
+                                                            String endpointUrl,
+                                                            final String postBody) throws Throwable {
     this.spec = createWebClient(endpointUrl).body(postBody);
     this.response =
         (method.equals("POST")) ? this.spec.post(this.basePath) : this.spec.put(this.basePath);
@@ -90,38 +77,41 @@ public class RestSteps {
   }
 
   @When("^I make a (POST|PUT) call to \"(.*?)\" endpoint with post body in file \"(.*?)\"$")
-  public final void I_make_a_POST_PUT_call_to_endpoint_with_post_body_in_file(final String method,
-      final String endpointUrl, final String postBodyFilePath) throws Throwable {
-    I_make_a_POST_PUT_call_to_endpoint_with_post_body(method, endpointUrl,
-        Utility.fileContent(postBodyFilePath));
+  public final void iMakeAPostPutCallToEndpointWithPostBodyInFile(final String method,
+                                                                  final String endpointUrl,
+                                                                  final String postBodyFilePath) throws Throwable {
+    iMakeAPostPutCallToEndpointWithPostBody(method, endpointUrl,
+                                            Utility.fileContent(postBodyFilePath));
   }
 
   @When("^I make a DELETE call to \"(.*?)\" endpoint$")
-  public final void I_make_a_DELETE_call_to_endpoint(final String endpointUrl) throws Throwable {
+  public final void iMakeADeleteCallToEndpoint(final String endpointUrl) throws Throwable {
     this.response = createWebClient(endpointUrl).delete(endpointUrl);
     this.responseValue = this.response.asString();
   }
 
   @When("^I make a (GET|HEAD) call to \"(.*?)\" endpoint with headers:$")
-  public void I_make_a_GET_HEAD_call_to_endpoint_with_headers(final String method,
-      final String endpointUrl, final DataTable headers) throws Throwable {
+  public void iMakeAGetHeadCallToEndpointWithHeaders(final String method,
+                                                     final String endpointUrl,
+                                                     final DataTable headers) throws Throwable {
     this.spec = createWebClient(endpointUrl);
     this.spec = this.spec.headers(headers.asMap(String.class, String.class));
     execute(method);
   }
 
   @When("^I make a (GET|HEAD) call to \"(.*?)\" endpoint with query params:$")
-  public void i_make_a_GET_HEAD_call_to_endpoint_with_query_params(final String method,
-      final String endpointUrl, final DataTable params) throws Throwable {
+  public void iMakeAGetHeadCallToEndpointWithQueryParams(final String method,
+                                                         final String endpointUrl,
+                                                         final DataTable params) throws Throwable {
     this.spec = createWebClient(endpointUrl);
     this.spec = this.spec.params(params.asMap(String.class, String.class));
     execute(method);
   }
 
   @When("^I make a (POST|PUT) call to \"(.*?)\" endpoint with post body in file \"(.*?)\" and headers:$")
-  public void I_make_a_POST_PUT_call_to_endpoint_with_post_body_in_file_and_headers(
-      final String method, final String endpointUrl, final String postBodyFilePath,
-      final DataTable headers) throws IOException, URISyntaxException {
+  public void iMakeAPostPutCallToEndpointWithPostBodyInFileAndHeaders(
+          final String method, final String endpointUrl, final String postBodyFilePath,
+          final DataTable headers) throws IOException, URISyntaxException {
     this.spec =
         createWebClient(endpointUrl).headers(headers.asMap(String.class, String.class)).body(
             Utility.fileContent(postBodyFilePath));
@@ -131,82 +121,82 @@ public class RestSteps {
   }
 
   @Then("^response status code should be (\\d+)$")
-  public final void response_status_code_should_be(final int statusCode) throws Throwable {
+  public final void responseStatusCodeShouldBe(final int statusCode) throws Throwable {
     assertThat(this.response.getStatusCode()).isEqualTo(statusCode);
   }
 
   @Then("^response content type should be \"(.*?)\"$")
-  public final void response_content_type_should_be(final String contentType) throws Throwable {
+  public final void responseContentTypeShouldBe(final String contentType) throws Throwable {
     assertThat(contentType).isEqualTo(this.response.contentType());
   }
 
   @Then("^response should be json in file \"(.*?)\"$")
-  public final void response_should_be_json_responseBody(final String contentFilePath)
+  public final void responseShouldBeJsonResponseBody(final String contentFilePath)
       throws Throwable {
 
     final String content = Utility.fileContent(contentFilePath);
-    this.response_should_be_json(content);
+    this.responseShouldBeJson(content);
   }
 
   @Then("^response should be json in file \"(.*?)\" ignoring array order$")
-  public final void response_should_be_json_ignoring_array_oders_responseBody(
-      final String contentFilePath) throws Throwable {
+  public final void responseShouldBeJsonIgnoringArrayOdersResponseBody(
+          final String contentFilePath) throws Throwable {
     final String content = Utility.fileContent(contentFilePath);
-    this.response_should_be_json_ignoring_array_order(content);
+    this.responseShouldBeJsonIgnoringArrayOrder(content);
   }
 
   @Then("^response should be json:$")
-  public final void response_should_be_json(final String jsonResponseString) throws Throwable {
+  public final void responseShouldBeJson(final String jsonResponseString) throws Throwable {
     assertThatJson(this.responseValue).ignoring("${json-unit.ignore}")
         .isEqualTo(jsonResponseString);
   }
 
   @Then("^response should be json ignoring array order:$")
-  public final void response_should_be_json_ignoring_array_order(final String jsonResponseString)
+  public final void responseShouldBeJsonIgnoringArrayOrder(final String jsonResponseString)
       throws Throwable {
     assertThatJson(this.responseValue).ignoring("${json-unit.ignore}")
         .when(Option.IGNORING_ARRAY_ORDER).isEqualTo(jsonResponseString);
   }
 
   @Then("^response should be empty$")
-  public final void response_should_be_empty() throws Throwable {
+  public final void responseShouldBeEmpty() throws Throwable {
     assertThat(this.responseValue).isEmpty();
   }
 
   @Then("^response should be file \"(.*?)\"$")
-  public final void response_should_be_file(final String contentFilePath) throws Throwable {
+  public final void responseShouldBeFile(final String contentFilePath) throws Throwable {
     assertThat(this.responseValue).isEqualTo(Utility.fileContent(contentFilePath));
   }
 
   @Then("^response header \"(.*?)\" should be \"(.*?)\"$")
-  public final void response_header_should_be_(final String responseHeaderName,
-      final String headerValue) throws Throwable {
+  public final void responseHeaderShouldBe(final String responseHeaderName,
+                                           final String headerValue) throws Throwable {
     assertThat(this.response.getHeader(responseHeaderName)).isEqualTo(headerValue);
   }
 
   @Then("^response json path list \"(.*?)\" should be:$")
-  public void response_json_path_list_should_be(final String jsonPath, final DataTable list)
+  public void responseJsonPathListShouldBe(final String jsonPath, final DataTable list)
       throws Throwable {
     final List<String> responseList = JsonPath.read(this.responseValue, jsonPath);
     assertThat(responseList).isEqualTo(list.asList(String.class));
   }
 
   @Then("^response json path element \"(.*?)\" should be \"(.*?)\"$")
-  public void response_json_path_element_should_be(final String jsonPath, final String value)
+  public void responseJsonPathElementShouldBe(final String jsonPath, final String value)
       throws Throwable {
     final Object responseValue = JsonPath.read(this.responseValue, jsonPath);
     assertThat(String.valueOf(responseValue)).isEqualTo(value);
   }
 
   @Then("^response json path list \"(.*?)\" should be of length (\\d+)$")
-  public void response_json_path_list_should_be_of_length(final String jsonPath, final int length) {
+  public void responseJsonPathListShouldBeOfLength(final String jsonPath, final int length) {
     final List<Object> responseList = JsonPath.read(this.responseValue, jsonPath);
     assertThat(responseList.size()).isEqualTo(length);
   }
 
   @Then("^response json path list \"(.*?)\" should be at least of length (\\d+)$")
-  public void response_json_path_list_should_be_at_least_of_length(final String jsonPath,
-      final int length) {
+  public void responseJsonPathListShouldBeAtLeastOfLength(final String jsonPath,
+                                                          final int length) {
     final List<Object> responseList = JsonPath.read(this.responseValue, jsonPath);
     assertThat(responseList.size()).isAtLeast(length);
   }

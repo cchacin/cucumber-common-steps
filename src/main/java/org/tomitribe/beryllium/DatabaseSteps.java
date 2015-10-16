@@ -1,13 +1,20 @@
 /**
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.tomitribe.beryllium;
 
@@ -60,14 +67,14 @@ public class DatabaseSteps {
       properties.getProperty("database.password"));
 
   @Given("^I have the following rows in the \"(.*?)\" table:$")
-  public void i_have_the_following_rows_in_the_table(final String tableName, final DataTable data)
+  public void iHaveTheFollowingRowsInTheTable(final String tableName, final DataTable data)
       throws Throwable {
     this.insert(tableName, data);
   }
 
   @Given("^I have only the following rows in the \"([^\"]*)\" table:$")
-  public void I_have_only_the_following_rows_in_the_table(final String tableName,
-      final DataTable data) throws Throwable {
+  public void iHaveOnlyTheFollowingRowsInTheTable(final String tableName,
+                                                  final DataTable data) throws Throwable {
     this.deleteAll(tableName);
     this.insert(tableName, data);
   }
@@ -97,14 +104,14 @@ public class DatabaseSteps {
   }
 
   @Given("^I have the following sql script \"([^\"]*)\"$")
-  public void I_have_the_following_sql_script(final String script) throws Throwable {
+  public void iHaveTheFollowingSQLScript(final String script) throws Throwable {
     new ScriptRunner(this.destination.getConnection()).runScript(new BufferedReader(new FileReader(
         Thread.currentThread().getContextClassLoader().getResource(script).getPath())));
   }
 
   @Then("^I should have the following rows in the \"([^\"]*)\" table:$")
-  public void I_should_have_the_following_rows_in_the_table(final String tableName,
-      final DataTable data) throws SQLException, ClassNotFoundException {
+  public void iShouldHaveTheFollowingRowsInTheTable(final String tableName,
+                                                    final DataTable data) throws SQLException, ClassNotFoundException {
     exists(tableName, data);
   }
 

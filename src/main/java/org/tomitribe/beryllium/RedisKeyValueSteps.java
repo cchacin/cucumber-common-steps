@@ -1,13 +1,20 @@
 /**
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package org.tomitribe.beryllium;
 
@@ -34,7 +41,7 @@ public class RedisKeyValueSteps {
   }
 
   @Given("^I have the redis key \"([^\"]*)\"(?: in the db (\\d+))? with value \"([^\"]*)\"$")
-  public void I_have_the_redis_key_with_value(final String key, final Integer db, final String value)
+  public void iHaveTheRedisKeyWithValue(final String key, final Integer db, final String value)
       throws Throwable {
     final Jedis jedis = getJedis(db);
     jedis.set(key, value);
@@ -42,19 +49,19 @@ public class RedisKeyValueSteps {
   }
 
   @Given("^I have the redis key \"([^\"]*)\"(?: in the db (\\d+))? with value in file \"([^\"]*)\"$")
-  public void I_have_the_redis_key_with_value_in_file(final String key, final Integer db,
-      final String filename) throws Throwable {
-    this.I_have_the_redis_key_with_value(key, db, Utility.fileContent(filename));
+  public void iHaveTheRedisKeyInTheDbWithValueInFile(final String key, final Integer db,
+                                                     final String filename) throws Throwable {
+    this.iHaveTheRedisKeyWithValue(key, db, Utility.fileContent(filename));
   }
 
   @Given("^I have the redis key \"([^\"]*)\"(?: in the db (\\d+))? with value:$")
-  public void I_have_the_redis_key_with_value_(final String key, final Integer db,
-      final String value) throws Throwable {
-    this.I_have_the_redis_key_with_value(key, db, value);
+  public void iHaveTheRedisKeyInTheDbWithValue(final String key, final Integer db,
+                                               final String value) throws Throwable {
+    this.iHaveTheRedisKeyWithValue(key, db, value);
   }
 
   @Then("^the redis key \"([^\"]*)\"(?: in the db (\\d+))? should be \"([^\"]*)\"$")
-  public void the_redis_key_should_be(final String key, final Integer db, final String value)
+  public void theRedisKeyInTheDbShouldBe(final String key, final Integer db, final String value)
       throws Throwable {
     final Jedis jedis = getJedis(db);
     assertThat(jedis.get(key)).isEqualTo(value);
@@ -62,69 +69,69 @@ public class RedisKeyValueSteps {
   }
 
   @Then("^the redis key \"([^\"]*)\"(?: in the db (\\d+))? should be:$")
-  public void the_redis_key_should_be_(final String key, final Integer db, final String value)
+  public void theRedisKeyInTheDbShouldBeColon(final String key, final Integer db, final String value)
       throws Throwable {
-    this.the_redis_key_should_be(key, db, value);
+    this.theRedisKeyInTheDbShouldBe(key, db, value);
   }
 
   @Then("^the redis key \"([^\"]*)\"(?: in the db (\\d+))? should be file \"([^\"]*)\"$")
-  public void the_redis_key_should_be_file(final String key, final Integer db, final String value)
+  public void theRedisKeyInTheDbShouldBeFile(final String key, final Integer db, final String value)
       throws Throwable {
-    this.the_redis_key_should_be(key, db, Utility.fileContent(value));
+    this.theRedisKeyInTheDbShouldBe(key, db, Utility.fileContent(value));
   }
 
   @Given("^I have the redis key \"([^\"]*)\"(?: in the db (\\d+))? with value \"([^\"]*)\" with ttl (\\d+) seconds$")
-  public void I_have_the_redis_key_with_value_with_ttl(final String key, final Integer db,
-      final String value, final int seconds) throws Throwable {
-    this.I_have_the_redis_key_with_value(key, db, value);
+  public void iHaveTheRedisKeyInTheDbWithValueWithTTL(final String key, final Integer db,
+                                                      final String value, final int seconds) throws Throwable {
+    this.iHaveTheRedisKeyWithValue(key, db, value);
     final Jedis jedis = getJedis(db);
     jedis.expire(key, seconds);
     jedis.close();
   }
 
   @Then("^the redis key \"([^\"]*)\"(?: in the db (\\d+))? should not exists after (\\d+) seconds$")
-  public void the_redis_key_should_not_exists_after_seconds(final String key, final Integer db,
-      final int seconds) throws Throwable {
+  public void theRedisKeyInTheDbShouldNotExistsAfterSeconds(final String key, final Integer db,
+                                                            final int seconds) throws Throwable {
     Thread.sleep(seconds * 1_000);
-    this.the_redis_key_should_not_exists(key, db);
+    this.theRedisKeyInTheDbShouldNotExists(key, db);
   }
 
   @Then("^the redis key \"([^\"]*)\"(?: in the db (\\d+))? should exists$")
-  public void the_redis_key_should_exists(final String key, final Integer db) throws Throwable {
+  public void theRedisKeyInTheDbShouldExists(final String key, final Integer db) throws Throwable {
     final Jedis jedis = getJedis(db);
     assertThat(jedis.get(key)).isNotNull();
     jedis.close();
   }
 
   @Then("^the redis key \"([^\"]*)\"(?: in the db (\\d+))? should not exists$")
-  public void the_redis_key_should_not_exists(final String key, final Integer db) throws Throwable {
+  public void theRedisKeyInTheDbShouldNotExists(final String key, final Integer db) throws Throwable {
     final Jedis jedis = getJedis(db);
     assertThat(jedis.get(key)).isNull();
     jedis.close();
   }
 
   @Then("^the redis keys(?: in the db (\\d+))? should exists:$")
-  public void the_redis_keys_should_exists(final Integer db, final DataTable dataTable)
+  public void theRedisKeysInTheDbShouldExistsColon(final Integer db, final DataTable dataTable)
       throws Throwable {
     for (final String key : dataTable.asList(String.class)) {
-      this.the_redis_keys_should_exists(key, db);
+      this.theRedisKeysInTheDbShouldExists(key, db);
     }
   }
 
   @Then("^the redis keys \"([^\"]*)\"(?: in the db (\\d+))? should exists$")
-  public void the_redis_keys_should_exists(final String keys, final Integer db) throws Throwable {
+  public void theRedisKeysInTheDbShouldExists(final String keys, final Integer db) throws Throwable {
     final String[] split = keys.split(",");
     for (final String key : split) {
-      this.the_redis_key_should_exists(key, db);
+      this.theRedisKeyInTheDbShouldExists(key, db);
     }
   }
 
   @Then("^the redis keys \"([^\"]*)\"(?: in the db (\\d+))? should not exists$")
-  public void the_redis_keys_should_not_exists(final String keys, final Integer db)
+  public void theRedisKeysShouldNotExists(final String keys, final Integer db)
       throws Throwable {
     final String[] split = keys.split(",");
     for (final String key : split) {
-      this.the_redis_key_should_not_exists(key, db);
+      this.theRedisKeyInTheDbShouldNotExists(key, db);
     }
   }
 }

@@ -1,24 +1,47 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>cucumber-common-steps</artifactId>
+    <groupId>org.tomitribe</groupId>
+    <artifactId>beryllium</artifactId>
     <packaging>jar</packaging>
     <version>0.2.12-SNAPSHOT</version>
 
     <parent>
-        <groupId>com.github.cchacin</groupId>
-        <artifactId>basepom</artifactId>
-        <version>0.1.8</version>
+        <groupId>org.tomitribe</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>3</version>
     </parent>
 
-    <name>Cucumber Common Step Definitions</name>
-    <description>Cucumber Common Step Definitions.</description>
+    <name>Beryllium</name>
+    <description>Functional testing for REST API, Database setup, external service mocks and redis setup/assertions.
+    </description>
     <inceptionYear>2014</inceptionYear>
-    <url>https://github.com/cchacin/cucumber-common-steps</url>
+    <url>https://github.com/cchacin/beryllium</url>
 
     <scm>
-        <url>scm:git:git@github.com:cchacin/cucumber-common-steps.git</url>
-        <connection>scm:git:git@github.com:cchacin/cucumber-common-steps.git</connection>
-        <developerConnection>scm:git:git@github.com:cchacin/cucumber-common-steps.git</developerConnection>
+        <url>scm:git:git@github.com:cchacin/beryllium.git</url>
+        <connection>scm:git:git@github.com:cchacin/beryllium.git</connection>
+        <developerConnection>scm:git:git@github.com:cchacin/beryllium.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
@@ -39,6 +62,7 @@
         <restassured.version>2.6.0</restassured.version>
         <jedis.version>2.7.3</jedis.version>
         <restito.version>0.7</restito.version>
+        <jsonpath.version>2.0.0</jsonpath.version>
     </properties>
 
     <repositories>
@@ -131,7 +155,7 @@
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>
-            <version>2.0.0</version>
+            <version>${jsonpath.version}</version>
         </dependency>
 
         <!-- Findbugs -->
@@ -187,32 +211,80 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <optimize>true</optimize>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>2.11</version>
+                <configuration>
+                    <basedir>${basedir}</basedir>
+                    <header>${basedir}/header.txt</header>
+                    <quiet>false</quiet>
+                    <failIfMissing>true</failIfMissing>
+                    <aggregate>false</aggregate>
+                    <includes>
+                        <include>src/**/*</include>
+                        <include>src/test/resources/*.feature</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/README</exclude>
+                    </excludes>
+                    <useDefaultExcludes>true</useDefaultExcludes>
+                    <mapping>
+                        <java>JAVADOC_STYLE</java>
+                    </mapping>
+                    <strictCheck>true</strictCheck>
+                    <useDefaultMapping>true</useDefaultMapping>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>format</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>com.googlecode.maven-java-formatter-plugin</groupId>
-                <artifactId>maven-java-formatter-plugin</artifactId>
+                <groupId>org.apache.rat</groupId>
+                <artifactId>apache-rat-plugin</artifactId>
+                <version>0.10</version>
+                <configuration>
+                    <includes>
+                        <include>src/**/*</include>
+                        <include>pom.xml</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/*/MANIFEST.MF</exclude>
+                        <exclude>.git</exclude>
+                        <exclude>.gitignore</exclude>
+                        <exclude>derby.log</exclude>
+                        <exclude>**/META-INF/services/*</exclude>
+                        <exclude>**/bootstrap-*</exclude>
+                        <exclude>**/js/jquery-*</exclude>
+                        <exclude>**/*.json</exclude>
+                        <exclude>src/test/resources/**/*.csv</exclude>
+                        <exclude>src/test/resources/**/*.txt</exclude>
+                        <exclude>src/test/resources/**/*.text</exclude>
+                        <exclude>src/test/resources/**/*.feature</exclude>
+                        <exclude>**/src/main/resources/archetype-resources/**/*</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
