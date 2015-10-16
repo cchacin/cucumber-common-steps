@@ -35,7 +35,7 @@
         <dbsetup.version>1.6.0</dbsetup.version>
         <jsonunit.version>1.6.1</jsonunit.version>
         <lombok.version>1.16.6</lombok.version>
-        <restassured.version>2.5.0</restassured.version>
+        <restassured.version>2.6.0</restassured.version>
         <jedis.version>2.7.3</jedis.version>
         <restito.version>0.7</restito.version>
     </properties>
