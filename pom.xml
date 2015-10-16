@@ -39,9 +39,9 @@
     <url>https://github.com/cchacin/beryllium</url>
 
     <scm>
-        <url>scm:git:git@github.com:cchacin/beryllium.git</url>
-        <connection>scm:git:git@github.com:cchacin/beryllium.git</connection>
-        <developerConnection>scm:git:git@github.com:cchacin/beryllium.git</developerConnection>
+        <url>scm:git:git@github.com:tomitribe/beryllium.git</url>
+        <connection>scm:git:git@github.com:tomitribe/beryllium.git</connection>
+        <developerConnection>scm:git:git@github.com:tomitribe/beryllium.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
