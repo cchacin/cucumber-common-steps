@@ -9,7 +9,7 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.github.cchacin.cucumber.steps;
+package org.tomitribe.beryllium;
 
 import java.util.List;
 
@@ -19,8 +19,8 @@ import cucumber.api.java.en.Then;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
-import static com.github.cchacin.cucumber.steps.Utility.fileContent;
 import static com.google.common.truth.Truth.assertThat;
+import static org.tomitribe.beryllium.Utility.fileContent;
 
 public class RedisListSteps {
 

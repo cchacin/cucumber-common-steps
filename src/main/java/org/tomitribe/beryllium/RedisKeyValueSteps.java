@@ -9,7 +9,7 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.github.cchacin.cucumber.steps;
+package org.tomitribe.beryllium;
 
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
@@ -17,7 +17,6 @@ import cucumber.api.java.en.Then;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
-import static com.github.cchacin.cucumber.steps.Utility.fileContent;
 import static com.google.common.truth.Truth.assertThat;
 
 
@@ -45,7 +44,7 @@ public class RedisKeyValueSteps {
   @Given("^I have the redis key \"([^\"]*)\"(?: in the db (\\d+))? with value in file \"([^\"]*)\"$")
   public void I_have_the_redis_key_with_value_in_file(final String key, final Integer db,
       final String filename) throws Throwable {
-    this.I_have_the_redis_key_with_value(key, db, fileContent(filename));
+    this.I_have_the_redis_key_with_value(key, db, Utility.fileContent(filename));
   }
 
   @Given("^I have the redis key \"([^\"]*)\"(?: in the db (\\d+))? with value:$")
@@ -71,7 +70,7 @@ public class RedisKeyValueSteps {
   @Then("^the redis key \"([^\"]*)\"(?: in the db (\\d+))? should be file \"([^\"]*)\"$")
   public void the_redis_key_should_be_file(final String key, final Integer db, final String value)
       throws Throwable {
-    this.the_redis_key_should_be(key, db, fileContent(value));
+    this.the_redis_key_should_be(key, db, Utility.fileContent(value));
   }
 
   @Given("^I have the redis key \"([^\"]*)\"(?: in the db (\\d+))? with value \"([^\"]*)\" with ttl (\\d+) seconds$")

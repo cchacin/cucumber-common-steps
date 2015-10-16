@@ -8,6 +8,16 @@
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 /**
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
@@ -20,7 +30,7 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.github.cchacin.cucumber.steps;
+package org.tomitribe.beryllium;
 
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.restassured.response.Response;
@@ -36,7 +46,6 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import static com.github.cchacin.cucumber.steps.Utility.fileContent;
 import static com.google.common.truth.Truth.assertThat;
 import static com.jayway.restassured.RestAssured.given;
 import static net.javacrumbs.jsonunit.fluent.JsonFluentAssert.assertThatJson;
@@ -84,7 +93,7 @@ public class RestSteps {
   public final void I_make_a_POST_PUT_call_to_endpoint_with_post_body_in_file(final String method,
       final String endpointUrl, final String postBodyFilePath) throws Throwable {
     I_make_a_POST_PUT_call_to_endpoint_with_post_body(method, endpointUrl,
-        fileContent(postBodyFilePath));
+        Utility.fileContent(postBodyFilePath));
   }
 
   @When("^I make a DELETE call to \"(.*?)\" endpoint$")
@@ -115,7 +124,7 @@ public class RestSteps {
       final DataTable headers) throws IOException, URISyntaxException {
     this.spec =
         createWebClient(endpointUrl).headers(headers.asMap(String.class, String.class)).body(
-            fileContent(postBodyFilePath));
+            Utility.fileContent(postBodyFilePath));
     this.response =
         (method.equals("POST")) ? this.spec.post(this.basePath) : this.spec.put(this.basePath);
     this.responseValue = this.response.asString();
@@ -135,14 +144,14 @@ public class RestSteps {
   public final void response_should_be_json_responseBody(final String contentFilePath)
       throws Throwable {
 
-    final String content = fileContent(contentFilePath);
+    final String content = Utility.fileContent(contentFilePath);
     this.response_should_be_json(content);
   }
 
   @Then("^response should be json in file \"(.*?)\" ignoring array order$")
   public final void response_should_be_json_ignoring_array_oders_responseBody(
       final String contentFilePath) throws Throwable {
-    final String content = fileContent(contentFilePath);
+    final String content = Utility.fileContent(contentFilePath);
     this.response_should_be_json_ignoring_array_order(content);
   }
 
@@ -166,7 +175,7 @@ public class RestSteps {
 
   @Then("^response should be file \"(.*?)\"$")
   public final void response_should_be_file(final String contentFilePath) throws Throwable {
-    assertThat(this.responseValue).isEqualTo(fileContent(contentFilePath));
+    assertThat(this.responseValue).isEqualTo(Utility.fileContent(contentFilePath));
   }
 
   @Then("^response header \"(.*?)\" should be \"(.*?)\"$")

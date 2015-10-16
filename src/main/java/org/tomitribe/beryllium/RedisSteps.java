@@ -1,7 +1,7 @@
-package com.github.cchacin.cucumber.steps;
+package org.tomitribe.beryllium;
 
-import redis.clients.jedis.Jedis;
 import cucumber.api.java.en.Given;
+import redis.clients.jedis.Jedis;
 
 public class RedisSteps {
   private final Jedis jedis = new Jedis("localhost");

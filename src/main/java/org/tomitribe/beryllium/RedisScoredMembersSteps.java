@@ -1,4 +1,4 @@
-package com.github.cchacin.cucumber.steps;
+package org.tomitribe.beryllium;
 
 import java.util.Map;
 

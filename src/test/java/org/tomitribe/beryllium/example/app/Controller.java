@@ -9,7 +9,12 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.github.cchacin.cucumber.steps.example.app;
+package org.tomitribe.beryllium.example.app;
+
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
+
+import org.apache.cxf.jaxrs.client.WebClient;
 
 import java.util.Date;
 import java.util.Enumeration;
@@ -42,11 +47,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Value;
-
-import org.apache.cxf.jaxrs.client.WebClient;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 
 @Path("/")
 @Stateless

@@ -9,7 +9,7 @@
 
         <non-jta-data-source>jdbc/test-unmanaged</non-jta-data-source>
 
-        <class>com.github.cchacin.cucumber.steps.example.app.Model</class>
+        <class>org.tomitribe.beryllium.example.app.Model</class>
 
         <properties>
             <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>

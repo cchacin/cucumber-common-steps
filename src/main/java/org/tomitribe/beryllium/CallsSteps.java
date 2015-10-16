@@ -9,7 +9,23 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.github.cchacin.cucumber.steps;
+package org.tomitribe.beryllium;
+
+import com.xebialabs.restito.builder.stub.StubHttp;
+import com.xebialabs.restito.semantics.Condition;
+import com.xebialabs.restito.semantics.ConditionWithApplicables;
+import com.xebialabs.restito.server.StubServer;
+
+import org.glassfish.grizzly.http.util.HttpStatus;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import cucumber.api.DataTable;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
+import cucumber.api.java.en.Given;
+import lombok.Value;
 
 import static com.xebialabs.restito.builder.stub.StubHttp.whenHttp;
 import static com.xebialabs.restito.semantics.Action.resourceContent;
@@ -19,23 +35,6 @@ import static com.xebialabs.restito.semantics.Condition.get;
 import static com.xebialabs.restito.semantics.Condition.parameter;
 import static com.xebialabs.restito.semantics.Condition.post;
 import static com.xebialabs.restito.semantics.Condition.put;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import lombok.Value;
-
-import org.glassfish.grizzly.http.util.HttpStatus;
-
-import com.xebialabs.restito.builder.stub.StubHttp;
-import com.xebialabs.restito.semantics.Condition;
-import com.xebialabs.restito.semantics.ConditionWithApplicables;
-import com.xebialabs.restito.server.StubServer;
-
-import cucumber.api.DataTable;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
-import cucumber.api.java.en.Given;
 
 public class CallsSteps {
 
