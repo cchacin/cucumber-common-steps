@@ -11,9 +11,14 @@
  */
 package com.github.cchacin.cucumber.steps;
 
-import static com.ninja_squad.dbsetup.Operations.deleteAllFrom;
-import static com.ninja_squad.dbsetup.operation.CompositeOperation.sequenceOf;
-import static org.assertj.core.api.Assertions.assertThat;
+import com.ninja_squad.dbsetup.DbSetup;
+import com.ninja_squad.dbsetup.destination.Destination;
+import com.ninja_squad.dbsetup.destination.DriverManagerDestination;
+import com.ninja_squad.dbsetup.operation.Insert;
+import com.ninja_squad.dbsetup.operation.Operation;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.jdbc.ScriptRunner;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -28,19 +33,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.ibatis.jdbc.ScriptRunner;
-
-import com.ninja_squad.dbsetup.DbSetup;
-import com.ninja_squad.dbsetup.destination.Destination;
-import com.ninja_squad.dbsetup.destination.DriverManagerDestination;
-import com.ninja_squad.dbsetup.operation.Insert;
-import com.ninja_squad.dbsetup.operation.Operation;
-
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
+
+import static com.google.common.truth.Truth.assertThat;
+import static com.ninja_squad.dbsetup.Operations.deleteAllFrom;
+import static com.ninja_squad.dbsetup.operation.CompositeOperation.sequenceOf;
 
 public class DatabaseSteps {
 

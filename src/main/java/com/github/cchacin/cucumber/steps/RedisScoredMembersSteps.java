@@ -1,13 +1,13 @@
 package com.github.cchacin.cucumber.steps;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.Map;
 
-import redis.clients.jedis.Jedis;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import redis.clients.jedis.Jedis;
+
+import static com.google.common.truth.Truth.assertThat;
 
 public class RedisScoredMembersSteps {
   private final Jedis jedis = new Jedis("localhost");

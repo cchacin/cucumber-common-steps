@@ -26,6 +26,8 @@ import com.jayway.jsonpath.JsonPath;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 
+import net.javacrumbs.jsonunit.core.Option;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -33,12 +35,11 @@ import java.util.List;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import net.javacrumbs.jsonunit.core.Option;
 
 import static com.github.cchacin.cucumber.steps.Utility.fileContent;
+import static com.google.common.truth.Truth.assertThat;
 import static com.jayway.restassured.RestAssured.given;
 import static net.javacrumbs.jsonunit.fluent.JsonFluentAssert.assertThatJson;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class RestSteps {
 
@@ -198,6 +199,6 @@ public class RestSteps {
   public void response_json_path_list_should_be_at_least_of_length(final String jsonPath,
       final int length) {
     final List<Object> responseList = JsonPath.read(this.responseValue, jsonPath);
-    assertThat(responseList.size()).isGreaterThanOrEqualTo(length);
+    assertThat(responseList.size()).isAtLeast(length);
   }
 }

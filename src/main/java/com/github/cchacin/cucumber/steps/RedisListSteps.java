@@ -11,16 +11,16 @@
  */
 package com.github.cchacin.cucumber.steps;
 
-import static com.github.cchacin.cucumber.steps.Utility.fileContent;
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.List;
 
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+
+import static com.github.cchacin.cucumber.steps.Utility.fileContent;
+import static com.google.common.truth.Truth.assertThat;
 
 public class RedisListSteps {
 
@@ -143,9 +143,7 @@ public class RedisListSteps {
       final String filename) throws Throwable {
     final Jedis jedis = getJedis(db);
     final String[] values = fileContent(filename).split("\n");
-    for (final String value : values) {
-      assertThat(values).contains(jedis.lpop(list));
-    }
+    assertThat(values).asList().contains(jedis.lpop(list));
     jedis.close();
   }
 }

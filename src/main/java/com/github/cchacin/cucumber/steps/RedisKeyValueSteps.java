@@ -11,14 +11,14 @@
  */
 package com.github.cchacin.cucumber.steps;
 
-import static com.github.cchacin.cucumber.steps.Utility.fileContent;
-import static org.assertj.core.api.Assertions.assertThat;
-
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+
+import static com.github.cchacin.cucumber.steps.Utility.fileContent;
+import static com.google.common.truth.Truth.assertThat;
 
 
 public class RedisKeyValueSteps {
