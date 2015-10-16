@@ -1,18 +1,12 @@
-[![Build Status](https://travis-ci.org/cchacin/cucumber-common-steps.svg?branch=master)](https://travis-ci.org/cchacin/cucumber-common-steps.svg?branch=master)
-[![Coverage Status](https://img.shields.io/coveralls/cchacin/cucumber-common-steps.svg)](https://coveralls.io/r/cchacin/cucumber-common-steps?branch=master)
-[![Stories in Ready](https://badge.waffle.io/cchacin/cucumber-common-steps.svg?label=ready&title=Ready)](http://waffle.io/cchacin/cucumber-common-steps)
-[![Dependency Status](https://www.versioneye.com/user/projects/5407630bccc023c90d000098/badge.svg)](https://www.versioneye.com/user/projects/5407630bccc023c90d000098)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.cchacin/cucumber-common-steps/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.cchacin/cucumber-common-steps)
+# Beryllium
 
-# Cucumber Common Steps
-
-This project is an intent to provide common steps definitions to make functional testing for REST API, Database setup, external service mocks, redis setup/assertions and HTML pages
+Functional testing for REST API, Database setup, external service mocks and redis setup/assertions
 
 This is based on [cucumber-jvm](https://github.com/cucumber/cucumber-jvm) project.
 
 You need to specify your features in the gherkin language and run it with [cucumber-java](https://github.com/cucumber/cucumber-java-skeleton) or [cukespace](https://github.com/cukespace/cukespace) + [arquillian](http://arquillian.org/)
 
-* [Cucumber Common Steps] (#cucumber-common-steps)
+* [Beryllium] (#beryllium)
   * [Dependency](#dependency)
   * [Call Restful APIs and assert Responses](#call-restful-apis-and-assert-responses)
   * [Mock externals API calls](#mock-externals-api-calls)
@@ -25,8 +19,8 @@ You need to specify your features in the gherkin language and run it with [cucum
 
 ```xml
 <dependency>
-    <groupId>com.github.cchacin</groupId>
-    <artifactId>cucumber-common-steps</artifactId>
+    <groupId>com.tomitribe</groupId>
+    <artifactId>beryllium</artifactId>
     <version>${version}</version>
     <scope>test</scope>
 </dependency>
