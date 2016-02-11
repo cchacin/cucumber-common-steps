@@ -1,1 +1,1 @@
-#This project was moved to: https://github.com/tomitribe/beryllium
+#This project was moved to: https://tomitribe.io/projects/beryllium
